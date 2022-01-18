@@ -14,7 +14,7 @@ import os
 import django_heroku
 import dj_database_url
 from decouple import config,Csv
-
+import cloudinary
 
 MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
@@ -151,3 +151,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+cloudinary.config(
+   cloud_name =config('CLOUD_NAME'),
+    api_key=config('CLOUD_API_KEY'), 
+    api_secret=config('API_SECRET'),
+)
