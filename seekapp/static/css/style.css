@@ -22,7 +22,7 @@ body{
 .services-page{
     font-family: 'Poppins', sans-serif;
 }
-.intro-header{
+.intro-header,.merri-font{
     font-family: 'Merriweather', serif !important;
 }
 .services-bg{
