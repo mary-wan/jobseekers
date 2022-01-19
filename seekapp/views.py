@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from seekapp.models import *
 from django.shortcuts import render
-
+from django.contrib.auth.models import User
 
 
 def services(request):
