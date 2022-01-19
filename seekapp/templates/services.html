@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+{% block content%}
+{{block.super}}
+
+<!-- As a heading -->
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Navbar</span>
+    </div>
+</nav>
+<div class="services-page">
+    <div class="intro-bg">
+        <div class="intro-overlay">
+            <h1 class="mb-5 intro-header">Our Services</h1>
+
+            <p style="color:rgb(255, 255, 255);text-size-adjust: 70px;">
+                <strong style="font-size: xx-large;"> Snagjob offers great services to both job seekers and employers.
+                </strong></p>
+        </div>
+
+    </div>
+    <section class="services-bg">
+    <div class="container">
+        <section class="about-us">
+            <h1 class="text-center">About Us</h1>
+            <p class="text-center text-muted pb-4 place">A place where leading empoyers are already looking for your talent and
+                experience.
+            </p>
+            <div class="row">
+                <div class="col-md-5">
+                    <img src="{%static 'photos/about.jpg' %}" alt="" width="300" height="330" class="about-img">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <h3 class="text-center merri-font mt-4"> Welcome to Snagjob</h3>
+                    <p class="about-description pt-2"> 
+                        We are intensely passionate about delivering the right fit for
+                         every hire. Our friendly team helps companies of all sizes hire 
+                         the best talent and offers the best opportunity for job seekers 
+                         to get hired. When you register and upload a resume you can be sure
+                         Snagjob has just the job for you, your skills, and knowledge.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <div class="service-description mt-4">
+            <h1 class="text-center">Services We Offer</h1>
+            <p class="text-center text-muted place">
+                Using Snagjob you can find the job of your dreams and best fit candidate for the job in seconds
+            </p>
+            <div class="row gx-4 gx-lg-5 place mb-3">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="fas fa-check" style="color: #0969C3; font-size: 30px;"></i></div>
+                        <p class="h4 mb-2 " style="font-size: 20px;">Only relevant and verified vacancies 24/7</p>
+    
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="fas fa-globe-americas" style="color: #0969C3; font-size: 30px;"></i></div>
+                        <p class="h4 mb-2" style="font-size: 20px;">Browse profiles</p>
+                       
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="fas fa-search-location" style="color: #0969C3; font-size: 30px;"></i></div>
+                        <p class="h4 mb-2" style="font-size: 20px;">Search jobseekers</p>
+                       
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="mt-5">
+                        <div class="mb-2"><i class="fas fa-globe" style="color: #0969C3; font-size: 30px;"></i></div>
+                        <p class="h4 mb-2" style="font-size: 20px;">Connect jobseekers and employers</p>
+                       
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </section>
+</div>
+
+
+{%endblock%}

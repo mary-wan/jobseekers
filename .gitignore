@@ -1,4 +1,4 @@
-virtual/
+venv/
 *.env
 *.pyc
 ./start.sh

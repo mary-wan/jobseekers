@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Merriweather:ital,wght@1,700&family=Poppins:wght@500&display=swap');
+
+body{
+    overflow-x: hidden !important;
+}
+.intro-bg{
+    background-image: url(/static/photos/connect.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 450px;
+}
+.intro-overlay{
+    height: 450px;
+    background-color: rgb(9,105,195,0.8);
+    color: white;
+    text-align: center;
+    padding-top: 10%;
+    border-bottom: solid 20px ;
+    border-color: rgb(9,105,195);
+   
+}
+.services-page{
+    font-family: 'Poppins', sans-serif;
+}
+.intro-header,.merri-font{
+    font-family: 'Merriweather', serif !important;
+}
+.services-bg{
+    background-color: #F3F9FF;
+}
+.service-description, .about-us{
+    padding-top: 5%;
+
+}
+.about-description{
+    font-family: 'Lato', sans-serif;
+    line-height: 40px;
+}
+.place{
+    font-family: 'Lato', sans-serif;
+}
+
+@media only screen and (min-width: 768px) {
+    .about-img{
+        width: 500px !important;
+    }
+}
