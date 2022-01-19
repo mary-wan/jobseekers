@@ -7,9 +7,8 @@ from django.shortcuts import render
 def services(request):
     return render(request,'services.html')
 
-# Create your views here.
-
-
+def home(request):
+    return render (request, 'index.html')
 
 def profile_jobseeker(request):
   current_user = request.user
@@ -23,4 +22,5 @@ def profile_employer(request):
         "available":available,
     }
     return render(request,'#',context)
+
 
