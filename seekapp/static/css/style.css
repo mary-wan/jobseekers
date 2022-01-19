@@ -39,6 +39,23 @@ body{
 .place{
     font-family: 'Lato', sans-serif;
 }
+.form-text{
+    display: none !important;
+}
+
+.navbar-brand{
+    font-size: 40px;
+    font-weight: 800;
+    color: #0969C3 !important;
+}
+.profile{
+    min-height: 100vh;
+    background-color: #F3F9FF;
+}
+
+
+
+
 
 @media only screen and (min-width: 768px) {
     .about-img{
