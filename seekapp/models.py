@@ -35,8 +35,8 @@ class User(AbstractUser):
     profile_photo = CloudinaryField('image', null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
-    contact = models.CharField(unique=True, max_length=10, null=True, blank=True, validators=[
-        MinLengthValidator(9), MaxLengthValidator(10)])
+    contact = models.CharField(
+        unique=True, max_length=10, null=True, blank=True)
     availability = models.CharField(
         null=True, blank=True, choices=JOBSEEKER_WORKHOUR_CHOICES, max_length=20)
     salary = models.IntegerField(null=True, blank=True)
