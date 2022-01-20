@@ -158,7 +158,17 @@ body{
     z-index: 1;
 
 }
-
+.prof-pic{
+    position: relative;
+    margin-left: 20.5rem;
+    margin-top: 1rem;
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 4; 
+}
+  
 
 @media only screen and (min-width: 768px) {
     .about-img{
