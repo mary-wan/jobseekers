@@ -24,10 +24,6 @@ def profile_employer(request):
     }
     return render(request,'#',context)
 
-
-
-
-
 def profile(request):
     return render(request, "jobseeker/profile.html", {"profile": profile,})
 
