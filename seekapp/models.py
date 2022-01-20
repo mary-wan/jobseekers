@@ -5,7 +5,7 @@ from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 import datetime as dt
-from tinymce.models import HTMLField
+from tinymce.models import HTMLField, URLField
 from django.contrib.auth.models import PermissionsMixin
 
 # Create your models here.
@@ -34,8 +34,8 @@ JOB_CATEGORY_CHOICES = (
 )
 
 
-class User(AbstractUser):
-    USERNAME_FIELD = 'email'
+class CustomUser(AbstractUser):
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
     is_admin = models.BooleanField(default=False)
     is_employer = models.BooleanField(default=False)
@@ -52,7 +52,7 @@ class User(AbstractUser):
         self.delete()
         
 class JobSeeker(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     firstName = models.CharField(max_length=100, null=True, blank=True)
     lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
@@ -77,7 +77,7 @@ class JobSeeker(models.Model):
         
         
 class Employer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     firstName = models.CharField(max_length=100, null=True, blank=True)
     lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
@@ -93,3 +93,18 @@ class Employer(models.Model):
 
     def delete_employer(self):
         self.delete()
+        
+class FileUpload(models.Model):
+    name = models.CharField(max_length=100)
+    pdf = models.FileField(upload_to='documents/pdf/')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='documents')
+
+    def save_upload(self):
+        self.save()
+
+    def delete_upload(self):
+        self.delete()
+    
+    def __str__(self):
+        return self.name
+    
