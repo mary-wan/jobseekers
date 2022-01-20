@@ -70,8 +70,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'seekapp',
-    'bootstrap4',
     'crispy_forms',
+    'bootstrap4',
+    'cloudinary',
 
 ]
 
