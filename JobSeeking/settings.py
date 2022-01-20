@@ -69,7 +69,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'seekapp'
+    'seekapp',
+    'crispy_forms',
+    'bootstrap4',
+    'cloudinary',
+
 ]
 
 MIDDLEWARE = [
