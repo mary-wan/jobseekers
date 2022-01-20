@@ -10,6 +10,10 @@
 body{
     overflow-x: hidden !important;
 }
+.navigation{
+    z-index: 5;
+    background: transparent;
+}
 .intro-bg{
     background-image: url(/static/photos/connect.jpg);
     background-size: 100% 100%;
@@ -102,7 +106,58 @@ body{
     width: 400px;
     margin-left: 5rem;
 }
+.profile{
+   
+    overflow: hidden;
+}
+.profile_content{
+    background: #0969C3;
+    color: #fff;
+    width: 42rem;
+    min-height: 20rem;
+    border-radius: 40px;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    padding-top: 1.5rem;
+}
+.profile_details{
+    margin-top: 2rem;
+}
+.profile_content h4{
+    margin-left: 2rem;
+    
+}
+.circle{
+    position: absolute;
+    left: 2rem;
+    top: -20rem;
+    opacity: 2;
+}
 
+.profile::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0969C3;
+    clip-path: circle(40% at 83% 23%);
+    z-index: 1;
+}
+
+.profile:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    clip-path: circle(16% at 80% 40%);
+    z-index: 1;
+
+}
 
 
 @media only screen and (min-width: 768px) {
