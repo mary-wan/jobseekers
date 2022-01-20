@@ -35,7 +35,7 @@ JOB_CATEGORY_CHOICES = (
 
 
 class User(AbstractUser):
-    USERNAME_FIELD = 'email'
+    # USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     is_admin = models.BooleanField(default=False)
     is_employer = models.BooleanField(default=False)

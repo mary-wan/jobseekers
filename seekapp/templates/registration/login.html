@@ -1,25 +1,37 @@
-{% extends 'base.html'%} {%load crispy_forms_tags%} {% block content %} {{block.super}}
-<div class="container"><br><br>
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <h1 class="text-center border-bottom mb-4">Awards</h1>
-            <form method="POST">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    {{ form|crispy }}
-                </fieldset>
-                <div class="form-group text-center">
-                    <button class="btn btn-outline-info" type="submit">Log In</button>
-                </div>
-            </form><br>
-            <div class="border-top pt-3 text-center">
-                <small class="text-muted">Don't Have an Account?
-                <a href="/accounts/register">Sign Up</a>
-            </small>
-            </div>
-        </div>
-        <div class="col-md-4"></div>
-    </div>
+{%extends "base.html"%}
+{% load bootstrap4 %}
+{% load crispy_forms_tags%}
+{%load static%}
+{% block content %}
+<div class="sign">
+  <div class="row">
+      <div class="col-md-3"></div>
+     
+      <div class="col-md-6 mt-4 ">
+          <div class="card pb-5 pt-2">
+              <div class="card-body pb-1 mr-3 ml-3">
+                <h6 class="text-muted pb-4">Sign in to continue  <span class="right">Not a member yet? <a href="" class="link-color font-weight-bold">Register now.</a> </span> </h6>
+
+                  <form action="" method="post" class="mb-2" >
+                      {% csrf_token%}
+                      {{ form|crispy}}
+                      <button type="submit" class="btn btn-color login text-white"> LOGIN</button>
+                  </form>
+               
+                                   
+              </div>
+              <small class="mb-2 text-center"><a href="" class="text-center link-color">Forgot your password? </a></small>
+              <p class="font-weight-bold ml-5 mt-3 pb-1">Or sign in with</p>
+              <span>
+              <a href=""><button type="button" class="login-with-google-btn ml-5 mb-1" >Sign in with Google</button></a>
+              <a href=""><button class="loginBtn loginBtn--facebook ml-5 mb-1">Sign in with Facebook</button></a>
+            </span>
+            
+              
+          </div>
+      </div>
+      <div class="col-md-3"></div>
+  </div>
 </div>
+
 {% endblock %}
