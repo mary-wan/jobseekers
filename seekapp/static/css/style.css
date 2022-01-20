@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Merriweather:ital,wght@1,700&family=Poppins:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
 body{
     overflow-x: hidden !important;
@@ -53,7 +60,48 @@ body{
     background-color: #F3F9FF;
 }
 
+.login_container{
+    background-color: #F3F9FF;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+.login_details{
+    padding-top: 7rem;
+}
+.login_image{
+    background-color: #0969C3;
+    min-height: 500px;
+    padding: 3rem 1rem;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
 
+}
+.login_form{
+    background-color: #fff;
+    padding: 3rem;
+    min-height: 500px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+}
+.forms{
+    margin-top: 2rem;
+}
+.login_form h1{
+    text-align: center;
+    color: #0969C3;
+    font-weight: 700;
+}
+.login_image p{
+    color: #fff;
+    margin-top: 30px;
+}
+
+.sign{
+    height: 400px;
+    /* object-fit: cover; */
+    width: 400px;
+    margin-left: 5rem;
+}
 
 
 
