@@ -166,7 +166,8 @@ LOGOUT_REDIRECT_URL = 'login'
 # LOGIN_URL = 'login'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-AUTH_USER_MODEL = 'seekapp.User'
+AUTH_USER_MODEL = 'seekapp.CustomUser'
+
 
 
 

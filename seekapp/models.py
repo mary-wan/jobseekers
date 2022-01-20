@@ -34,33 +34,18 @@ JOB_CATEGORY_CHOICES = (
 )
 
 
-class User(AbstractUser):
-    USERNAME_FIELD = 'email'
+
+class CustomUser(AbstractUser):
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
     is_admin = models.BooleanField(default=False)
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
-    email = models.EmailField(unique=True)
-    firstName = models.CharField(max_length=100, null=True, blank=True)
-    lastName = models.CharField(max_length=100, null=True, blank=True)
-    profile_photo = CloudinaryField('image', null=True, blank=True)
-    bio = models.TextField(null=True, blank=True)
-    location = models.CharField(max_length=100, null=True, blank=True)
-    contact = models.CharField(unique=True, max_length=10, null=True, blank=True)
-    availability = models.CharField(
-        null=True, blank=True, choices=JOBSEEKER_WORKHOUR_CHOICES, max_length=20)
-    salary = models.IntegerField(null=True, blank=True)
-    job_category = models.CharField(
-        null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
-    company = models.CharField(max_length=100, null=True, blank=True)
-
     def save_user(self):
         self.save()
-
     def update_user(self):
         self.update()
-
     def delete_user(self):
         self.delete()
 
