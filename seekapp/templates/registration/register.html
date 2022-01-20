@@ -4,7 +4,7 @@
 {% load static %}
 {% block content %}
 
-<div class="sign">
+<!-- <div class="sign">
     <div class="row pt-3">
         <div class="col-md-2"></div>
         <div class="col-md-7">
@@ -27,5 +27,32 @@
 
         <div class="col-md-3"></div>
     </div>
+</div> -->
+
+
+<div class="container-full reg_container">
+    <div class="container reg_details">
+        <div class="row">
+                <div class="col-md-6 reg_image">
+                        <img class="sign" src="{%static 'photos/reg.svg' %}" alt="">
+                        <p class="text-center">Are you a member? <a id="up" href="">Login!</a></p>
+                </div>
+                <div class="col-md-6 reg_form">
+                    <h1>Sign Up</h1>
+                    <div class="forms">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <fieldset class="form-group">
+                                {{ form|crispy }}
+                            </fieldset>
+                            <div class="form-group text-center">
+                                <button class="btn btn-primary" type="submit">Sign Up</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
 </div>
+
 {% endblock %}
