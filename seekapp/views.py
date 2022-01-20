@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,get_object_or_404
 from seekapp.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,8 @@ from django.contrib import messages
 from .forms import *
 import os
 from .email import *
+from django.http.response import Http404
+from django.http import HttpResponse,HttpResponseRedirect,Http404,JsonResponse
 
 
 def services(request):
@@ -90,6 +92,26 @@ def add_portfolios(request):
     'port_form': port_form,
     }
   return render(request,"jobseekers/portfolio.html",context)
+
+@login_required
+@allowed_users(allowed_roles=['admin','jobseeker'])
+def upload_file(request):
+    if request.method == 'POST':
+        upload_form = UploadFileForm(request.POST, request.FILES)
+        if upload_form.is_valid():
+            upload = upload_form.save(commit=False)
+            upload.user = request.user
+            upload.save()
+            messages.success(request,"File uploaded successfully")
+            return redirect('jobseekerDash')
+    else:
+        upload_form = UploadFileForm()
+    return render(request, 'jobseekers/upload_file.html', {'upload_form': upload_form})
+
+def pdf_view(request,file_id):
+    file =get_object_or_404(FileUpload, pk = file_id)
+    image_data = open(f"/home/access/Desktop/Eloquent_JavaScript.pdf/{file.pdf}", "rb").read()
+    return HttpResponse(image_data, content_type="application/pdf")
 
 
 

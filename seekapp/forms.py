@@ -32,4 +32,9 @@ class AddPortfolio(forms.ModelForm):
     class Meta:
         model = Portfolio
         fields = ('name','link',  )
+        
+class UploadFileForm(forms.ModelForm):
+    class Meta:
+        model = FileUpload
+        fields = ('name','pdf')
 
