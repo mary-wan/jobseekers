@@ -49,7 +49,9 @@ def update_jobseeker_profile(request):
   return render(request,'jobseekers/update.html',params)
 
 #employer profle
-def profile_employer(request):
+@login_required
+@allowed_users(allowed_roles=['admin','employer'])
+def employerProfile(request):
     employer=request.user
     available=User.objects.filter(is_jobseeker= True,verified=True).all() 
     context={
@@ -57,6 +59,26 @@ def profile_employer(request):
         "available":available,
     }
     return render(request,'#',context)
+
+@login_required
+@allowed_users(allowed_roles=['admin','employer'])
+def update_employer(request):
+  if request.method == 'POST':
+    u_form = UpdateUserProfile(request.POST,request.FILES,instance=request.user)
+    p_form = UpdateEmployerProfile(request.POST,instance=request.user)
+    if u_form.is_valid() and p_form.is_valid():
+      u_form.save()
+      p_form.save()
+      messages.success(request,'Your Profile account has been updated successfully')
+      return redirect('#')
+  else:
+    u_form = UpdateUserProfile(instance=request.user)
+    p_form = UpdateEmployerProfile(instance=request.user) 
+  context = {
+    'u_form':u_form,
+    'p_form':p_form
+  }
+  return render
 
 
 def contact(request):

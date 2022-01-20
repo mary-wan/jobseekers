@@ -37,4 +37,9 @@ class UploadFileForm(forms.ModelForm):
     class Meta:
         model = FileUpload
         fields = ('name','pdf')
+        
+class UpdateEmployerProfile(forms.ModelForm):
+    class Meta:
+        model = Employer
+        fields = ('company_name',  )
 
