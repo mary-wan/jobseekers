@@ -1,7 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.db import transaction
-from django.contrib.auth.models import User
 from .models import *
 
 
@@ -12,7 +11,7 @@ class JobseekerSignUp(UserCreationForm):
     email= forms.EmailField(label='Email Address' ,help_text='Format: 123@gmail.com, 456@yahoo.com',error_messages={'required': 'Please enter your email address'})
 
     class Meta(UserCreationForm.Meta):
-        model = User
+        model = CustomUser
         fields=['first_name','last_name','username','email','password1','password2']
 
         
@@ -28,7 +27,7 @@ class JobseekerSignUp(UserCreationForm):
         return user
     
     
-User._meta.get_field('email')._unique=True
+CustomUser._meta.get_field('email')._unique=True
 
 
 class EmployerSignUp(UserCreationForm):
@@ -37,7 +36,7 @@ class EmployerSignUp(UserCreationForm):
     email= forms.EmailField(label='Email Address' ,help_text='Format: 123@gmail.com, 456@yahoo.com',error_messages={'required': 'Please enter your email address'})
 
     class Meta(UserCreationForm.Meta):
-        model = User
+        model = CustomUser
         fields=['first_name','last_name','username','email','password1','password2']
 
         
@@ -52,4 +51,45 @@ class EmployerSignUp(UserCreationForm):
         employer.email = self.cleaned_data.get('email')
         return user
     
-User._meta.get_field('email')._unique=True
+CustomUser._meta.get_field('email')._unique=True
+       
+        
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+
+        model = CustomUser
+        fields = "__all__"
+
+        
+class UpdateJobseekerProfile(forms.ModelForm):
+    class Meta:
+        model = JobSeeker
+        fields = ('job_category','availability', 'salary')
+
+class UpdateUserProfile(forms.ModelForm):
+  email = forms.EmailField()
+  class Meta:
+    model = JobSeeker
+    fields = ['firstName', 'lastName','email','contact','location', 'profile_photo','bio']
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+      model = Contact
+      fields = ['name','email','message']
+
+class AddPortfolio(forms.ModelForm):
+    class Meta:
+        model = Portfolio
+        fields = ('name','link',  )
+        
+class UploadFileForm(forms.ModelForm):
+    class Meta:
+        model = FileUpload
+        fields = ('name','pdf')
+        
+class UpdateEmployerProfile(forms.ModelForm):
+    class Meta:
+        model = Employer
+        fields = ('company',  )
+
+
