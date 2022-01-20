@@ -35,8 +35,8 @@ def jobseeker_home(request):
     return render (request, 'jobseeker/home.html')
 
 def jobseeker_signup(request):
-    # if request.user.is_authenticated:
-    #     return redirect('home')
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method=="POST":
         form = JobseekerSignUp(request.POST)
         if form.is_valid():
@@ -50,8 +50,8 @@ def jobseeker_signup(request):
 
 
 def employer_signup(request):
-    # if request.user.is_authenticated:
-    #     return redirect('home')
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method=="POST":
         form = EmployerSignUp(request.POST)
         if form.is_valid():
