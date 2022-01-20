@@ -41,7 +41,18 @@ class User(AbstractUser):
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
-    email = models.EmailField(unique=True)
+
+    def save_user(self):
+        self.save()
+
+    def update_user(self):
+        self.update()
+
+    def delete_user(self):
+        self.delete()
+        
+class JobSeeker(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     firstName = models.CharField(max_length=100, null=True, blank=True)
     lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
@@ -53,14 +64,32 @@ class User(AbstractUser):
     salary = models.IntegerField(null=True, blank=True)
     job_category = models.CharField(
         null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
-    company = models.CharField(max_length=100, null=True, blank=True)
-
-    def save_user(self):
+    email = models.EmailField(unique=True)
+    
+    def save_jobseeker(self):
         self.save()
 
-    def update_user(self):
+    def update_jobseeker(self):
         self.update()
 
-    def delete_user(self):
+    def delete_jobseeker(self):
         self.delete()
+        
+        
+class Employer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    firstName = models.CharField(max_length=100, null=True, blank=True)
+    lastName = models.CharField(max_length=100, null=True, blank=True)
+    profile_photo = CloudinaryField('image', null=True, blank=True)
+    company = models.CharField(max_length=100, null=True, blank=True)
+    job_category = models.CharField(
+        null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
+    
+    def save_employer(self):
+        self.save()
 
+    def update_employer(self):
+        self.update()
+
+    def delete_employer(self):
+        self.delete()
