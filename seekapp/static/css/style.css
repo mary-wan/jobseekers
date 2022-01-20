@@ -1,7 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Merriweather:ital,wght@1,700&family=Poppins:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
 body{
     overflow-x: hidden !important;
+}
+.navigation{
+    z-index: 5;
+    background: transparent;
 }
 .intro-bg{
     background-image: url(/static/photos/connect.jpg);
@@ -51,6 +62,101 @@ body{
 .profile{
     min-height: 100vh;
     background-color: #F3F9FF;
+}
+
+.login_container{
+    background-color: #F3F9FF;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+.login_details{
+    padding-top: 7rem;
+}
+.login_image{
+    background-color: #0969C3;
+    min-height: 500px;
+    padding: 3rem 1rem;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+
+}
+.login_form{
+    background-color: #fff;
+    padding: 3rem;
+    min-height: 500px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+}
+.forms{
+    margin-top: 2rem;
+}
+.login_form h1{
+    text-align: center;
+    color: #0969C3;
+    font-weight: 700;
+}
+.login_image p{
+    color: #fff;
+    margin-top: 30px;
+}
+
+.sign{
+    height: 400px;
+    /* object-fit: cover; */
+    width: 400px;
+    margin-left: 5rem;
+}
+.profile{
+   
+    overflow: hidden;
+}
+.profile_content{
+    background: #0969C3;
+    color: #fff;
+    width: 38rem;
+    min-height: 20rem;
+    border-radius: 40px;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    padding-top: 1.5rem;
+}
+.profile_details{
+    margin-top: 2rem;
+}
+.profile_content h4{
+    margin-left: 2rem;
+    
+}
+.circle{
+    position: absolute;
+    left: 2rem;
+    top: -20rem;
+    opacity: 2;
+}
+
+.profile::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0969C3;
+    clip-path: circle(36% at 86% 26%);
+    z-index: 1;
+}
+
+.profile:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    clip-path: circle(16% at 83% 40%);
+    z-index: 1;
+
 }
 
 
