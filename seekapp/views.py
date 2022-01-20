@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from seekapp.models import *
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import *
 
@@ -18,7 +18,7 @@ def profile_jobseeker(request):
 
 def profile_employer(request):
     employer=request.user
-    available=User.objects.filter(is_jobseeker= True,verified=True).all() 
+    available=CustomUser.objects.filter(is_jobseeker= True,verified=True).all() 
     context={
         "employer":employer,
         "available":available,
