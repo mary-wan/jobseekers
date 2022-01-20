@@ -108,3 +108,17 @@ class FileUpload(models.Model):
     def __str__(self):
         return self.name
     
+class Portfolio(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='portfolio')
+    name = models.CharField(max_length=50)
+    link=models.URLField(max_length=555)
+
+    def save_portfolio(self):
+        self.save()
+
+    def delete_portfolio(self):
+        self.delete()
+        
+    def __str__(self):
+        return self.name
+    
