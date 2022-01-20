@@ -122,3 +122,16 @@ class Portfolio(models.Model):
     def __str__(self):
         return self.name
     
+class Contact(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def save_contact(self):
+        self.save()
+
+    def delete_contact(self):
+        self.delete()
+        
+    def __str__(self):
+        return self.name
