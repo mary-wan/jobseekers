@@ -12,12 +12,14 @@ def services(request):
 
 def home(request):
     return render (request, 'index.html')
+
 @login_required
 @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
-  current_user = request.jobseeker
+  current_user = request.user
+  profile = JobSeeker.objects.filter(user_id=current_user.id).first()  # get profile
   documents = FileUpload.objects.filter(user_id = current_user.id).all()
-  return render(request,"jobseeker/profile.html",{"current_user":current_user})
+  return render(request,"jobseeker/profile.html",{"documents":documents,"current_user":current_user,"profile":profile})
 
 def profile_employer(request):
     employer=request.user
