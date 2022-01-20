@@ -9,4 +9,8 @@ urlpatterns = [
     path('', views.home, name = 'home'),
     path('services/',views.services, name='services'),
     path('jobseeker/profile/',views.profile,name='profile'),
+    path('signup/jobseeker/', views.jobseeker_signup,name='jobseeker_signup'),
+    path('signup/employer/', views.employer_signup,name='employer_signup'),
+    path('employer/home/',views.emp_home, name='emp_home'),
+    path('jobseeker/home/',views.jobseeker_home, name='jobseeker_home'),
 ]
