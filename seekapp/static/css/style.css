@@ -64,10 +64,24 @@ body{
     background-color: #F3F9FF;
     min-height: 100vh;
 }
+.reg_container{
+    background-color: #F3F9FF;
+    min-height: 100vh;
+}
 .login_details{
     padding-top: 7rem;
 }
+.reg_details{
+    padding-top: 7rem;
+}
 .login_image{
+    background-color: #0969C3;
+    min-height: 500px;
+    padding: 3rem 1rem;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+}
+.reg_image{
     background-color: #0969C3;
     min-height: 500px;
     padding: 3rem 1rem;
@@ -81,7 +95,14 @@ body{
     border-bottom-right-radius: 30px;
     border-top-right-radius: 30px;
 }
-.login_form fieldset{
+.reg_form{
+    background-color: #fff;
+    padding: 2rem;
+    min-height: 500px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+}
+.reg_form fieldset{
     /* padding: 3rem; */
     margin-left: 3rem;
     font-size: large;
@@ -89,12 +110,18 @@ body{
 .forms{
     margin-top: 2rem;
 }
-.login_form h1{
+.reg_form h1{
     text-align: center;
     color: #0969C3;
     font-weight: 900;
 }
 .login_image p{
+    color: #fff;
+    margin-top: 30px;
+    font-size: x-large;
+    text-align: justify;
+}
+.reg_image p{
     color: #fff;
     margin-top: 30px;
     font-size: x-large;
@@ -107,7 +134,7 @@ body{
     margin-left: 3rem;
     margin-right: 5rem;
 }
-.login_form button{
+.reg_form button{
     border-radius: 40px;
     padding-left: 2rem;
     padding-right: 2rem;
