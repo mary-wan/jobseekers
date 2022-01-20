@@ -11,3 +11,15 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
+        
+class UpdateJobseekerProfile(forms.ModelForm):
+    class Meta:
+        model = JobSeeker
+        fields = ('job_category','availability', 'salary')
+
+class UpdateUserProfile(forms.ModelForm):
+  email = forms.EmailField()
+  class Meta:
+    model = JobSeeker
+    fields = ['firstName', 'lastName','email','contact','location', 'profile_photo','bio']
+
