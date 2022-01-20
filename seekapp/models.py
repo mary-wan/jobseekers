@@ -7,20 +7,11 @@ from cloudinary.models import CloudinaryField
 import datetime as dt
 from tinymce.models import HTMLField
 from django.contrib.auth.models import PermissionsMixin
-
 # Create your models here.
-
-
-
 JOBSEEKER_WORKHOUR_CHOICES = (
-
     ('Full Time', "Full Time"),
     ('Part Time', "Part Time"),
 )
-
-
-
-
 JOB_CATEGORY_CHOICES = (
     ('UI/UX-Designer', "UI/UX-Designer"),
     ('Data Scientist', "Data Scientist"),
@@ -41,16 +32,12 @@ class CustomUser(AbstractUser):
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
-
     def save_user(self):
         self.save()
-
     def update_user(self):
         self.update()
-
     def delete_user(self):
         self.delete()
-        
 class JobSeeker(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     firstName = models.CharField(max_length=100, null=True, blank=True)
@@ -65,17 +52,12 @@ class JobSeeker(models.Model):
     job_category = models.CharField(
         null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
     email = models.EmailField(unique=True)
-    
     def save_jobseeker(self):
         self.save()
-
     def update_jobseeker(self):
         self.update()
-
     def delete_jobseeker(self):
         self.delete()
-        
-        
 class Employer(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     firstName = models.CharField(max_length=100, null=True, blank=True)
@@ -84,13 +66,10 @@ class Employer(models.Model):
     company = models.CharField(max_length=100, null=True, blank=True)
     job_category = models.CharField(
         null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
-    
     def save_employer(self):
         self.save()
-
     def update_employer(self):
         self.update()
-
     def delete_employer(self):
         self.delete()
         

@@ -56,5 +56,40 @@ CustomUser._meta.get_field('email')._unique=True
         
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
+
         model = CustomUser
         fields = "__all__"
+
+        
+class UpdateJobseekerProfile(forms.ModelForm):
+    class Meta:
+        model = JobSeeker
+        fields = ('job_category','availability', 'salary')
+
+class UpdateUserProfile(forms.ModelForm):
+  email = forms.EmailField()
+  class Meta:
+    model = JobSeeker
+    fields = ['firstName', 'lastName','email','contact','location', 'profile_photo','bio']
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+      model = Contact
+      fields = ['name','email','message']
+
+class AddPortfolio(forms.ModelForm):
+    class Meta:
+        model = Portfolio
+        fields = ('name','link',  )
+        
+class UploadFileForm(forms.ModelForm):
+    class Meta:
+        model = FileUpload
+        fields = ('name','pdf')
+        
+class UpdateEmployerProfile(forms.ModelForm):
+    class Meta:
+        model = Employer
+        fields = ('company',  )
+
+
