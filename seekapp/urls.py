@@ -8,5 +8,5 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.home, name = 'home'),
     path('services/',views.services, name='services'),
-    path('jobseeker/profile/',views.profile,name='profile'),
+    path('jobseeker/profile/',views.profile_jobseeker,name='profile'),
 ]
