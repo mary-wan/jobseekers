@@ -28,3 +28,8 @@ class ContactForm(forms.ModelForm):
       model = Contact
       fields = ['name','email','message']
 
+class AddPortfolio(forms.ModelForm):
+    class Meta:
+        model = Portfolio
+        fields = ('name','link',  )
+

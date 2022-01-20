@@ -72,5 +72,24 @@ def contact(request):
       contact_form = ContactForm()
     return render(request,'contact.html',{'contact_form':contact_form})
 
+@login_required
+def add_portfolios(request):
+  if request.method == 'POST':
+    port_form=AddPortfolio(request.POST,request.FILES)
+    if port_form.is_valid():
+      portfolio = port_form.save(commit=False)
+      portfolio.user = request.user
+      portfolio.save()
+      messages.success(request,'Your Portfolio has been added successfully.Thank you')
+      print(port_form)
+      return redirect('jobseekerDash')
+
+  else:
+    port_form = AddPortfolio()
+  context = {
+    'port_form': port_form,
+    }
+  return render(request,"jobseekers/portfolio.html",context)
+
 
 
