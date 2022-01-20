@@ -135,5 +135,15 @@ def pdf_view(request,file_id):
     image_data = open(f"/home/access/Desktop/Eloquent_JavaScript.pdf/{file.pdf}", "rb").read()
     return HttpResponse(image_data, content_type="application/pdf")
 
+@login_required
+@allowed_users(allowed_roles=['admin','jobseeker'])
+
+def jobseekerPage(request):
+    current_user = request.user
+    documents = FileUpload.objects.filter(user_id = current_user.id).all()
+    portfolios=Portfolio.objects.filter(user_id = current_user.id)
+    return render(request,'#',{"documents":documents,"portfolios":portfolios})
+
+
 
 
