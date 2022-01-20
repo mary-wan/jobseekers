@@ -54,11 +54,69 @@ body{
 }
 
 
-
-
-
 @media only screen and (min-width: 768px) {
     .about-img{
         width: 500px !important;
     }
+}
+
+.login_container{
+    background-color: #F3F9FF;
+    min-height: 100vh;
+}
+.login_details{
+    padding-top: 7rem;
+}
+.login_image{
+    background-color: #0969C3;
+    min-height: 500px;
+    padding: 3rem 1rem;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+}
+.login_form{
+    background-color: #fff;
+    padding: 2rem;
+    min-height: 500px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+}
+.login_form fieldset{
+    /* padding: 3rem; */
+    margin-left: 3rem;
+    font-size: large;
+}
+.forms{
+    margin-top: 2rem;
+}
+.login_form h1{
+    text-align: center;
+    color: #0969C3;
+    font-weight: 900;
+}
+.login_image p{
+    color: #fff;
+    margin-top: 30px;
+    font-size: x-large;
+    text-align: justify;
+}
+.sign{
+    height: 400px;
+    /* object-fit: cover; */
+    width: 400px;
+    margin-left: 3rem;
+    margin-right: 5rem;
+}
+.login_form button{
+    border-radius: 40px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+h1{
+    font-family: sans-serif;
+    
+}
+#up{
+    color: #000;
+    font-weight: bold;
 }
