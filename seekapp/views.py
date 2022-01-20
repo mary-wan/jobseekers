@@ -6,6 +6,8 @@ from .decorators import unauthenticated_user,allowed_users,admin_only
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
+import os
+from .email import *
 
 
 def services(request):
@@ -14,6 +16,7 @@ def services(request):
 def home(request):
     return render (request, 'index.html')
 
+#jobseekers profile
 @login_required
 @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
@@ -22,6 +25,7 @@ def profile_jobseeker(request):
   documents = FileUpload.objects.filter(user_id = current_user.id).all()
   return render(request,"jobseeker/profile.html",{"documents":documents,"current_user":current_user,"profile":profile})
 
+#jobseekers update profile
 @login_required
 @allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
@@ -42,6 +46,7 @@ def update_jobseeker_profile(request):
   }
   return render(request,'jobseekers/update.html',params)
 
+#employer profle
 def profile_employer(request):
     employer=request.user
     available=User.objects.filter(is_jobseeker= True,verified=True).all() 
@@ -51,6 +56,21 @@ def profile_employer(request):
     }
     return render(request,'#',context)
 
+
+def contact(request):
+    name = request.POST.get('name')
+    email = request.POST.get('email')
+    message = request.POST.get('message')
+    if request.method == 'POST':
+      contact_form = ContactForm(request.POST)
+      if contact_form.is_valid():
+        contact_form.save()
+        send_contact_email(name, email)
+        data = {'success': 'Your message has been reaceived. Thank you for contacting us, we will get back to you shortly'}
+        messages.success(request, f"Message submitted successfully")
+    else:
+      contact_form = ContactForm()
+    return render(request,'contact.html',{'contact_form':contact_form})
 
 
 

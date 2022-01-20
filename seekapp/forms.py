@@ -23,3 +23,8 @@ class UpdateUserProfile(forms.ModelForm):
     model = JobSeeker
     fields = ['firstName', 'lastName','email','contact','location', 'profile_photo','bio']
 
+class ContactForm(forms.ModelForm):
+    class Meta:
+      model = Contact
+      fields = ['name','email','message']
+
