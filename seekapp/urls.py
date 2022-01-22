@@ -14,5 +14,5 @@ urlpatterns = [
     path('signup/employer/', views.employer_signup,name='employer_signup'),
     path('employer/home/',views.emp_home, name='emp_home'),
     path('jobseeker/home/',views.jobseeker_home, name='jobseeker_home'),
+    path('contact_us/',views.contact, name='contact_us'),
 ]
-z
