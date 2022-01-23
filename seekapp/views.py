@@ -64,7 +64,7 @@ def employerProfile(request):
         "employer":employer,
         "available":available,
     }
-    return render(request,'#',context)
+    return render(request,'employer/profile.html',context)
 
 @login_required
 # @allowed_users(allowed_roles=['admin','employer'])
