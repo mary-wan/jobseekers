@@ -59,12 +59,12 @@ def update_jobseeker_profile(request):
 # @allowed_users(allowed_roles=['admin','employer'])
 def employerProfile(request):
     employer=request.user
-    available=User.objects.filter(is_jobseeker= True,verified=True).all() 
+    available=User.objects.filter(is_jobseeker= True).all() 
     context={
         "employer":employer,
         "available":available,
     }
-    return render(request,'#',context)
+    return render(request,'employer/profile.html',context)
 
 @login_required
 # @allowed_users(allowed_roles=['admin','employer'])
@@ -279,7 +279,7 @@ def search_jobseekers(request):
 
   else:
     message = 'You have not searched for any term'
-    return render(request, 'employers/search.html', {"message":message})
+    return render(request, 'employer/search.html', {"message":message})
 
 def contact(request):
     name = request.POST.get('name')
