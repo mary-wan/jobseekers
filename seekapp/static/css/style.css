@@ -159,6 +159,18 @@ body{
 
 }
 
+.prof-pic{
+    position: relative;
+    margin-left: 23.6rem;
+    margin-top: -2.5rem;
+    margin-bottom: 2rem;
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 4;
+}
+
 
 @media only screen and (min-width: 768px) {
     .about-img{
@@ -252,4 +264,29 @@ h1{
 #up{
     color: #000;
     font-weight: bold;
+}
+
+.prof-button{
+    border-radius: 30px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 10px;  
+    padding-bottom: 10px;
+    font-size: large;
+    font-family: sans-serif;
+    flex: 3px;
+}
+.pdf-button{
+    border-radius: 30px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 10px;  
+    padding-bottom: 10px;
+    font-size: large;
+    font-family: sans-serif;
+    margin-left: 12rem;
+}
+.leeft{
+    padding-left: 2rem;
+    gap: 20px;
 }
