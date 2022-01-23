@@ -5,7 +5,7 @@ from .models import *
 from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
-    model = CustomUser
+    model = User
     add_form = CustomUserCreationForm
     fieldsets = (
         *UserAdmin.fieldsets,
@@ -21,4 +21,4 @@ class CustomUserAdmin(UserAdmin):
             }
         )
     )
-admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(User, UserAdmin)
