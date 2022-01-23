@@ -11,9 +11,10 @@ body{
     overflow-x: hidden !important;
 }
 .navigation{
-    z-index: 5;
     background: transparent;
+    z-index: 5;
 }
+
 .intro-bg{
     background-image: url(/static/photos/connect.jpg);
     background-size: 100% 100%;
@@ -113,7 +114,7 @@ body{
 .profile_content{
     background: #0969C3;
     color: #fff;
-    width: 42rem;
+    width: 38rem;
     min-height: 20rem;
     border-radius: 40px;
     margin-left: 1rem;
@@ -142,7 +143,7 @@ body{
     width: 100%;
     height: 100%;
     background: #0969C3;
-    clip-path: circle(40% at 83% 23%);
+    clip-path: circle(36% at 86% 26%);
     z-index: 1;
 }
 
@@ -154,13 +155,13 @@ body{
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.1);
-    clip-path: circle(16% at 80% 40%);
+    clip-path: circle(16% at 83% 40%);
     z-index: 1;
 
 }
 .prof-pic{
     position: relative;
-    margin-left: 20.5rem;
+    margin-left: 23rem;
     margin-top: 1rem;
     width: 320px;
     height: 320px;
@@ -174,4 +175,127 @@ body{
     .about-img{
         width: 500px !important;
     }
+}
+
+.login_container{
+    background-color: #F3F9FF;
+    min-height: 100vh;
+}
+.reg_container{
+    background-color: #F3F9FF;
+    min-height: 100vh;
+}
+.login_details{
+    padding-top: 7rem;
+}
+.reg_details{
+    padding-top: 7rem;
+}
+.login_image{
+    background-color: #0969C3;
+    min-height: 500px;
+    padding: 3rem 1rem;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+}
+.reg_image{
+    background-color: #0969C3;
+    min-height: 500px;
+    padding: 3rem 1rem;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+}
+.login_form{
+    background-color: #fff;
+    padding: 2rem;
+    min-height: 500px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+}
+.reg_form{
+    background-color: #fff;
+    padding: 2rem;
+    min-height: 500px;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+}
+.reg_form fieldset{
+    /* padding: 3rem; */
+    margin-left: 3rem;
+    font-size: large;
+}
+.forms{
+    margin-top: 2rem;
+}
+.reg_form h1{
+    text-align: center;
+    color: #0969C3;
+    font-weight: 900;
+}
+.login_image p{
+    color: #fff;
+    margin-top: 30px;
+    font-size: x-large;
+    text-align: justify;
+}
+.reg_image p{
+    color: #fff;
+    margin-top: 30px;
+    font-size: x-large;
+    text-align: justify;
+}
+.sign{
+    height: 400px;
+    /* object-fit: cover; */
+    width: 400px;
+    margin-left: 3rem;
+    margin-right: 5rem;
+}
+.reg_form button{
+    border-radius: 40px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+h1{
+    font-family: sans-serif;
+    
+}
+#up{
+    color: #000;
+    font-weight: bold;
+}
+.employer_home{
+    background-color: #F3F9FF;
+    min-height: 100vh
+}
+.rectangle{
+    position: absolute;
+    top: .4%;
+    left: 51%;
+    border-radius: 70px;
+    min-height: 96vh;
+    min-width: 50rem;
+    background-color: #0969C3;
+    z-index: 1;
+    display: block;
+
+}
+.home_employ h1{
+    margin-top: 10rem;
+}
+
+.head{
+    font-size: 4rem;
+    margin-left: 4rem;
+}
+
+.employer_img{
+    position: relative;
+    top: 10%;
+    left: 24%;
+    width: 70%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    z-index: 4; 
 }

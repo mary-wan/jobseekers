@@ -1,9 +1,9 @@
-{% extends 'registration/base.html'%}
+{% extends 'registration/base.html'%} 
 {% load static %}
-{%load crispy_forms_tags%}
-{% block content %}
+{%load crispy_forms_tags%} 
+{% block content %} 
 {{block.super}}
-<!-- <div class="container"><br><br>
+<!-- <div class="container">
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
@@ -26,16 +26,12 @@
         <div class="col-md-4"></div>
     </div>
 </div> -->
-
 <div class="container-full login_container">
     <div class="container login_details">
         <div class="row">
-            
                 <div class="col-md-6 login_image">
-                    <div class="">
                         <img class="sign" src="{%static 'photos/signup.svg' %}" alt="">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt voluptatum similique doloribus libero voluptatibus. Numquam expedita ipsum beatae odit ex?</p>
-                    </div>
+                        <p class="text-center">Do not have an account? <a href="{% url 'jobseeker_signup' %}" id="up">Sign Up!</a></p>
                 </div>
                 <div class="col-md-6 login_form">
                     <h1>Sign In</h1>
@@ -46,13 +42,13 @@
                                 {{ form|crispy }}
                             </fieldset>
                             <div class="form-group text-center">
-                                <button class="btn btn-outline-info" type="submit">Log In</button>
+                                <button class="btn btn-primary" type="submit">Sign In</button>
                             </div>
                         </form>
                     </div>
                 </div>
-           
         </div>
     </div>
 </div>
+
 {% endblock %}
