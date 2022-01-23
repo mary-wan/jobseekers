@@ -53,13 +53,7 @@ class EmployerSignUp(UserCreationForm):
     
 CustomUser._meta.get_field('email')._unique=True
        
-        
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-
-        model = CustomUser
-        fields = "__all__"
-
+    
         
 class UpdateJobseekerProfile(forms.ModelForm):
     class Meta:
