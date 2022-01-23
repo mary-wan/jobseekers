@@ -1,8 +1,24 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load static %}
 {%load crispy_forms_tags%} 
 {% block content %}
-<section class="contact_us pt-5">
+<div class="container-fluid p-0 border-contact">
+    <!-- <div class="intro-bg">
+        <div class="intro-overlay">
+            <h1 class="mb-5 intro-header">Contact Us</h1>
+
+            <p style="color:rgb(255, 255, 255);text-size-adjust: 70px;">
+                <strong style="font-size: xx-large;"> If you have question, concern or suggestion, you can send us message from here. It's our pleasure to help you.
+                </strong></p>
+        </div>
+
+    </div> -->
+    <img src="{% static 'photos/contact1.jpg' %}" class="contact-img" alt="">
+
+</div>
+
+<section class="contact_us pt-5 pl-4 mb-3">
   <div class="container conta">
     <legend class="intro-header text-center">Send us a Message</legend>
     <hr>

@@ -22,13 +22,13 @@ body{
 }
 .intro-overlay{
     height: 450px;
-    background-color: rgb(9,105,195,0.8);
-    color: white;
+    background-color: rgba(219, 235, 250, 0.8);
+    color: black;
     text-align: center;
     padding-top: 10%;
     border-bottom: solid 20px ;
     border-color: rgb(9,105,195);
-   
+
 }
 .services-page{
     font-family: 'Poppins', sans-serif;
@@ -55,7 +55,7 @@ body{
 }
 
 .navbar-brand{
-    font-size: 40px;
+    /* font-size: 40px; */
     font-weight: 800;
     color: #0969C3 !important;
 }
@@ -269,7 +269,7 @@ h1{
   /* display: flex; */
   align-items: center;
   justify-content: center;
-  background-color: rgb(9,105,195);
+  /* background-color: rgb(9,105,195); */
 }
 .conta{
   width: 85%;
@@ -310,7 +310,7 @@ h1{
 }
 .content .left-side .details i{
   font-size: 30px;
-  color: #3e2093;
+  color: rgb(9,105,195);
   margin-bottom: 10px;
 }
 .content .left-side .details .topic{
@@ -329,7 +329,7 @@ h1{
 .content .right-side .topic-text{
   font-size: 23px;
   font-weight: 600;
-  color: #3e2093;
+  color: rgb(9,105,195);
 }
 .right-side .input-box{
   height: 50px;
@@ -365,7 +365,7 @@ h1{
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
-  background: #3e2093;
+  background: rgb(9,105,195);
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -418,4 +418,17 @@ h1{
 .btn-color{
     background-color:rgb(9,105,195) !important ;
     color: white;
+}
+.contact-img{
+    height: 100% !important;
+    width: 100% !important;
+}
+@media only screen and (min-width: 768px) {
+    .contact-img{
+        height: 500px !important;
+    }
+}
+.border-contact{
+    border-bottom: solid 20px ;
+    border-color: rgb(9,105,195);
 }
