@@ -179,4 +179,4 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 
-AUTH_USER_MODEL = 'seekapp.CustomUser'
+AUTH_USER_MODEL = 'seekapp.User'

@@ -11,7 +11,7 @@ class JobseekerSignUp(UserCreationForm):
     email= forms.EmailField(label='Email Address' ,help_text='Format: 123@gmail.com, 456@yahoo.com',error_messages={'required': 'Please enter your email address'})
 
     class Meta(UserCreationForm.Meta):
-        model = CustomUser
+        model = User
         fields=['first_name','last_name','username','email','password1','password2']
 
         
@@ -27,7 +27,7 @@ class JobseekerSignUp(UserCreationForm):
         return user
     
     
-CustomUser._meta.get_field('email')._unique=True
+User._meta.get_field('email')._unique=True
 
 
 class EmployerSignUp(UserCreationForm):
@@ -36,7 +36,7 @@ class EmployerSignUp(UserCreationForm):
     email= forms.EmailField(label='Email Address' ,help_text='Format: 123@gmail.com, 456@yahoo.com',error_messages={'required': 'Please enter your email address'})
 
     class Meta(UserCreationForm.Meta):
-        model = CustomUser
+        model = User
         fields=['first_name','last_name','username','email','password1','password2']
 
         
@@ -51,9 +51,15 @@ class EmployerSignUp(UserCreationForm):
         employer.email = self.cleaned_data.get('email')
         return user
     
-CustomUser._meta.get_field('email')._unique=True
+User._meta.get_field('email')._unique=True
        
-    
+        
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+
+        model = User
+        fields = "__all__"
+
         
 class UpdateJobseekerProfile(forms.ModelForm):
     class Meta:
@@ -85,5 +91,3 @@ class UpdateEmployerProfile(forms.ModelForm):
     class Meta:
         model = Employer
         fields = ('company',  )
-
-
