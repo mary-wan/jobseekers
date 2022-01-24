@@ -70,6 +70,9 @@ def jobseeker_details(request,user_id):
 
   return render(request,'#',{'jobseeker':jobseeker,'documents':documents,'portfolios':portfolios})
 
+#delete jobseeker
+
+
 #employer profle
 @login_required
 # @allowed_users(allowed_roles=['admin','employer'])
@@ -101,6 +104,16 @@ def update_employer(request):
     'p_form':p_form
   }
   return render
+
+#delete employers
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def delete_employer(request,user_id):
+  employer = Employer.objects.get(pk=user_id)
+  if employer:
+    employer.delete_user()
+    messages.success(request, f'Employer deleted successfully!')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def contact(request):
