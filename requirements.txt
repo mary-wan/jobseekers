@@ -16,7 +16,11 @@ djangorestframework==3.12.4
 gunicorn==20.1.0
 lts==0.0.2
 Pillow==8.4.0
+<<<<<<< HEAD
+psycopg2==2.9.2
+=======
 psycopg2==2.8.6
+>>>>>>> 99e1058dffc56394018af6f2db3c1f720c044628
 pycrop==1.0.1
 python-decouple==3.5
 pytz==2021.3

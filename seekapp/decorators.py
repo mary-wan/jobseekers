@@ -33,10 +33,10 @@ def admin_only(view_func):
       group = request.user.groups.all()[0].name
 
     if group == 'jobseeker':
-      return redirect('#')
+      return redirect('jobseekerDash')
 
     if group == 'employer':
-      return redirect('#')
+      return redirect('employerDash')
 
     if group == 'admin':
       return view_func(request, *args, **kwargs)
