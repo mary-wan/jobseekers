@@ -181,6 +181,9 @@ body{
     .about-img{
         width: 500px !important;
     }
+    .home-desc{
+        padding-left: 10% !important;
+    }
 }
 
 .login_container{

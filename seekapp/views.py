@@ -237,11 +237,11 @@ def dashboard(request):
     else: 
         return redirect('jobseekerDash/')
 
-@login_required
-@allowed_users(allowed_roles=['admin','jobseeker'])
+# @login_required
+# @allowed_users(allowed_roles=['admin','jobseeker'])
 def jobseekerDash(request):
     current_user = request.user
-    documents = FileUpload.objects.filter(user_id = current_user.id).all()
+    documents = FileUpload.objects.filter(User_id = current_user.id).all()
     portfolios=Portfolio.objects.filter(user_id = current_user.id)
     return render(request,'jobseekers/jobseeker_dashboard.html',{"documents":documents,"portfolios":portfolios})
 
@@ -256,11 +256,11 @@ def adminDash(request):
     unverified_employers = User.objects.filter(verified = False,is_employer = True).all()
     return render(request,'admin/admin_dashboard.html',{"unverified_employers":unverified_employers  ,"verified_employers":verified_employers  ,"all_employers":all_employers ,'verified_jobseekers':verified_jobseekers,'unverified_jobseekers':unverified_jobseekers,'all_jobseekers':all_jobseekers})
 
-@login_required
-@allowed_users(allowed_roles=['admin','employer'])
+# @login_required
+# @allowed_users(allowed_roles=['admin','employer'])
 def employerDash(request):
     user = request.user
-    job_seekers = User.objects.filter(verified = True,is_jobseeker = True).all()
+    job_seekers = User.objects.filter(is_jobseeker = True).all()
     employer=User.objects.all()
     
     context={
@@ -297,7 +297,7 @@ def contact(request):
     return render(request,'contact.html',{'contact_form':contact_form})
 
 @login_required
-@allowed_users(allowed_roles=['admin','jobseeker'])
+# @allowed_users(allowed_roles=['admin','jobseeker'])
 def upload_file(request):
     if request.method == 'POST':
         upload_form = UploadFileForm(request.POST, request.FILES)
