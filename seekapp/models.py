@@ -5,11 +5,10 @@ from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 import datetime as dt
-from tinymce.models import HTMLField, URLField
+from tinymce.models import HTMLField
 from django.contrib.auth.models import PermissionsMixin
 
 # Create your models here.
-
 
 
 JOBSEEKER_WORKHOUR_CHOICES = (
@@ -17,8 +16,6 @@ JOBSEEKER_WORKHOUR_CHOICES = (
     ('Full Time', "Full Time"),
     ('Part Time', "Part Time"),
 )
-
-
 
 
 JOB_CATEGORY_CHOICES = (
@@ -50,22 +47,25 @@ class CustomUser(AbstractUser):
 
     def delete_user(self):
         self.delete()
-        
+
+
 class JobSeeker(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, primary_key=True)
     firstName = models.CharField(max_length=100, null=True, blank=True)
     lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
-    contact = models.CharField(unique=True, max_length=10, null=True, blank=True)
+    contact = models.CharField(
+        unique=True, max_length=10, null=True, blank=True)
     availability = models.CharField(
         null=True, blank=True, choices=JOBSEEKER_WORKHOUR_CHOICES, max_length=20)
     salary = models.IntegerField(null=True, blank=True)
     job_category = models.CharField(
         null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
     email = models.EmailField(unique=True)
-    
+
     def save_jobseeker(self):
         self.save()
 
@@ -74,17 +74,18 @@ class JobSeeker(models.Model):
 
     def delete_jobseeker(self):
         self.delete()
-        
-        
+
+
 class Employer(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(
+        CustomUser, on_delete=models.CASCADE, primary_key=True)
     firstName = models.CharField(max_length=100, null=True, blank=True)
     lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     company = models.CharField(max_length=100, null=True, blank=True)
     job_category = models.CharField(
         null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
-    
+
     def save_employer(self):
         self.save()
 
@@ -93,37 +94,42 @@ class Employer(models.Model):
 
     def delete_employer(self):
         self.delete()
-        
+
+
 class FileUpload(models.Model):
     name = models.CharField(max_length=100)
     pdf = models.FileField(upload_to='documents/pdf/')
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='documents')
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name='documents')
 
     def save_upload(self):
         self.save()
 
     def delete_upload(self):
         self.delete()
-    
+
     def __str__(self):
         return self.name
-    
+
+
 class Portfolio(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='portfolio')
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, related_name='portfolio')
     name = models.CharField(max_length=50)
-    link=models.URLField(max_length=555)
+    link = models.URLField(max_length=555)
 
     def save_portfolio(self):
         self.save()
 
     def delete_portfolio(self):
         self.delete()
-        
+
     def __str__(self):
         return self.name
-    
+
+
 class Contact(models.Model):
-    name = models.CharField(max_length = 30)
+    name = models.CharField(max_length=30)
     email = models.EmailField()
     message = models.TextField()
 
@@ -132,6 +138,6 @@ class Contact(models.Model):
 
     def delete_contact(self):
         self.delete()
-        
+
     def __str__(self):
         return self.name
