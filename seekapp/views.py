@@ -235,7 +235,7 @@ def update_jobseeker_profile(request):
 
 @login_required
 # @allowed_users(allowed_roles=['admin','employer'])
-def update_employer(request):
+def update_employer_profile(request):
     if request.method == 'POST':
         u_form = UpdateUserProfile(
             request.POST, request.FILES, instance=request.user)
