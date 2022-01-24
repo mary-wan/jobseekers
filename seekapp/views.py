@@ -405,3 +405,17 @@ def employer_signup(request):
     else:
         form = EmployerSignUp()
     return render(request, "registration/register.html", {'form': form})
+
+
+def search_by_category(request):
+    if 'job_category' in request.GET and request.GET["job_category"]:
+        search_term = request.GET.get("job_category")
+        searched_jobseekers = JobSeeker.search_jobseekers_by_job_category(
+            search_term)
+        message = f"{search_term}"
+
+        return render(request, 'job-cat/search.html', {"message": message, "jobseekers": searched_jobseekers})
+
+    else:
+        message = 'You have not searched for any term'
+        return render(request, 'job-cat/search.html', {"message": message})
