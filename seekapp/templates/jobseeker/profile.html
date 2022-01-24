@@ -2,32 +2,37 @@
 {% block content %}
 {% load static %}
 
-<section class="profile">
+<section class="prof">
     <div class="container-full container-fluid">
        <div class="row" style="padding-top: 5rem;">
            <div class="col-md-6" style="padding-left: 2rem;">
-              <div class="profile_content" style="padding-top: 3rem ; padding-bottom:3rem ;">
-                <h4>Full Name : </h4>
-                <h4>Username : </h4>
-                <h4>Bio : </h4>
-                <h4>Phone Number : </h4>
-                <h4>Email Address : </h4>
-                <h4>Availability : </h4>
-                <h4>Job Category : </h4>
-                <h4>Location : </h4>
-                <h4>Salary : </h4>
+              <div class="profile_cont" style="padding-top: 3rem ; padding-bottom:3rem ;">
+                <h4>First Name : {{ user.firstName }}</h4>
+                <h4>Last Name: {{ user.lastName }}</h4>
+                <h4>Username : {{ user.username }}</h4>
+                <h4>Bio : {{ user.bio }}</h4>
+                <h4>Phone Number : {{ user.contact }}</h4>
+                <h4>Email Address : {{ user.email }}</h4>
+                <h4>Availability : {{ user.availability }}</h4>
+                <h4>Job Category : {{ user.job_category }}</h4>
+                <h4>Location : {{ user.location }}</h4>
+                <h4>Salary : {{ user.salary }}</h4>
               </div> <br><br>
               <div class="form-group  leeft">
-                <button class="btn btn-primary  prof-button" type="submit">Update Profile</button>
-                <button class="btn btn-primary  pdf-button" type="submit">Upload PDF</button>
+                <a href="{% url 'update_jobseeker_profile' %}">
+                    <button class="btn btn-primary  prof-button" type="submit">Update Profile</button>
+                </a>
+                <a href="">
+                    <button class="btn btn-primary  pdf-button" type="submit">Upload PDF</button>   
+                </a>
               </div>
            </div>
            <div class="col-md-6">
             {% if profile.profile_pic %}
-            <img src="{{profile.profile_pic.url}}" alt="" class="prof-pic">
+            <img src="{{profile.profile_pic.url}}" alt="" class="profile-pic">
             {%else%}
             <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
-                class="card-img-top prof-pic" alt="My profile picture">
+                class="card-img-top profile-pic" alt="My profile picture">
             {% endif %}
            </div>
        </div>

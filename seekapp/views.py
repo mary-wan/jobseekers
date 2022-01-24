@@ -38,7 +38,7 @@ def profile_jobseeker(request):
 
 # jobseekers update profile
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
+@allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
   if request.method == 'POST':
     user_form = UpdateUserProfile(request.POST,request.FILES,instance=request.user)
@@ -47,7 +47,7 @@ def update_jobseeker_profile(request):
       user_form.save()
       jobseeker_form.save()
       messages.success(request,'Your Profile account has been updated successfully')
-      return redirect('#')
+      return redirect('profile_jobseeker')
   else:
     user_form = UpdateUserProfile(instance=request.user)
     jobseeker_form = UpdateJobseekerProfile(instance=request.user) 
@@ -55,7 +55,7 @@ def update_jobseeker_profile(request):
     'user_form':user_form,
     'jobseeker_form':jobseeker_form
   }
-  return render(request,'jobseekers/update.html',params)
+  return render(request,'jobseeker/update.html',params)
 
 
 #single jobseeker details
@@ -97,7 +97,7 @@ def employerProfile(request):
 
 @login_required
 # @allowed_users(allowed_roles=['admin','employer'])
-def update_employer(request):
+def update_employer_profile(request):
     if request.method == 'POST':
         u_form = UpdateUserProfile(
             request.POST, request.FILES, instance=request.user)
@@ -248,57 +248,6 @@ def employer_signup(request):
     else:
         form = EmployerSignUp()
     return render(request, "registration/register.html", {'form': form})
-
-# jobseekers update profile
-
-
-@login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
-def update_jobseeker_profile(request):
-    if request.method == 'POST':
-        user_form = UpdateUserProfile(
-            request.POST, request.FILES, instance=request.user)
-        jobseeker_form = UpdateJobseekerProfile(
-            request.POST, instance=request.user)
-        if user_form.is_valid() and jobseeker_form.is_valid():
-            user_form.save()
-            jobseeker_form.save()
-            messages.success(
-                request, 'Your Profile account has been updated successfully')
-            return redirect('#')
-    else:
-        user_form = UpdateUserProfile(instance=request.user)
-        jobseeker_form = UpdateJobseekerProfile(instance=request.user)
-    params = {
-        'user_form': user_form,
-        'jobseeker_form': jobseeker_form
-    }
-    return render(request, 'jobseekers/update.html', params)
-
-# employer profle
-
-
-@login_required
-# @allowed_users(allowed_roles=['admin','employer'])
-def update_employer_profile(request):
-    if request.method == 'POST':
-        u_form = UpdateUserProfile(
-            request.POST, request.FILES, instance=request.user)
-        p_form = UpdateEmployerProfile(request.POST, instance=request.user)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(
-                request, 'Your Profile account has been updated successfully')
-            return redirect('#')
-    else:
-        u_form = UpdateUserProfile(instance=request.user)
-        p_form = UpdateEmployerProfile(instance=request.user)
-    context = {
-        'u_form': u_form,
-        'p_form': p_form
-    }
-    return render
 
 
 @login_required
