@@ -14,7 +14,8 @@ from .forms import *
 import os
 from .email import *
 from django.http.response import Http404
-from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
+from django.http import HttpResponse,HttpResponseRedirect,Http404,JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def services(request):
@@ -96,6 +97,30 @@ def update_employer(request):
     }
     return render
 
+#delete employers
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def delete_employer(request,user_id):
+  employer = Employer.objects.get(pk=user_id)
+  if employer:
+    employer.delete_user()
+    messages.success(request, f'Employer deleted successfully!')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+#joobsekers sigle details for jobseekers
+@login_required
+@allowed_users(allowed_roles=['admin','employer'])
+def single_jobseeker(request,user_id):
+  try:
+    jobseeker =get_object_or_404(User, pk = user_id)
+    documents = FileUpload.objects.filter(user_id = user_id)
+    portfolios=Portfolio.objects.filter(user_id = user_id)
+
+  except ObjectDoesNotExist:
+    raise Http404()
+
+  return render(request,'#',{'documents':documents, 'jobseeker':jobseeker,"portfolios":portfolios})
+
 
 def contact(request):
     name = request.POST.get('name')
@@ -144,8 +169,8 @@ def upload_file(request):
             upload = upload_form.save(commit=False)
             upload.user = request.user
             upload.save()
-            messages.success(request, "File uploaded successfully")
-            return redirect('jobseekerDash')
+            messages.success(request,"File uploaded successfully")
+            return redirect('#')
     else:
         upload_form = UploadFileForm()
     return render(request, 'jobseekers/upload_file.html', {'upload_form': upload_form})

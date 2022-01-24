@@ -93,8 +93,8 @@ class Employer(models.Model):
 
     def delete_employer(self):
         self.delete()
-
-
+        
+        #file uploads
 class FileUpload(models.Model):
     name = models.CharField(max_length=100)
     pdf = models.FileField(upload_to='documents/pdf/')
@@ -125,8 +125,8 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.name
-
-
+    
+    #contacts details
 class Contact(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
