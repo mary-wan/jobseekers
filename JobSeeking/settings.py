@@ -70,8 +70,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'seekapp',
-    'bootstrap4',
     'crispy_forms',
+    'bootstrap4',
+    'cloudinary',
 
 ]
 
@@ -161,9 +162,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'profile'
-LOGOUT_REDIRECT_URL = 'login'
-# LOGIN_URL = 'login'
+# LOGIN_REDIRECT_URL = 'profile'
+# LOGOUT_REDIRECT_URL = 'login'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-AUTH_USER_MODEL = 'seekapp.CustomUser'
+LOGIN_URL = 'login'
+
+LOGOUT_URL = 'logout'
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
+
+
+
+
+
+AUTH_USER_MODEL = 'seekapp.User'
