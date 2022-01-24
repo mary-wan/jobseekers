@@ -122,6 +122,20 @@ def delete_employer(request,user_id):
     messages.success(request, f'Employer deleted successfully!')
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+#joobsekers sigle details for jobseekers
+@login_required
+@allowed_users(allowed_roles=['admin','employer'])
+def single_jobseeker(request,user_id):
+  try:
+    jobseeker =get_object_or_404(User, pk = user_id)
+    documents = FileUpload.objects.filter(user_id = user_id)
+    portfolios=Portfolio.objects.filter(user_id = user_id)
+
+  except ObjectDoesNotExist:
+    raise Http404()
+
+  return render(request,'#',{'documents':documents, 'jobseeker':jobseeker,"portfolios":portfolios})
+
 
 def contact(request):
     name = request.POST.get('name')
