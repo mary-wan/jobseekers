@@ -15,6 +15,7 @@ import os
 from .email import *
 from django.http.response import Http404
 from django.http import HttpResponse,HttpResponseRedirect,Http404,JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def services(request):
@@ -53,6 +54,21 @@ def update_jobseeker_profile(request):
     'jobseeker_form':jobseeker_form
   }
   return render(request,'jobseekers/update.html',params)
+
+
+#single jobseeker details
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def jobseeker_details(request,user_id):
+  try:
+    jobseeker =get_object_or_404(JobSeeker, pk = user_id)
+    documents = FileUpload.objects.filter(user_id = user_id).all()
+    portfolios=Portfolio.objects.filter(user_id = user_id).all()
+
+  except ObjectDoesNotExist:
+    raise Http404()
+
+  return render(request,'#',{'jobseeker':jobseeker,'documents':documents,'portfolios':portfolios})
 
 #employer profle
 @login_required

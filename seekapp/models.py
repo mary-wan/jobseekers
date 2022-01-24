@@ -70,6 +70,8 @@ class Employer(models.Model):
         self.update()
     def delete_employer(self):
         self.delete()
+        
+        #file uploads
 class FileUpload(models.Model):
     name = models.CharField(max_length=100)
     pdf = models.FileField(upload_to='documents/pdf/')
@@ -80,6 +82,7 @@ class FileUpload(models.Model):
         self.delete()
     def __str__(self):
         return self.name
+    
 class Portfolio(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='portfolio')
     name = models.CharField(max_length=50)
@@ -90,6 +93,8 @@ class Portfolio(models.Model):
         self.delete()
     def __str__(self):
         return self.name
+    
+    #contacts details
 class Contact(models.Model):
     name = models.CharField(max_length = 30)
     email = models.EmailField()
@@ -132,7 +137,8 @@ class FileUpload(models.Model):
 
     def __str__(self):
         return self.name
-
+    
+    
 class Portfolio(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE, related_name='portfolio')
     name = models.CharField(max_length=50)
