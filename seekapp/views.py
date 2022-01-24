@@ -106,7 +106,7 @@ def add_portfolios(request):
       portfolio.save()
       messages.success(request,'Your Portfolio has been added successfully.Thank you')
       print(port_form)
-      return redirect('jobseekerDash')
+      return redirect('#')
 
   else:
     port_form = AddPortfolio()
@@ -125,7 +125,7 @@ def upload_file(request):
             upload.user = request.user
             upload.save()
             messages.success(request,"File uploaded successfully")
-            return redirect('jobseekerDash')
+            return redirect('#')
     else:
         upload_form = UploadFileForm()
     return render(request, 'jobseekers/upload_file.html', {'upload_form': upload_form})
