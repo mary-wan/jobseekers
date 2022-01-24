@@ -30,8 +30,8 @@
           style="height: 10vh; width:10vh;" alt="">
         {% endif %}
         <h4 class="">{{user.username}}</h4>
-        <div class="card-header"><a href="{% url 'update_employer' %}">Update Details</a></div>
-        <div class="card-header"><a href="{% url 'employer_profile' %}">See my Profile</a></div>
+        <div class="card-header"><a href="">Update Details</a></div>
+        <div class="card-header"><a href="">See my Profile</a></div>
       </div>
     </div>
     <div class="col-md-8">
@@ -92,7 +92,7 @@
             <td>{{job_seeker.email}}</td>
             <td>{{job_seeker.phone}}</td>
             <td>{{job_seeker.location}}</td>
-            <td><a href="{% url 'specific_details' job_seeker.id%}"><button class="button">View</button></a></td>
+            <td><a href=""><button class="button">View</button></a></td>
             <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
           </tr>
           {%endfor%}

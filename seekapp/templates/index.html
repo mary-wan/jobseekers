@@ -5,153 +5,196 @@
 {% block content%}
 {{block.super}}
 
-<div class="container trial pt-2">
+<!-- <div class="container trial pt-2">
 <h1>beginning</h1>
 
 <a href="{%url 'jobseeker_signup' %}" class="btn btn-sm btn-warning">Sign Up Jobseeker</a>
 <a href="{%url 'employer_signup' %}" class="btn btn-sm btn-info">Sign Up employer</a>
-</div>
+</div> -->
+
+<section class="employer_home">
+  <div class="container-full">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 ">
+          <div class=" pt-5">
+            <h1 class="pl-5" style="font-size:70px">Advertise yourself for Jobs Application </h1>
+          </div>
+
+          <div class="text-center mt-5">
+            <button class="btn btn-primary rounded-pill pl-3 pr-3" style="border-radius: 20px;">Get Started</button>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="employer_img pt-5">
+            <img src="{%static 'photos/home.svg' %}" class="employer_img" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rectangle">
+
+    </div>
 
 
+  </div>
+</section>
+<section class="home-desc pt-3 mb-5 container-fluid" style="background-color: white;">
+  <h2 class="text-primary text-center"> Welcome to JobSeekers</h2>
+  <p class="text-center text-muted pb-4 place">A place where leading empoyers are already looking for your talent and
+    experience.
+  </p>
+  <div class="container">
+    <div class="row p-3 home-desc">
+      <div class="col-md-2 value-container mr-5  mb-2 text-center "
+        style="background-color: #0969C3; height: 300px;color: white; border-radius: 50px;">
+        <div class="pt-3">
+          <img src="{%static 'photos/home.svg' %}" class="" alt="" height="100" width="100">
+        </div>
+        <div class="mt-5">
+
+          More than 3.8 million visitors every day
+        </div>
+      </div>
+
+      <div class="col-md-2 value-container mr-5 mb-2 text-center "
+        style="background-color: #0969C3; height: 300px;color: white; border-radius: 50px;">
+        <div class="pt-3">
+          <img src="{%static 'photos/hand.png' %}" class="" alt="" height="100" width="100">
+        </div>
+        <div class="mt-5">
+
+          Leading recruiting website in the East Africa
+        </div>
+
+      </div>
+
+      <div class="col-md-2 value-container mr-5 mb-2 text-center "
+        style="background-color: #0969C3; height: 300px;color: white; border-radius: 50px;">
+        <div class="pt-3">
+          <img src="{%static 'photos/message.png' %}" class="" alt="" height="100" width="100">
+        </div>
+        <div class="mt-5">
+
+          24\7 Dedicated and free Support
+        </div>
+      </div>
+
+      <div class="col-md-2 value-container mr-5 mb-2 text-center "
+        style="background-color: #0969C3; height: 300px;color: white; border-radius: 50px;">
+        <div class="pt-3">
+          <img src="{%static 'photos/home.svg' %}" class="" alt="" height="100" width="100">
+        </div>
+        <div class="mt-5">
+
+          Only relevant and verified vacancies
+        </div>
+      </div>
+
+
+
+</section>
 
 
 
 
 
 <div class="foot-cont">
-    <footer 
-                class="text-center text-lg-start text-white"
-                style="background-color:  rgb(9,105,195);"
-                >
-          <!-- Grid container -->
-          <div class="container p-4 pb-0">
-            <!-- Section: Links -->
-            <section class="">
-              <!--Grid row-->
-              <div class="row">
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">
-                    Company name
-                  </h6>
-                  <p>
-                    Here you can use rows and columns to organize your footer
-                    content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit.
-                  </p>
-                </div>
-                <!-- Grid column -->
-      
-                <hr class="w-100 clearfix d-md-none" />
-      
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-                  <p>
-                    <a class="text-white">Services</a>
-                  </p>
-                  <p>
-                    <a class="text-white">Contact</a>
-                  </p>
-                  <p>
-                    <a class="text-white">Home</a>
-                  </p>
-                  <p>
-                    <a class="text-white">Bootstrap Angular</a>
-                  </p>
-                </div>
-                <!-- Grid column -->
-      
-                <hr class="w-100 clearfix d-md-none" />
-      
-                <!-- Grid column -->
-                <hr class="w-100 clearfix d-md-none" />
-      
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                  <p><i class="fas fa-home mr-3"></i> Ngong Road, NP12, Nairobi</p>
-                  <p><i class="fas fa-envelope mr-3"></i> snagjob@gmail.com</p>
-                  <p><i class="fas fa-phone mr-3"></i> +254 768 990</p>
-                  <p><i class="fas fa-print mr-3"></i> +254 983 224</p>
-                </div>
-                <!-- Grid column -->
-      
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                  <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
-      
-                  <!-- Facebook -->
-                  <a
-                     class="btn btn-primary btn-floating m-1"
-                     style="background-color: #3b5998"
-                     href="#!"
-                     role="button"
-                     ><i class="fab fa-facebook-f"></i
-                    ></a>
-      
-                  <!-- Twitter -->
-                  <a
-                     class="btn btn-primary btn-floating m-1"
-                     style="background-color: #55acee"
-                     href="#!"
-                     role="button"
-                     ><i class="fab fa-twitter"></i
-                    ></a>
-      
-                  <!-- Google -->
-                  <a
-                     class="btn btn-primary btn-floating m-1"
-                     style="background-color: #dd4b39"
-                     href="#!"
-                     role="button"
-                     ><i class="fab fa-google"></i
-                    ></a>
-      
-                  <!-- Instagram -->
-                  <a
-                     class="btn btn-primary btn-floating m-1"
-                     style="background-color: #ac2bac"
-                     href="#!"
-                     role="button"
-                     ><i class="fab fa-instagram"></i
-                    ></a>
-      
-                  <!-- Linkedin -->
-                  <a
-                     class="btn btn-primary btn-floating m-1"
-                     style="background-color: #0082ca"
-                     href="#!"
-                     role="button"
-                     ><i class="fab fa-linkedin-in"></i
-                    ></a>
-                  <!-- Github -->
-                  <a
-                     class="btn btn-primary btn-floating m-1"
-                     style="background-color: #333333"
-                     href="#!"
-                     role="button"
-                     ><i class="fab fa-github"></i
-                    ></a>
-                </div>
-              </div>
-              <!--Grid row-->
-            </section>
-            <!-- Section: Links -->
+  <footer class="text-center text-lg-start text-white" style="background-color:  rgb(9,105,195);">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">
+              Company name
+            </h6>
+            <p>
+              Here you can use rows and columns to organize your footer
+              content. Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit.
+            </p>
           </div>
-          <!-- Grid container -->
-      
-          <!-- Copyright -->
-          <div
-               class="text-center p-3"
-               style="background-color: rgba(0, 0, 0, 0.2)"
-               >
-            © 2022 Copyright:
-            <a class="text-white" href="https://mdbootstrap.com/"
-               >Snagjob.com</a
-              >
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+            <p>
+              <a class="text-white">Services</a>
+            </p>
+            <p>
+              <a class="text-white">Contact</a>
+            </p>
+            <p>
+              <a class="text-white">Home</a>
+            </p>
+            <p>
+              <a class="text-white">Bootstrap Angular</a>
+            </p>
           </div>
-          <!-- Copyright -->
-        </footer>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+            <p><i class="fas fa-home mr-3"></i> Ngong Road, NP12, Nairobi</p>
+            <p><i class="fas fa-envelope mr-3"></i> snagjob@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> +254 768 990</p>
+            <p><i class="fas fa-print mr-3"></i> +254 983 224</p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+
+            <!-- Facebook -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i
+                class="fab fa-facebook-f"></i></a>
+
+            <!-- Twitter -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee" href="#!" role="button"><i
+                class="fab fa-twitter"></i></a>
+
+            <!-- Google -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39" href="#!" role="button"><i
+                class="fab fa-google"></i></a>
+
+            <!-- Instagram -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i
+                class="fab fa-instagram"></i></a>
+
+            <!-- Linkedin -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca" href="#!" role="button"><i
+                class="fab fa-linkedin-in"></i></a>
+            <!-- Github -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #333333" href="#!" role="button"><i
+                class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
     </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+      © 2022 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">Snagjob.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+</div>
 {%endblock%}

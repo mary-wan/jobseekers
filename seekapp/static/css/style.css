@@ -5,6 +5,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Poppins" , sans-serif;
 }
 
 body{
@@ -111,7 +112,21 @@ body{
    
     overflow: hidden;
 }
+.prof{
+   
+    overflow: hidden;
+}
 .profile_content{
+    background: #0969C3;
+    color: #fff;
+    width: 38rem;
+    min-height: 20rem;
+    border-radius: 40px;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    padding-top: 1.5rem;
+}
+.profile_cont{
     background: #0969C3;
     color: #fff;
     width: 38rem;
@@ -146,8 +161,31 @@ body{
     clip-path: circle(36% at 86% 26%);
     z-index: 1;
 }
+.prof::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0969C3;
+    clip-path: circle(36% at 86% 26%);
+    z-index: 1;
+}
 
 .profile:after{
+    content: '';
+    position: absolute;
+    top: -6%;
+    left: 2.6%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    clip-path: circle(16% at 83% 40%);
+    z-index: 1;
+
+}
+.prof:after{
     content: '';
     position: absolute;
     top: 0;
@@ -166,6 +204,16 @@ body{
 } */
 .prof-pic{
     position: relative;
+    float: right;
+    margin-right: 4rem;
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 4; 
+}
+.profile-pic{
+    position: relative;
     margin-left: 15.5rem;
     margin-top: -2.0rem;
     margin-bottom: 2rem;
@@ -180,6 +228,9 @@ body{
 @media only screen and (min-width: 768px) {
     .about-img{
         width: 500px !important;
+    }
+    .home-desc{
+        padding-left: 10% !important;
     }
 }
 
@@ -511,4 +562,55 @@ h1{
 }
 .trial{
     margin-bottom: 200px;
+}
+
+@media screen and (max-width: 550px){
+    .profile::before{
+        display: none;
+    }
+
+    .profile::after{
+        display: none;
+    }
+    
+    .profile_content h4{
+        font-size: 20px;
+    }
+}
+
+/* For medium devices */
+@media screen and (max-width: 568px){
+    .profile::before{
+        display: none;
+    }
+
+    .profile::after{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .profile::before{
+        display: none;
+    }
+
+    .profile::after{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .profile::before{
+        display: none;
+    }
+
+}
+
+@media screen and (min-width: 1224px){
+    .profile::before{
+        display: initial;
+    }
+    .profile::after{
+        display: initial;
+    }
 }
