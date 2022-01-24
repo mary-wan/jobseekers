@@ -14,7 +14,8 @@ from .forms import *
 import os
 from .email import *
 from django.http.response import Http404
-from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
+from django.http import HttpResponse,HttpResponseRedirect,Http404,JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def services(request):
@@ -39,29 +40,49 @@ def profile_jobseeker(request):
 @login_required
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
-    if request.method == 'POST':
-        user_form = UpdateUserProfile(
-            request.POST, request.FILES, instance=request.user)
-        jobseeker_form = UpdateJobseekerProfile(
-            request.POST, instance=request.user)
-        if user_form.is_valid() and jobseeker_form.is_valid():
-            user_form.save()
-            jobseeker_form.save()
-            messages.success(
-                request, 'Your Profile account has been updated successfully')
-            return redirect('#')
-    else:
-        user_form = UpdateUserProfile(instance=request.user)
-        jobseeker_form = UpdateJobseekerProfile(instance=request.user)
-    params = {
-        'user_form': user_form,
-        'jobseeker_form': jobseeker_form
-    }
-    return render(request, 'jobseekers/update.html', params)
-
-# employer profle
+  if request.method == 'POST':
+    user_form = UpdateUserProfile(request.POST,request.FILES,instance=request.user)
+    jobseeker_form = UpdateJobseekerProfile(request.POST,instance=request.user)
+    if user_form.is_valid() and jobseeker_form.is_valid():
+      user_form.save()
+      jobseeker_form.save()
+      messages.success(request,'Your Profile account has been updated successfully')
+      return redirect('#')
+  else:
+    user_form = UpdateUserProfile(instance=request.user)
+    jobseeker_form = UpdateJobseekerProfile(instance=request.user) 
+  params = {
+    'user_form':user_form,
+    'jobseeker_form':jobseeker_form
+  }
+  return render(request,'jobseekers/update.html',params)
 
 
+#single jobseeker details
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def jobseeker_details(request,user_id):
+  try:
+    jobseeker =get_object_or_404(JobSeeker, pk = user_id)
+    documents = FileUpload.objects.filter(user_id = user_id).all()
+    portfolios=Portfolio.objects.filter(user_id = user_id).all()
+
+  except ObjectDoesNotExist:
+    raise Http404()
+
+  return render(request,'#',{'jobseeker':jobseeker,'documents':documents,'portfolios':portfolios})
+
+#delete jobseeker
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def delete_jobseeker(request,user_id):
+  jobseeker = JobSeeker.objects.get(pk=user_id)
+  if jobseeker:
+    jobseeker.delete_user()
+    messages.success(request, f'User deleted successfully!')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+#employer profle
 @login_required
 # @allowed_users(allowed_roles=['admin','employer'])
 def employerProfile(request):
@@ -95,6 +116,30 @@ def update_employer(request):
         'p_form': p_form
     }
     return render
+
+#delete employers
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def delete_employer(request,user_id):
+  employer = Employer.objects.get(pk=user_id)
+  if employer:
+    employer.delete_user()
+    messages.success(request, f'Employer deleted successfully!')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+#joobsekers sigle details for jobseekers
+@login_required
+@allowed_users(allowed_roles=['admin','employer'])
+def single_jobseeker(request,user_id):
+  try:
+    jobseeker =get_object_or_404(User, pk = user_id)
+    documents = FileUpload.objects.filter(user_id = user_id)
+    portfolios=Portfolio.objects.filter(user_id = user_id)
+
+  except ObjectDoesNotExist:
+    raise Http404()
+
+  return render(request,'#',{'documents':documents, 'jobseeker':jobseeker,"portfolios":portfolios})
 
 
 def contact(request):
