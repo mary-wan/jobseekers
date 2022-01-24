@@ -28,14 +28,14 @@ def home(request):
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
   current_user = request.user
-  profile = JobSeeker.objects.filter(user_id=current_user.id).first()  # get profile
+  profile = User.objects.filter(id=current_user.id).first()  # get profile
   documents = FileUpload.objects.filter(User_id = current_user.id).all()
   return render(request,"jobseeker/profile.html",{"documents":documents,"current_user":current_user,"profile":profile})
 
 
 #jobseekers update profile
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
+@allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
   if request.method == 'POST':
     user_form = UpdateUserProfile(request.POST,request.FILES,instance=request.user)
@@ -44,7 +44,7 @@ def update_jobseeker_profile(request):
       user_form.save()
       jobseeker_form.save()
       messages.success(request,'Your Profile account has been updated successfully')
-      return redirect('#')
+      return redirect('profile_jobseeker')
   else:
     user_form = UpdateUserProfile(instance=request.user)
     jobseeker_form = UpdateJobseekerProfile(instance=request.user) 
@@ -52,7 +52,7 @@ def update_jobseeker_profile(request):
     'user_form':user_form,
     'jobseeker_form':jobseeker_form
   }
-  return render(request,'jobseekers/update.html',params)
+  return render(request,'jobseeker/update.html',params)
 
 #employer profle
 @login_required
@@ -84,7 +84,7 @@ def update_employer(request):
     'u_form':u_form,
     'p_form':p_form
   }
-  return render
+  return render (request,'employer/update.html',context)
 
 
 def contact(request):
@@ -196,7 +196,7 @@ def update_jobseeker_profile(request):
       user_form.save()
       jobseeker_form.save()
       messages.success(request,'Your Profile account has been updated successfully')
-      return redirect('#')
+      return redirect('profile_jobseeker')
   else:
     user_form = UpdateUserProfile(instance=request.user)
     jobseeker_form = UpdateJobseekerProfile(instance=request.user) 
@@ -204,7 +204,7 @@ def update_jobseeker_profile(request):
     'user_form':user_form,
     'jobseeker_form':jobseeker_form
   }
-  return render(request,'jobseekers/update.html',params)
+  return render(request,'jobseeker/update.html',params)
 
 #employer profle
 @login_required
