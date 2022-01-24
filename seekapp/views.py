@@ -71,7 +71,14 @@ def jobseeker_details(request,user_id):
   return render(request,'#',{'jobseeker':jobseeker,'documents':documents,'portfolios':portfolios})
 
 #delete jobseeker
-
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def delete_jobseeker(request,user_id):
+  jobseeker = JobSeeker.objects.get(pk=user_id)
+  if jobseeker:
+    jobseeker.delete_user()
+    messages.success(request, f'User deleted successfully!')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 #employer profle
 @login_required
