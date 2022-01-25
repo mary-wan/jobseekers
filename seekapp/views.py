@@ -59,7 +59,7 @@ def update_jobseeker_profile(request):
 
 #single jobseeker details
 @login_required
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def jobseeker_details(request,user_id):
   try:
     jobseeker =get_object_or_404(JobSeeker, pk = user_id)
