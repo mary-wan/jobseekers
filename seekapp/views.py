@@ -21,6 +21,9 @@ from django.core.exceptions import ObjectDoesNotExist
 def services(request):
     return render(request, 'services.html')
 
+def options(request):
+    return render(request, 'registration/options.html')
+
 
 def home(request):
     return render(request, 'index.html')
@@ -378,7 +381,7 @@ def jobseeker_signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return redirect('jobseeker_home')
+            return redirect('login')
 
     else:
         form = JobseekerSignUp()

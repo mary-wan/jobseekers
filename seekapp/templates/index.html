@@ -5,12 +5,7 @@
 {% block content%}
 {{block.super}}
 
-<!-- <div class="container trial pt-2">
-<h1>beginning</h1>
 
-<a href="{%url 'jobseeker_signup' %}" class="btn btn-sm btn-warning">Sign Up Jobseeker</a>
-<a href="{%url 'employer_signup' %}" class="btn btn-sm btn-info">Sign Up employer</a>
-</div> -->
 
 <section class="employer_home">
   <div class="container-full">
@@ -22,7 +17,7 @@
           </div>
 
           <div class="text-center mt-5">
-            <button class="btn btn-primary rounded-pill pl-3 pr-3" style="border-radius: 20px;">Get Started</button>
+            <a href = "{%url 'options' %}" class="btn btn-primary rounded-pill pl-3 pr-3" style="border-radius: 20px;">Get Started</a>
           </div>
         </div>
         <div class="col-md-8">
