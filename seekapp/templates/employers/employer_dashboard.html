@@ -73,12 +73,12 @@
       </div>
       {% else %}
 
-      <h5 class="">POTENTIAL CANDIDATES: </h5>
+      <h5 class="pot" style="text-align: center;">POTENTIAL CANDIDATES: </h5>
       <hr>
-      <div class="card card-body table-responsive">
+      <div class="container-fluid add" style="padding: 3rem; background-color: rgb(92, 92, 240); width: max-content; border-radius: 30px;">
         <table class="table table-striped" border="1">
           <tr>
-            <th scope="col">Names</th>
+            <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
             <th scope="col">Location</th>
@@ -87,7 +87,6 @@
           </tr>
           {% for job_seeker in job_seekers %}
           <tr>
-            <!-- a href="" data-product="{{job_seeker.id}}" data-action="add" class="btn btn-outline-info btn-sm hire">Hire</a> -->
             <td>{{job_seeker.first_name}} {{job_seeker.last_name}}</td>
             <td>{{job_seeker.email}}</td>
             <td>{{job_seeker.phone}}</td>
@@ -116,4 +115,7 @@
     })
   }
 </script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 {% endblock %}
