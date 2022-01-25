@@ -89,10 +89,13 @@ def delete_jobseeker(request,user_id):
 # @allowed_users(allowed_roles=['admin','employer'])
 def employerProfile(request):
     employer = request.user
+    profile = Employer.objects.get(
+        user_id=employer.id)  # get profile
     available = User.objects.filter(is_jobseeker=True).all()
     context = {
         "employer": employer,
         "available": available,
+        'profile':profile
     }
     return render(request, 'employer/profile.html', context)
 
@@ -117,7 +120,7 @@ def update_employer_profile(request):
         'u_form': u_form,
         'p_form': p_form
     }
-    return render
+    return render(request,'employer/update.html',context)
 
 #delete employers
 @login_required

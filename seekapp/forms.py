@@ -20,7 +20,7 @@ class JobseekerSignUp(UserCreationForm):
             user = super().save(commit=False)
             user.is_jobseeker = True
             user.first_name = self.cleaned_data.get('first_name')
-            user.first_name = self.cleaned_data.get('last_name')
+            user.last_name = self.cleaned_data.get('last_name')
             user.save()
             jobseeker = JobSeeker.objects.create(user=user)
             jobseeker.email = self.cleaned_data.get('email')
@@ -41,9 +41,9 @@ class EmployerSignUp(UserCreationForm):
     @transaction.atomic
     def save(self):
             user = super().save(commit=False)
-            user.is_staff = True
+            user.is_employer = True
             user.first_name = self.cleaned_data.get('first_name')
-            user.first_name = self.cleaned_data.get('last_name')
+            user.last_name = self.cleaned_data.get('last_name')
             user.save()
             employer = Employer.objects.create(user=user)
             employer.email = self.cleaned_data.get('email')
