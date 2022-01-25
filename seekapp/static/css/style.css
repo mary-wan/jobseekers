@@ -150,7 +150,7 @@ body{
     opacity: 2;
 }
 
-.profile::before{
+/* .profile::before{
     content: '';
     position: absolute;
     top: 0;
@@ -160,7 +160,7 @@ body{
     background: #0969C3;
     clip-path: circle(36% at 86% 26%);
     z-index: 1;
-}
+} */
 .prof::before{
     content: '';
     position: absolute;

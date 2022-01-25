@@ -90,4 +90,4 @@ class UploadFileForm(forms.ModelForm):
 class UpdateEmployerProfile(forms.ModelForm):
     class Meta:
         model = Employer
-        fields = ('company',  )
+        fields = ('company', )

@@ -100,15 +100,14 @@ def employerProfile(request):
 # @allowed_users(allowed_roles=['admin','employer'])
 def update_employer_profile(request):
     if request.method == 'POST':
-        u_form = UpdateUserProfile(
-            request.POST, request.FILES, instance=request.user)
+        u_form = UpdateUserProfile(request.POST, request.FILES, instance=request.user)
         p_form = UpdateEmployerProfile(request.POST, instance=request.user)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
             messages.success(
                 request, 'Your Profile account has been updated successfully')
-            return redirect('#')
+            return redirect('profile')
     else:
         u_form = UpdateUserProfile(instance=request.user)
         p_form = UpdateEmployerProfile(instance=request.user)
@@ -116,7 +115,7 @@ def update_employer_profile(request):
         'u_form': u_form,
         'p_form': p_form
     }
-    return render
+    return render(request,'employers/update.html',context)
 
 #delete employers
 @login_required

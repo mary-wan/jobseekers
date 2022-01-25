@@ -91,8 +91,7 @@ class Employer(models.Model):
     lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     company = models.CharField(max_length=100, null=True, blank=True)
-    job_category = models.CharField(
-        null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
+
 
     def save_employer(self):
         self.save()
