@@ -25,20 +25,19 @@ def services(request):
 def home(request):
     return render(request, 'index.html')
 
-
 @login_required
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
     current_user = request.user
-    profile = JobSeeker.objects.filter(
-        user_id=current_user.id).first()  # get profile
+    profile = JobSeeker.objects.get(
+        user_id=current_user.id)  # get profile
     documents = FileUpload.objects.filter(User_id=current_user.id).all()
     return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "profile": profile})
 
 
 # jobseekers update profile
 @login_required
-@allowed_users(allowed_roles=['admin','jobseeker'])
+# @allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
   if request.method == 'POST':
     user_form = UpdateUserProfile(request.POST,request.FILES,instance=request.user)
@@ -262,16 +261,16 @@ def dashboard(request):
 
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'jobseeker'])
+# @allowed_users(allowed_roles=['admin', 'jobseeker'])
 def jobseekerDash(request):
     current_user = request.user
-    documents = FileUpload.objects.filter(user_id=current_user.id).all()
+    documents = FileUpload.objects.filter(User_id=current_user.id).all()
     portfolios = Portfolio.objects.filter(user_id=current_user.id)
     return render(request, 'jobseekers/jobseeker_dashboard.html', {"documents": documents, "portfolios": portfolios})
 
 
 @login_required
-@admin_only
+# @admin_only
 def adminDash(request):
     all_employers = User.objects.filter(is_employer=True).all()
     all_jobseekers = User.objects.filter(is_jobseeker=True).all()
@@ -287,10 +286,10 @@ def adminDash(request):
 
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'employer'])
+# @allowed_users(allowed_roles=['admin', 'employer'])
 def employerDash(request):
     user = request.user
-    job_seekers = User.objects.filter(verified=True, is_jobseeker=True).all()
+    job_seekers = User.objects.filter( is_jobseeker=True).all()
     employer = User.objects.all()
 
     context = {
