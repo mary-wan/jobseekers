@@ -30,15 +30,14 @@ def home(request):
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
     current_user = request.user
-    profile = JobSeeker.objects.filter(
-        user_id=current_user.id).first()  # get profile
+    profile = JobSeeker.objects.get(user_id=current_user.id)  # get profile
     documents = FileUpload.objects.filter(User_id=current_user.id).all()
     return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "profile": profile})
 
 
 # jobseekers update profile
 @login_required
-@allowed_users(allowed_roles=['admin','jobseeker'])
+# @allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
   if request.method == 'POST':
     user_form = UpdateUserProfile(request.POST,request.FILES,instance=request.user)
@@ -74,7 +73,7 @@ def jobseeker_details(request,user_id):
 
 #delete jobseeker
 @login_required
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def delete_jobseeker(request,user_id):
   jobseeker = JobSeeker.objects.get(pk=user_id)
   if jobseeker:
@@ -119,7 +118,7 @@ def update_employer_profile(request):
 
 #delete employers
 @login_required
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def delete_employer(request,user_id):
   employer = Employer.objects.get(pk=user_id)
   if employer:
@@ -129,7 +128,7 @@ def delete_employer(request,user_id):
 
 #joobsekers sigle details for jobseekers
 @login_required
-@allowed_users(allowed_roles=['admin','employer'])
+# @allowed_users(allowed_roles=['admin','employer'])
 def single_jobseeker(request,user_id):
   try:
     jobseeker =get_object_or_404(User, pk = user_id)
