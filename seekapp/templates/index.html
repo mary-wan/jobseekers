@@ -1,51 +1,71 @@
-{% extends 'base.html' %}
+{% extends 'slider-base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load bootstrap4 %}
 {% block content%}
 {{block.super}}
 
-<!-- <div class="container trial pt-2">
-<h1>beginning</h1>
 
-<a href="{%url 'jobseeker_signup' %}" class="btn btn-sm btn-warning">Sign Up Jobseeker</a>
-<a href="{%url 'employer_signup' %}" class="btn btn-sm btn-info">Sign Up employer</a>
-</div> -->
 
-<section class="employer_home">
-  <div class="container-full">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-4 ">
-          <div class=" pt-5">
-            <h1 class="pl-5" style="font-size:70px">Advertise yourself for Jobs Application </h1>
-          </div>
+<section class="main-slider">
 
-          <div class="text-center mt-5">
-            <button class="btn btn-primary rounded-pill pl-3 pr-3" style="border-radius: 20px;">Get Started</button>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="employer_img pt-5">
-            <img src="{%static 'photos/home.svg' %}" class="employer_img" alt="">
+  <div class="main-slider-carousel owl-carousel owl-theme">
+
+    <div class="slide" style="background-image:url({%static 'main-slider/image-1.jpg'%})">
+      <div class="auto-container">
+        <div class="content clearfix">
+          <div class="title">We Help</div>
+          <h1>Growing YOUR CAREER</h1>
+          <div class="text">We help you managing asset, provide financial advise. Leave money issue with us and focus on
+            your core business.</div>
+          <div class="link-box">
+            <a href="about.html" class="theme-btn btn-style-one">Learn More</a> <a href="{%url 'contact_us'%}"
+              class="theme-btn btn-style-two">Contact Us</a>
           </div>
         </div>
       </div>
     </div>
-    <div class="rectangle">
 
+    <div class="slide" style="background-image:url({%static 'main-slider/image-2.jpg'%})">
+      <div class="auto-container">
+        <div class="content centered clearfix">
+          <div class="title">We Help</div>
+          <h1>FIND THE BEST EMPLOYEE</h1>
+          <div class="text">We help you managing asset, provide financial advise. Leave money issue with us and focus on
+            your core business.</div>
+          <div class="link-box">
+            <a href="about.html" class="theme-btn btn-style-one">Learn More</a> <a href="{%url 'contact_us'%}"
+              class="theme-btn btn-style-two">Contact Us</a>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <div class="slide" style="background-image:url({%static 'main-slider/image-3.jpg'%})">
+      <div class="auto-container">
+        <div class="content clearfix">
+          <div class="title">We Help</div>
+          <h1>CREATE CONNECTIONS</h1>
+          <div class="text">We help you managing asset, provide financial advise. Leave money issue with us and focus on
+            your core business.</div>
+          <div class="link-box">
+            <a href="about.html" class="theme-btn btn-style-one">Learn More</a> <a href="{%url 'contact_us'%}"
+              class="theme-btn btn-style-two">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
+</section>
 </section>
 <section class="home-desc pt-3 mb-5 container-fluid" style="background-color: white;">
   <h2 class="text-primary text-center"> Welcome to JobSeekers</h2>
   <p class="text-center text-muted pb-4 place">A place where leading empoyers are already looking for your talent and
     experience.
   </p>
-  <div class="container">
-    <div class="row p-3 home-desc">
+  <div class="container-fluid">
+    <div class="row home-desc">
       <div class="col-md-2 value-container mr-5  mb-2 text-center "
         style="background-color: #0969C3; height: 300px;color: white; border-radius: 50px;">
         <div class="pt-3">
@@ -80,7 +100,7 @@
         </div>
       </div>
 
-      <div class="col-md-2 value-container mr-5 mb-2 text-center "
+      <div class="col-md-2 value-container mb-2 text-center "
         style="background-color: #0969C3; height: 300px;color: white; border-radius: 50px;">
         <div class="pt-3">
           <img src="{%static 'photos/home.svg' %}" class="" alt="" height="100" width="100">
@@ -100,7 +120,7 @@
 
 
 <div class="foot-cont">
-  <footer class="text-center text-lg-start text-white" style="background-color:  rgb(9,105,195);">
+  <footer class="text-center text-dark text-lg-start " style="background-color:  #e6f0f9;">
     <!-- Grid container -->
     <div class="container p-4 pb-0">
       <!-- Section: Links -->
@@ -126,16 +146,16 @@
           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
             <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
             <p>
-              <a class="text-white">Services</a>
+              <a class="">Services</a>
             </p>
             <p>
-              <a class="text-white">Contact</a>
+              <a class="">Contact</a>
             </p>
             <p>
-              <a class="text-white">Home</a>
+              <a class="">Home</a>
             </p>
             <p>
-              <a class="text-white">Bootstrap Angular</a>
+              <a class="">Bootstrap Angular</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -190,7 +210,7 @@
     <!-- Grid container -->
 
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    <div class="text-center p-3 text-white" style="background-color: #0969C3">
       © 2022 Copyright:
       <a class="text-white" href="https://mdbootstrap.com/">Snagjob.com</a>
     </div>

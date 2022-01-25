@@ -21,6 +21,9 @@ from django.core.exceptions import ObjectDoesNotExist
 def services(request):
     return render(request, 'services.html')
 
+def options(request):
+    return render(request, 'registration/options.html')
+
 
 def home(request):
     return render(request, 'index.html')
@@ -85,12 +88,14 @@ def delete_jobseeker(request,user_id):
 # @allowed_users(allowed_roles=['admin','employer'])
 def employerProfile(request):
     employer = request.user
+    profile = Employer.objects.get(
+        user_id=employer.id)  # get profile
     available = User.objects.filter(is_jobseeker=True).all()
     profile = Employer.objects.filter(user_id = employer.id).first()  # get profile
     context = {
         "employer": employer,
         "available": available,
-        "profile": profile,
+        'profile':profile
     }
     return render(request, 'employer/profile.html', context)
 
@@ -114,7 +119,7 @@ def update_employer_profile(request):
         'u_form': u_form,
         'p_form': p_form
     }
-    return render(request,'employers/update.html',context)
+    return render(request,'employer/update.html',context)
 
 #delete employers
 @login_required
@@ -227,7 +232,7 @@ def jobseeker_signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return redirect('jobseeker_home')
+            return redirect('login')
 
     else:
         form = JobseekerSignUp()
@@ -242,7 +247,7 @@ def employer_signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return redirect('emp_home')
+            return redirect('login')
 
     else:
         form = EmployerSignUp()
@@ -368,36 +373,6 @@ def emp_home(request):
 
 def jobseeker_home(request):
     return render(request, 'jobseeker/home.html')
-
-
-def jobseeker_signup(request):
-    # if request.user.is_authenticated:
-    #     return redirect('home')
-    if request.method == "POST":
-        form = JobseekerSignUp(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            return redirect('jobseeker_home')
-
-    else:
-        form = JobseekerSignUp()
-    return render(request, "registration/register.html", {'form': form})
-
-
-def employer_signup(request):
-    # if request.user.is_authenticated:
-    #     return redirect('home')
-    if request.method == "POST":
-        form = EmployerSignUp(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            return redirect('emp_home')
-
-    else:
-        form = EmployerSignUp()
-    return render(request, "registration/register.html", {'form': form})
 
 
 def search_by_category(request):

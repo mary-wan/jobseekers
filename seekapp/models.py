@@ -31,7 +31,8 @@ class User(AbstractUser):
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
-
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
     def save_user(self):
         self.save()
 
@@ -45,23 +46,8 @@ class User(AbstractUser):
 class JobSeeker(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
-
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
-    profile_photo = CloudinaryField('image')
-    bio = models.TextField(max_length=500,  null=True)
-    email = models.EmailField(null=True)
-    contact = models.CharField(max_length=50, blank=True, null=True)
-
-
-
-class JobSeeker(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
-    firstName = models.CharField(max_length=100, null=True, blank=True)
-    lastName = models.CharField(max_length=100, null=True, blank=True)
+    # firstName = models.CharField(max_length=100, null=True, blank=True)
+    # lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
@@ -72,7 +58,7 @@ class JobSeeker(models.Model):
     salary = models.IntegerField(null=True, blank=True)
     job_category = models.CharField(
         null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
-    email = models.EmailField(unique=True)
+    email = models.CharField(max_length=50,null=True)
 
     def save_jobseeker(self):
         self.save()
@@ -87,11 +73,13 @@ class JobSeeker(models.Model):
 class Employer(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
-    firstName = models.CharField(max_length=100, null=True, blank=True)
-    lastName = models.CharField(max_length=100, null=True, blank=True)
+    # firstName = models.CharField(max_length=100, null=True, blank=True)
+    # lastName = models.CharField(max_length=100, null=True, blank=True)
+    email = models.CharField(max_length=50,null=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     company = models.CharField(max_length=100, null=True, blank=True)
-
+    job_category = models.CharField(
+        null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
 
     def save_employer(self):
         self.save()
@@ -249,3 +237,10 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+
+
+
+

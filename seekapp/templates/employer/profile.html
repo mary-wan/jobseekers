@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'slider-base.html' %}
 {% block content %}
 {% load static %}
 
@@ -57,8 +57,8 @@
         <div class="row" style="padding-top: 5rem;">
             <div class="col-lg-6 col-md-12 ">
                 <div class="">
-                    {% if profile.profile_pic %}
-                        <img src="{{profile.profile_pic.url}}" alt="" class="prof-pic">
+                    {% if profile.profile_photo %}
+                        <img src="{{profile.profile_photo.url}}" alt="" class="prof-pic">
                         {%else%}
                         <img src="{%static 'photos/avatar.png' %}"
                             class="card-img-top prof-pic" alt="My profile picture">
@@ -67,20 +67,13 @@
                 
             </div>
            <div class="col-lg-6 col-md-12 ">
-            <div class="profile_content ">
-
-                <h4>Full Name : {{ user.firstName }}</h4>
-                <h4>Last Name: {{ user.lastName }}</h4>
+                <h4>Full Name : {{ user.first_name }}</h4>
+                <h4>Last Name: {{ user.last_name }}</h4>
                 <h4>Username : {{ user.username }}</h4>
-                <h4>Bio : {{ user.bio }}</h4>
-                <h4>Company Name : {{ user.company }}</h4>
-                <h4>Job Category : {{ user.job_category }}</h4>
+                <h4>Company Name : {{ profile.company }}</h4>
+                <h4>Job Category : {{ profile.job_category }}</h4>
             </div>
            </div>
-            
-        </div>
-    </div>
-</section>
 
 
-{% endblock %}
+{%endblock%}
