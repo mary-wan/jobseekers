@@ -38,7 +38,7 @@ def profile_jobseeker(request):
 
 # jobseekers update profile
 @login_required
-@allowed_users(allowed_roles=['admin','jobseeker'])
+# @allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
   if request.method == 'POST':
     user_form = UpdateUserProfile(request.POST,request.FILES,instance=request.user)
@@ -99,15 +99,14 @@ def employerProfile(request):
 # @allowed_users(allowed_roles=['admin','employer'])
 def update_employer_profile(request):
     if request.method == 'POST':
-        u_form = UpdateUserProfile(
-            request.POST, request.FILES, instance=request.user)
+        u_form = UpdateUserProfile(request.POST, request.FILES, instance=request.user)
         p_form = UpdateEmployerProfile(request.POST, instance=request.user)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
             messages.success(
                 request, 'Your Profile account has been updated successfully')
-            return redirect('#')
+            return redirect('employerProfile')
     else:
         u_form = UpdateUserProfile(instance=request.user)
         p_form = UpdateEmployerProfile(instance=request.user)
@@ -115,7 +114,7 @@ def update_employer_profile(request):
         'u_form': u_form,
         'p_form': p_form
     }
-    return render
+    return render(request,'employers/update.html',context)
 
 #delete employers
 @login_required
