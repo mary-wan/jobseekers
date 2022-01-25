@@ -5,4 +5,6 @@ from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 
 
-admin.site.register([User,JobSeeker,Employer])
+admin.site.register(User)
+admin.site.register(JobSeeker)
+admin.site.register(Employer)

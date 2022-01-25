@@ -167,6 +167,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN_REDIRECT_URL = 'profile'
 # LOGOUT_REDIRECT_URL = 'login'
 
+cloudinary.config( 
+  cloud_name = "dxszxm1de", 
+  api_key = "425287129295112", 
+  api_secret = "G2q33r2xhFA47cpvXLhhHWwTNPk" 
+)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dxszxm1de',
+    'API_KEY': '425287129295112',
+    'API_SECRET': 'G2q33r2xhFA47cpvXLhhHWwTNPk'
+}
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_URL = 'login'

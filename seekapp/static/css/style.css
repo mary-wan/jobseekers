@@ -108,6 +108,9 @@ body{
     width: 400px;
     margin-left: 5rem;
 }
+
+/* profile styles */
+
 .profile{
    
     overflow: hidden;
@@ -212,6 +215,38 @@ body{
     border-radius: 50%;
     z-index: 4; 
 }
+.update-pic{
+    /* position: relative; */
+    float: center;
+    /* margin-right: 4rem; */
+    margin-left: 5rem;
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* z-index: 4;  */
+}
+.user{
+    margin-right: 12rem;
+}
+
+.upt{
+    padding: 2rem;
+    /* border: 2px solid black; */
+    background: rgba(255, 255, 255, 0.3);
+    color: black;
+    border-radius: 30px;
+    /* margin-right: 3rem;
+    margin-top: 2rem; */
+
+}
+.format{
+    background: #0969C3;
+    width: 100%;
+    min-height: 100vh;
+    color: #fff;
+    padding: 5rem;
+}
 .profile-pic{
     position: relative;
     margin-left: 15.5rem;
@@ -234,6 +269,8 @@ body{
     }
 }
 
+
+/* registration styles */
 .login_container{
     background-color: #F3F9FF;
     min-height: 100vh;
@@ -622,3 +659,4 @@ h1{
         display: none;
     }
 }
+

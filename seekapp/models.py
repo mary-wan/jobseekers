@@ -48,12 +48,12 @@ class JobSeeker(models.Model):
 
 
 
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
-#     profile_photo = CloudinaryField('image')
-#     bio = models.TextField(max_length=500,  null=True)
-#     email = models.EmailField(null=True)
-#     contact = models.CharField(max_length=50, blank=True, null=True)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
+    profile_photo = CloudinaryField('image')
+    bio = models.TextField(max_length=500,  null=True)
+    email = models.EmailField(null=True)
+    contact = models.CharField(max_length=50, blank=True, null=True)
 
 
 
@@ -220,32 +220,32 @@ class Portfolio(models.Model):
         return self.name
 
 
-# class Portfolio(models.Model):
-#     user = models.ForeignKey(
-#         User, on_delete=models.CASCADE, related_name='portfolio')
-#     name = models.CharField(max_length=50)
-#     link = models.URLField(max_length=555)
+class Portfolio(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='portfolio')
+    name = models.CharField(max_length=50)
+    link = models.URLField(max_length=555)
 
-#     def save_portfolio(self):
-#         self.save()
+    def save_portfolio(self):
+        self.save()
 
-#     def delete_portfolio(self):
-#         self.delete()
+    def delete_portfolio(self):
+        self.delete()
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
 
 
-# class Contact(models.Model):
-#     name = models.CharField(max_length=30)
-#     email = models.EmailField()
-#     message = models.TextField()
+class Contact(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    message = models.TextField()
 
-#     def save_contact(self):
-#         self.save()
+    def save_contact(self):
+        self.save()
 
-#     def delete_contact(self):
-#         self.delete()
+    def delete_contact(self):
+        self.delete()
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
