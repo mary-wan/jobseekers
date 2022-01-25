@@ -119,8 +119,8 @@ body{
 .profile_content{
     background: #0969C3;
     color: #fff;
-    width: 38rem;
-    min-height: 20rem;
+    max-width: 38rem;
+    max-height: 20rem;
     border-radius: 40px;
     margin-left: 1rem;
     padding-left: 1rem;
@@ -576,6 +576,12 @@ h1{
     .profile_content h4{
         font-size: 20px;
     }
+    .prof-pic{
+        width: 210px;
+        height: 210px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
 }
 
 /* For medium devices */
@@ -603,7 +609,9 @@ h1{
     .profile::before{
         display: none;
     }
-
+    .profile::after{
+        display: none;
+    }
 }
 
 @media screen and (min-width: 1224px){
@@ -611,6 +619,6 @@ h1{
         display: initial;
     }
     .profile::after{
-        display: initial;
+        display: none;
     }
 }

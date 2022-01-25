@@ -15,6 +15,8 @@ import django_heroku
 import dj_database_url
 from decouple import config
 import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 MODE = config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
@@ -180,3 +182,17 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 AUTH_USER_MODEL = 'seekapp.User'
+
+
+#adding config
+cloudinary.config( 
+  cloud_name = 'the-collector', 
+  api_key =  '385692492331583', 
+  api_secret = 'wpPzGYYSWBJ_4NCwwSEC0YUMSO8'
+)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'the-collector',
+    'API_KEY': '385692492331583',
+    'API_SECRET': 'wpPzGYYSWBJ_4NCwwSEC0YUMSO8'
+}

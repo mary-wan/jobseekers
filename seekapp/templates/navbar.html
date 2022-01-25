@@ -36,10 +36,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
                     </li>
+
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile'%}">Profile</a>
+                    </li> -->
+                    {% for prof in profiles %}
+                    <li class="nav-item">
+                      <a class="" href="{% url 'profile'%}">{{prof.user.username}} </a>
                     </li>
+                    {% endfor %}
                     <li class="nav-item">
                         <a class="nav-link" href="">Upload Project</a>
                     </li>
