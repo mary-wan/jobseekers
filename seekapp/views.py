@@ -21,17 +21,18 @@ from django.core.exceptions import ObjectDoesNotExist
 def services(request):
     return render(request, 'services.html')
 
+def options(request):
+    return render(request, 'registration/options.html')
+
 
 def home(request):
     return render(request, 'index.html')
-
 
 @login_required
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
     current_user = request.user
-    profile = JobSeeker.objects.filter(
-        user_id=current_user.id).first()  # get profile
+    profile = JobSeeker.objects.get(user_id=current_user.id)  # get profile
     documents = FileUpload.objects.filter(User_id=current_user.id).all()
     return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "profile": profile})
 
@@ -60,7 +61,7 @@ def update_jobseeker_profile(request):
 
 #single jobseeker details
 @login_required
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def jobseeker_details(request,user_id):
   try:
     jobseeker =get_object_or_404(JobSeeker, pk = user_id)
@@ -74,7 +75,7 @@ def jobseeker_details(request,user_id):
 
 #delete jobseeker
 @login_required
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def delete_jobseeker(request,user_id):
   jobseeker = JobSeeker.objects.get(pk=user_id)
   if jobseeker:
@@ -87,10 +88,14 @@ def delete_jobseeker(request,user_id):
 # @allowed_users(allowed_roles=['admin','employer'])
 def employerProfile(request):
     employer = request.user
+    profile = Employer.objects.get(
+        user_id=employer.id)  # get profile
     available = User.objects.filter(is_jobseeker=True).all()
+    profile = Employer.objects.filter(user_id = employer.id).first()  # get profile
     context = {
         "employer": employer,
         "available": available,
+        'profile':profile
     }
     return render(request, 'employer/profile.html', context)
 
@@ -106,7 +111,7 @@ def update_employer_profile(request):
             p_form.save()
             messages.success(
                 request, 'Your Profile account has been updated successfully')
-            return redirect('employerProfile')
+            return redirect('profile')
     else:
         u_form = UpdateUserProfile(instance=request.user)
         p_form = UpdateEmployerProfile(instance=request.user)
@@ -114,11 +119,11 @@ def update_employer_profile(request):
         'u_form': u_form,
         'p_form': p_form
     }
-    return render(request,'employers/update.html',context)
+    return render(request,'employer/update.html',context)
 
 #delete employers
 @login_required
-@allowed_users(allowed_roles=['admin'])
+# @allowed_users(allowed_roles=['admin'])
 def delete_employer(request,user_id):
   employer = Employer.objects.get(pk=user_id)
   if employer:
@@ -128,7 +133,7 @@ def delete_employer(request,user_id):
 
 # sigle details for jobseekers
 @login_required
-@allowed_users(allowed_roles=['admin','employer'])
+# @allowed_users(allowed_roles=['admin','employer'])
 def single_jobseeker(request,user_id):
   try:
     jobseeker =get_object_or_404(User, pk = user_id)
@@ -227,7 +232,7 @@ def jobseeker_signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return redirect('jobseeker_home')
+            return redirect('login')
 
     else:
         form = JobseekerSignUp()
@@ -242,7 +247,7 @@ def employer_signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return redirect('emp_home')
+            return redirect('login')
 
     else:
         form = EmployerSignUp()
@@ -261,16 +266,16 @@ def dashboard(request):
 
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'jobseeker'])
+# @allowed_users(allowed_roles=['admin', 'jobseeker'])
 def jobseekerDash(request):
     current_user = request.user
-    documents = FileUpload.objects.filter(user_id=current_user.id).all()
+    documents = FileUpload.objects.filter(User_id=current_user.id).all()
     portfolios = Portfolio.objects.filter(user_id=current_user.id)
     return render(request, 'jobseekers/jobseeker_dashboard.html', {"documents": documents, "portfolios": portfolios})
 
 
 @login_required
-@admin_only
+# @admin_only
 def adminDash(request):
     all_employers = User.objects.filter(is_employer=True).all()
     all_jobseekers = User.objects.filter(is_jobseeker=True).all()
@@ -286,10 +291,10 @@ def adminDash(request):
 
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'employer'])
+# @allowed_users(allowed_roles=['admin', 'employer'])
 def employerDash(request):
     user = request.user
-    job_seekers = User.objects.filter(verified=True, is_jobseeker=True).all()
+    job_seekers = User.objects.filter( is_jobseeker=True).all()
     employer = User.objects.all()
 
     context = {
@@ -368,36 +373,6 @@ def emp_home(request):
 
 def jobseeker_home(request):
     return render(request, 'jobseeker/home.html')
-
-
-def jobseeker_signup(request):
-    # if request.user.is_authenticated:
-    #     return redirect('home')
-    if request.method == "POST":
-        form = JobseekerSignUp(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            return redirect('jobseeker_home')
-
-    else:
-        form = JobseekerSignUp()
-    return render(request, "registration/register.html", {'form': form})
-
-
-def employer_signup(request):
-    # if request.user.is_authenticated:
-    #     return redirect('home')
-    if request.method == "POST":
-        form = EmployerSignUp(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            return redirect('emp_home')
-
-    else:
-        form = EmployerSignUp()
-    return render(request, "registration/register.html", {'form': form})
 
 
 def search_by_category(request):
