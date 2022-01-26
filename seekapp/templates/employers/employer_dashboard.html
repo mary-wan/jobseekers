@@ -21,7 +21,7 @@
   {% endif %}
   <div class="row">
     <div class="col-md-3">
-      <div class="card">
+      <div class="card" style="margin-top: 3rem;">
         {% if user.profile_picture.url %}
         <img class="profile_picture my-4" src="{{ user.profile_picture.url }}" style="height: 10vh; width:10vh;" alt="">
         {% else %}
@@ -73,20 +73,23 @@
       </div>
       {% else %}
 
-      <h5 class="pot" style="text-align: center;">POTENTIAL CANDIDATES: </h5>
+      <h5 class="pot" style="text-align: center; color:rgb(24, 24, 238);">POTENTIAL CANDIDATES: </h5>
       <hr>
-      <div class="container-fluid add" style="padding: 3rem; background-color: rgb(92, 92, 240); width: max-content; border-radius: 30px;">
-        <table class="table table-striped" border="1">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Location</th>
-            <th scope="col">View</th>
-            <th scope="col">Hire</th>
+
+      <div class="container-fluid add" style="padding: 3rem; background-color: #0482f7; width: max-content; border-radius: 30px;">
+
+        <table class="table table-striped" style="background-color: #0969C3; color: black; font-weight: 400;" border="1">
+          <tr class="details" >
+            <th scope="col">Candidate <br><ion-icon name="person-outline"></ion-icon></th>
+            <th scope="col" class="icon"> Email <br><ion-icon name="mail-outline"></ion-icon></th>
+            <th scope="col">Phone <br><ion-icon name="call-outline"></ion-icon></th>
+            <th scope="col">Location <br><ion-icon name="location-outline"></ion-icon></th>
+            <th scope="col">View <br><ion-icon name="eye-outline"></ion-icon></th>
+            <th scope="col">Hire <br><ion-icon name="git-network-outline"></ion-icon></th>
           </tr>
+          </div>
           {% for job_seeker in job_seekers %}
-          <tr>
+          <tr class="link">
             <td>{{job_seeker.first_name}} {{job_seeker.last_name}}</td>
             <td>{{job_seeker.email}}</td>
             <td>{{job_seeker.phone}}</td>
