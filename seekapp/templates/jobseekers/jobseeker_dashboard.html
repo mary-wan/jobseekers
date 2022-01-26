@@ -1,7 +1,7 @@
 {% extends 'slider-base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid mt-5">
   <div class="row">
     {% if messages %}
     {% for message in messages %}
@@ -22,18 +22,21 @@
 
     <div class="col-md-3">
       <div class="card">
-        {% if user.profile_picture.url %}
-        <img class="profile_picture my-4"
-           src="{{ user.profile_picture.url }}" style="height: 10vh; width:10vh;" alt="">
-           {% else %}
+        <div class="text-center">
+          {% if profile.profile_photo.url %}
           <img class="profile_picture my-4"
-             src="https://res.cloudinary.com/dbos9xidr/image/upload/v1626854682/zvtfufhexa8lqqqgcdt3.png" style="height: 10vh; width:10vh;" alt="">
-             {% endif %}
-        <h4 class="">{{user.username}}</h4>
-        <div class="card-header"><a href="{% url 'upload_file' %}">Upload document</a></div>
-        <div class="card-header"><a href="">Update Details</a></div>
-        <div class="card-header"><a href="">Add portfolio</a></div>
-        <div class="card-header"><a href="">See my Profile</a></div>
+             src="{{profile.profile_photo.url}}" style="height: 10vh; width:10vh; border-radius: 50%;" alt="" >
+             {% else %}
+            <img class="profile_picture my-4"
+               src="https://res.cloudinary.com/dbos9xidr/image/upload/v1626854682/zvtfufhexa8lqqqgcdt3.png" style="height: 10vh; width:10vh;" alt="">
+               {% endif %}
+        </div>
+     
+        <h4 class="text-center text-dark mb-2">{{user.username}}</h4>
+        <div class="card-header"><a href="{%url 'upload_file'%}">Upload document</a></div>
+        <div class="card-header"><a href="{%url 'update_jobseeker_profile' %}">Update Details</a></div>
+        <div class="card-header"><a href="{%url 'add_portfolio'%}">Add portfolio</a></div>
+        <div class="card-header"><a href="{%url 'profile_jobseeker'%}">See my Profile</a></div>
       </div>
 
     </div>

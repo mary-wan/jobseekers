@@ -14,6 +14,7 @@ urlpatterns = [
     path('jobseeker/profile/', views.profile_jobseeker, name='profile_jobseeker'),
     path('update_jobseeker_profile/',views.update_jobseeker_profile, name='update_jobseeker_profile'),
     path('upload_file/',views.upload_file, name='upload_file'),
+    path('add_portfolio/',views.add_portfolios, name='add_portfolio'),
     path('employer/profile/', views.employerProfile, name='profile'),
     path('update_employer_profile/',views.update_employer_profile, name='update_employer'),
     path('signup/jobseeker/', views.jobseeker_signup, name='jobseeker_signup'),

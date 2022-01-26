@@ -73,6 +73,9 @@
                 <h4>Company Name : {{ profile.company }}</h4>
                 <h4>Job Category : {{ profile.job_category }}</h4>
             </div>
+            <a href="{% url 'update_employer' %}">
+                <button class="btn btn-primary mr-1 mb-1" type="submit">Update Profile</button>
+            </a> 
            </div>
 
 
