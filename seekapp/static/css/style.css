@@ -86,7 +86,7 @@ body {
 }
 
 .login_image {
-    background-color: #0969C3;
+    background-color: #13b5ea;
     min-height: 500px;
     padding: 3rem 1rem;
     border-bottom-left-radius: 30px;
@@ -123,14 +123,10 @@ body {
     margin-left: 5rem;
 }
 
-<<<<<<< HEAD
-.profile {
-=======
+
 /* profile styles */
 
-.profile{
-   
->>>>>>> 74455c233c95ca4b9c81e208fb4139dbfaa6e5d7
+.profile {
     overflow: hidden;
 }
 
@@ -150,12 +146,12 @@ body {
 }
 
 .profile_cont {
-    background: #0969C3;
-    color: #fff;
-    width: 38rem;
-    min-height: 20rem;
+    background: #F3F9FF;
+    /* color: #fff; */
+    /* width: 38rem;
+    min-height: 20rem; */
     border-radius: 40px;
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
     padding-left: 1rem;
     padding-top: 1.5rem;
 }
@@ -175,11 +171,8 @@ body {
     opacity: 2;
 }
 
-<<<<<<< HEAD
-.profile::before {
-=======
+
 /* .profile::before{
->>>>>>> 74455c233c95ca4b9c81e208fb4139dbfaa6e5d7
     content: '';
     position: absolute;
     top: 0;
@@ -189,14 +182,9 @@ body {
     background: #0969C3;
     clip-path: circle(36% at 86% 26%);
     z-index: 1;
-<<<<<<< HEAD
-}
+} */
 
 .prof::before {
-=======
-} */
-.prof::before{
->>>>>>> 74455c233c95ca4b9c81e208fb4139dbfaa6e5d7
     content: '';
     position: absolute;
     top: 0;
@@ -249,11 +237,8 @@ body {
     border-radius: 50%;
     z-index: 4;
 }
-<<<<<<< HEAD
 
-.profile-pic {
-=======
-.update-pic{
+.update-pic {
     /* position: relative; */
     float: center;
     /* margin-right: 4rem; */
@@ -264,11 +249,12 @@ body {
     border-radius: 50%;
     /* z-index: 4;  */
 }
-.user{
+
+.user {
     margin-right: 12rem;
 }
 
-.upt{
+.upt {
     padding: 2rem;
     /* border: 2px solid black; */
     background: rgba(255, 255, 255, 0.3);
@@ -276,21 +262,21 @@ body {
     border-radius: 30px;
     /* margin-right: 3rem;
     margin-top: 2rem; */
-
 }
-.format{
+
+.format {
     background: #0969C3;
     width: 100%;
     min-height: 100vh;
     color: #fff;
     padding: 5rem;
 }
-.profile-pic{
->>>>>>> 74455c233c95ca4b9c81e208fb4139dbfaa6e5d7
-    position: relative;
+
+.profile-pic {
+    /* position: relative;
     margin-left: 15.5rem;
     margin-top: -2.0rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; */
     width: 320px;
     height: 320px;
     object-fit: cover;
@@ -307,13 +293,10 @@ body {
     }
 }
 
-<<<<<<< HEAD
-.login_container {
-=======
 
 /* registration styles */
-.login_container{
->>>>>>> 74455c233c95ca4b9c81e208fb4139dbfaa6e5d7
+
+.login_container {
     background-color: #F3F9FF;
     min-height: 100vh;
 }
@@ -324,15 +307,15 @@ body {
 }
 
 .login_details {
-    padding-top: 7rem;
+    padding-top: 3rem;
 }
 
 .reg_details {
-    padding-top: 7rem;
+    padding-top: 3rem;
 }
 
 .login_image {
-    background-color: #0969C3;
+    background-color: #13b5ea;
     min-height: 500px;
     padding: 3rem 1rem;
     border-bottom-left-radius: 30px;
@@ -340,7 +323,7 @@ body {
 }
 
 .reg_image {
-    background-color: #0969C3;
+    background-color: #13b5ea;
     min-height: 500px;
     padding: 3rem 1rem;
     border-bottom-left-radius: 30px;
@@ -706,7 +689,7 @@ h1 {
     .profile_content h4 {
         font-size: 20px;
     }
-    .prof-pic{
+    .prof-pic {
         width: 210px;
         height: 210px;
         object-fit: cover;
@@ -739,25 +722,23 @@ h1 {
     .profile::before {
         display: none;
     }
-<<<<<<< HEAD
-=======
-    .profile::after{
+    .profile::after {
         display: none;
     }
->>>>>>> 74455c233c95ca4b9c81e208fb4139dbfaa6e5d7
 }
 
 @media screen and (min-width: 1224px) {
     .profile::before {
         display: initial;
     }
-<<<<<<< HEAD
     .profile::after {
-        display: initial;
-=======
-    .profile::after{
         display: none;
->>>>>>> 74455c233c95ca4b9c81e208fb4139dbfaa6e5d7
     }
 }
 
+.table-striped>tbody>tr:nth-child(2n+1)>td,
+.table-striped>tbody>tr:nth-child(2n+1)>th {
+    background-color: #e6f0f9;
+    /* color: white; */
+    /* font-weight: bold; */
+}

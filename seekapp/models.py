@@ -72,11 +72,14 @@ class JobSeeker(models.Model):
     def save_jobseeker(self):
         self.save()
 
-    def update_jobseeker(self):
-        self.update()
-
     def delete_jobseeker(self):
         self.delete()
+
+    @classmethod
+    def update_user(cls, id, username, first_name, last_name, email, phone, location, availability, job_category):
+        update = cls.objects.filter(id=id).update(username=username, first_name=first_name, last_name=last_name,
+                                                  email=email, phone=phone, location=location, availability=availability, job_category=job_category)
+        return update
 
 
 class Employer(models.Model):
@@ -97,21 +100,6 @@ class Employer(models.Model):
 
     def delete_employer(self):
         self.delete()
-
-
-class Contact(models.Model):
-    name = models.CharField(max_length=30)
-    email = models.EmailField()
-    message = models.TextField()
-
-    def save_contact(self):
-        self.save()
-
-    def delete_contact(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name
 
 
 class FileUpload(models.Model):
@@ -178,22 +166,6 @@ class Portfolio(models.Model):
         return self.name
 
     def delete_upload(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name
-
-
-class Portfolio(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='portfolio')
-    name = models.CharField(max_length=50)
-    link = models.URLField(max_length=555)
-
-    def save_portfolio(self):
-        self.save()
-
-    def delete_portfolio(self):
         self.delete()
 
     def __str__(self):

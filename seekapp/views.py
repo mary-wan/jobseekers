@@ -43,21 +43,16 @@ def profile_jobseeker(request):
 @login_required
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
+    current_user = request.user
+    profile = JobSeeker.objects.get(user_id=current_user.id)
     if request.method == 'POST':
         user_form = UpdateUserProfile(
             request.POST, request.FILES, instance=request.user)
         jobseeker_form = UpdateJobseekerProfile(
             request.POST, request.FILES, instance=request.user.jobseeker)
-
         if user_form.is_valid() and jobseeker_form.is_valid():
-            jobseeker_form.save(commit=True)
-            # jobseeker = JobSeeker(user=request.user, contact=jobseeker_form.cleaned_data['contact'], job_category=jobseeker_form.cleaned_data['job_category'], availability=jobseeker_form.cleaned_data[
-            #                       'availability'], salary=jobseeker_form.cleaned_data['salary'], location=jobseeker_form.cleaned_data['location'], bio=jobseeker_form.cleaned_data['bio'])
-
             user_form.save()
-            # jobseeker.save()
-
-            print(request.user)
+            jobseeker_form.save()
             messages.success(
                 request, 'Your Profile account has been updated successfully')
             return redirect('profile_jobseeker')
@@ -67,9 +62,20 @@ def update_jobseeker_profile(request):
             instance=request.user.jobseeker)
     params = {
         'user_form': user_form,
-        'jobseeker_form': jobseeker_form
+        'jobseeker_form': jobseeker_form,
+        'profile': profile
     }
     return render(request, 'jobseeker/update.html', params)
+
+
+# single jobseeker details
+# @login_required
+# # @allowed_users(allowed_roles=['admin'])
+# def jobseeker_details(request,user_id):
+#   try:
+#     jobseeker =get_object_or_404(JobSeeker, pk = user_id)
+#     documents = FileUpload.objects.filter(user_id = user_id).all()
+#     portfolios=Portfolio.objects.filter(user_id = user_id).all()
 
 
 # single jobseeker details
@@ -116,9 +122,11 @@ def employerProfile(request):
 @login_required
 # @allowed_users(allowed_roles=['admin','employer'])
 def update_employer_profile(request):
+    current_user = request.user
+    profile = Employer.objects.get(
+        user_id=current_user.id)  # get profile
     if request.method == 'POST':
-        u_form = UpdateUserProfile(
-            request.POST, request.FILES, instance=request.user)
+        u_form = UpdateUserProfile(request.POST, instance=request.user)
         p_form = UpdateEmployerProfile(
             request.POST, request.FILES, instance=request.user.employer)
         if u_form.is_valid() and p_form.is_valid():
@@ -132,7 +140,8 @@ def update_employer_profile(request):
         p_form = UpdateEmployerProfile(instance=request.user.employer)
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'profile': profile
     }
     return render(request, 'employer/update.html', context)
 
@@ -288,9 +297,10 @@ def dashboard(request):
 # @allowed_users(allowed_roles=['admin', 'jobseeker'])
 def jobseekerDash(request):
     current_user = request.user
+    profile = JobSeeker.objects.get(user_id=current_user.id)
     documents = FileUpload.objects.filter(User_id=current_user.id).all()
-    portfolios = Portfolio.objects.filter(user_id=current_user.id)
-    return render(request, 'jobseekers/jobseeker_dashboard.html', {"documents": documents, "portfolios": portfolios})
+    portfolios = Portfolio.objects.filter(User_id=current_user.id)
+    return render(request, 'jobseekers/jobseeker_dashboard.html', {"documents": documents, "portfolios": portfolios, 'profile': profile})
 
 
 @login_required

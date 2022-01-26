@@ -63,17 +63,13 @@ class EmployerSignUp(UserCreationForm):
 class UpdateJobseekerProfile(forms.ModelForm):
     class Meta:
         model = JobSeeker
-        fields = ('contact',
-                  'job_category', 'availability', 'salary', 'location', 'bio')
-
+        fields = ('contact','location', 'profile_photo','bio','job_category','availability', 'salary')
 
 class UpdateUserProfile(forms.ModelForm):
-    email = forms.EmailField()
-
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'email']
-
+  email = forms.EmailField()
+  class Meta:
+    model = User
+    fields = ['email','first_name','last_name']
 
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -96,4 +92,4 @@ class UploadFileForm(forms.ModelForm):
 class UpdateEmployerProfile(forms.ModelForm):
     class Meta:
         model = Employer
-        fields = ('company', 'profile_photo')
+        fields = ('profile_photo','company' )
