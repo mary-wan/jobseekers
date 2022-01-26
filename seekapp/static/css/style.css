@@ -75,7 +75,7 @@ body{
     padding-top: 7rem;
 }
 .login_image{
-    background-color: #0969C3;
+    background-color: #13b5ea;
     min-height: 500px;
     padding: 3rem 1rem;
     border-bottom-left-radius: 30px;
@@ -130,12 +130,12 @@ body{
     padding-top: 1.5rem;
 }
 .profile_cont{
-    background: #0969C3;
-    color: #fff;
-    width: 38rem;
-    min-height: 20rem;
+    background: #F3F9FF;
+    /* color: #fff; */
+    /* width: 38rem;
+    min-height: 20rem; */
     border-radius: 40px;
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
     padding-left: 1rem;
     padding-top: 1.5rem;
 }
@@ -248,10 +248,10 @@ body{
     padding: 5rem;
 }
 .profile-pic{
-    position: relative;
+    /* position: relative;
     margin-left: 15.5rem;
     margin-top: -2.0rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; */
     width: 320px;
     height: 320px;
     object-fit: cover;
@@ -280,20 +280,20 @@ body{
     min-height: 100vh;
 }
 .login_details{
-    padding-top: 7rem;
+    padding-top: 3rem;
 }
 .reg_details{
-    padding-top: 7rem;
+    padding-top: 3rem;
 }
 .login_image{
-    background-color: #0969C3;
+    background-color: #13b5ea;
     min-height: 500px;
     padding: 3rem 1rem;
     border-bottom-left-radius: 30px;
     border-top-left-radius: 30px;
 }
 .reg_image{
-    background-color: #0969C3;
+    background-color: #13b5ea;
     min-height: 500px;
     padding: 3rem 1rem;
     border-bottom-left-radius: 30px;
@@ -660,3 +660,9 @@ h1{
     }
 }
 
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #e6f0f9;
+    /* color: white; */
+    /* font-weight: bold; */
+ }
+ 

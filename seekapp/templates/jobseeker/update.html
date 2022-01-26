@@ -71,13 +71,13 @@
 
 
 
-  <div class="container-full">
+  <div class="container mt-4">
       <div class="row">
             <div class="col-md-5">
-                  <div>
-                      {% if user.profile.profile_picture.url %}
+                  <div class="pt-5 mt-5 pl-2">
+                      {% if profile.profile_photo.url %}
                       <img class="update_pic"
-                         src="{{ user.profile.profile_photo.url }}" style="height: 20vh; width:20vh;" alt="{{ profile.name }}">
+                         src="{{ profile.profile_photo.url }}" style="height: 30vh; width:30vh; border-radius: 100%;" alt="{{ profile.name }}" >
                          {% else %}
                          <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
                          class="card-img-top update-pic" alt="My profile picture">

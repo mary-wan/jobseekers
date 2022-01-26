@@ -1,4 +1,5 @@
 {% extends 'slider-base.html' %}
+
 {% block content %}
 <div class="container-fluid employ">
   <div class="row">
@@ -42,8 +43,10 @@
         <form class="forms" action="" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
           <fieldset class="form-group">
-            {% bootstrap_form u_form%}
-            {% bootstrap_form p_form%}
+            {% load crispy_forms_tags %}
+            {{ u_form | crispy }}
+            {{ p_form | crispy }}
+            {% csrf_token %}
           </fieldset>
           <div class="form-group">
             <button class="btn btn-outline-success" type="submit">Update</button>
