@@ -32,7 +32,7 @@ def home(request):
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
     current_user = request.user
-    profile = JobSeeker.objects.filter(user_id=current_user.id)  # get profile
+    profile = JobSeeker.objects.get(user_id=current_user.id)  # get profile
     documents = FileUpload.objects.filter(User_id=current_user.id).all()
     return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "profile": profile})
 

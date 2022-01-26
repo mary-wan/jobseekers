@@ -1,9 +1,79 @@
 {% extends 'slider-base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-  <div class="container mt-4">
+  <!-- <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        {% if messages %}
+    {% for message in messages %}
+    <div class="row ">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="alert text-center {{ message.tags }} alert-dismissible" role="alert" id="messages">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{ message }}
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  {% endfor %}
+{% endif %}
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6  justify-content-start">
+                    <div class="text-center">
+                        <div>
+                          {% if user.profile.profile_picture.url %}
+                          <img class="update_pic"
+                             src="{{ user.profile.profile_photo.url }}" style="height: 20vh; width:20vh;" alt="{{ profile.name }}">
+                             {% else %}
+                             <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+                             class="card-img-top update-pic" alt="My profile picture">
+                               {% endif %}
+                            </div>
+                        <div>
+                          <h2 class="text-monospace ml-3 pt-2"><small><strong>{{user.username}}</strong></small></h2>
+                        </div>
+                      </div>
+                      
+                </div>
+                <div class="col-md-6 justify-content-end">
+                    <div class="card" id="myContent">
+                        <form class="forms" action="" method="POST" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          <fieldset class="form-group">
+                            {% bootstrap_form user_form%}
+                            {% bootstrap_form jobseeker_form%}
+                          </fieldset>
+                          <div class="form-group">
+                            <button class="btn btn-outline-success" type="submit">Update</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div> -->
+
+
+
+
+
+
+
+
+
+
+  <div class="container-fluid mt-4">
       <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">
                   <div class="pt-5 mt-5 pl-2">
                       {% if profile.profile_photo.url %}
                       <img class="update_pic"
@@ -17,7 +87,7 @@
                     <h2 class=" user text-center"><small><strong>{{user.username}}</strong></small></h2>
                   </div>
             </div>
-          <div class="col-md-7">
+          <div class="col-md-6">
            <div class="format">
             <div class="upt" id="myContent">
                 <h2 class="text-center">Update Profile</h2>
