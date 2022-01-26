@@ -41,25 +41,34 @@
 
     </div>
     <div class="col-md-6">
-      <h4>Documents and Resumes</h4>
       {% if documents %}
+      <h4 class="text-center">Documents and Resumes</h4>
       {% for document in documents %}
-      <div class="card">
+      <div class="card p-2 mb-3">
         <h2><i class="fas fa-file-pdf"></i> {{document.name}}</h2>
-        <a href="" target="_blank" class="btn btn-outline-success doc"><i class="fas fa-eye"></i> View</a>
-        <a href="{{ document.pdf.url }}" download="" class="btn btn-outline-success doc"><i class="fa fa-download" aria-hidden="true"></i> Download</a>      </div>
+        <a href="" target="_blank" class="btn btn-outline-info doc mb-1"><i class="fas fa-eye"></i> View</a>
+        <a href="{{ document.pdf.url }}" download="" class="btn btn-outline-info doc mb-1"><i class="fa fa-download" aria-hidden="true"></i> Download</a>  
+      </div>
       {% endfor %}
+      {%else%}
+      <div class="card">
+        <h4 class ="text-center">Start Uploading Documents and Resume</h4>
+      </div>
       {% endif %}
     </div>
     <div class="col-md-3">
-      <h4>Portfolios</h4>
       {% if portfolios %}
+      <h4 class="text-center">Portfolios</h4>
       {% for portfolio in portfolios %}
-      <div class="card">
-        <h2><i class="fas fa-globe"></i> {{portfolio.name}}</h2>
-        <a href="{{ portfolio.link }}" download="" class="btn btn-outline-success doc">View</a>
+      <div class="card p-2 mb-2">
+        <h2><i class="fas fa-link"></i>{{portfolio.name}}</h2>
+        <a href="{{ portfolio.link }}" target="_blank" class="btn btn-outline-info doc">View</a>
       </div>
       {% endfor %}
+      {%else%}
+      <div class="card">
+        <h4 class="text-center">Upload Portfolio</h4>
+      </div>
       {% endif %}
         
     </div>
