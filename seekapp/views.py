@@ -106,9 +106,12 @@ def employerProfile(request):
 @login_required
 # @allowed_users(allowed_roles=['admin','employer'])
 def update_employer_profile(request):
+    current_user= request.user
+    profile = Employer.objects.get(
+        user_id=current_user.id)  # get profile
     if request.method == 'POST':
-        u_form = UpdateUserProfile(request.POST, request.FILES, instance=request.user)
-        p_form = UpdateEmployerProfile(request.POST, instance=request.user)
+        u_form = UpdateUserProfile(request.POST, instance=request.user)
+        p_form = UpdateEmployerProfile(request.POST,request.FILES, instance=request.user.employer)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -117,10 +120,11 @@ def update_employer_profile(request):
             return redirect('profile')
     else:
         u_form = UpdateUserProfile(instance=request.user)
-        p_form = UpdateEmployerProfile(instance=request.user)
+        p_form = UpdateEmployerProfile(instance=request.user.employer)
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'profile':profile
     }
     return render(request,'employer/update.html',context)
 
