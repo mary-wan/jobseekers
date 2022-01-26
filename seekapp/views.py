@@ -32,7 +32,7 @@ def home(request):
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
     current_user = request.user
-    profile = JobSeeker.objects.get(user_id=current_user.id)  # get profile
+    profile = JobSeeker.objects.filter(user_id=current_user.id)  # get profile
     documents = FileUpload.objects.filter(User_id=current_user.id).all()
     return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "profile": profile})
 
@@ -91,8 +91,7 @@ def delete_jobseeker(request,user_id):
 # @allowed_users(allowed_roles=['admin','employer'])
 def employerProfile(request):
     employer = request.user
-    profile = Employer.objects.get(
-        user_id=employer.id)  # get profile
+    profile = Employer.objects.get(user_id=employer.id)  # get profile
     available = User.objects.filter(is_jobseeker=True).all()
     profile = Employer.objects.filter(user_id = employer.id).first()  # get profile
     context = {
@@ -110,7 +109,7 @@ def update_employer_profile(request):
     profile = Employer.objects.get(
         user_id=current_user.id)  # get profile
     if request.method == 'POST':
-        u_form = UpdateUserProfile(request.POST, instance=request.user)
+        u_form = UpdateUserProfile(request.POST, request.FILES, instance=request.user)
         p_form = UpdateEmployerProfile(request.POST,request.FILES, instance=request.user.employer)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
@@ -138,7 +137,7 @@ def delete_employer(request,user_id):
     messages.success(request, f'Employer deleted successfully!')
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-#joobsekers sigle details for jobseekers
+# sigle details for jobseekers
 @login_required
 # @allowed_users(allowed_roles=['admin','employer'])
 def single_jobseeker(request,user_id):
