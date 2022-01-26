@@ -15,6 +15,7 @@ import os
 from .email import *
 from django.http.response import Http404
 from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def services(request):
@@ -37,7 +38,7 @@ def profile_jobseeker(request):
 
 # jobseekers update profile
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
+@allowed_users(allowed_roles=['admin', 'jobseeker'])
 def update_jobseeker_profile(request):
     if request.method == 'POST':
         user_form = UpdateUserProfile(
@@ -49,7 +50,7 @@ def update_jobseeker_profile(request):
             jobseeker_form.save()
             messages.success(
                 request, 'Your Profile account has been updated successfully')
-            return redirect('#')
+            return redirect('profile_jobseeker')
     else:
         user_form = UpdateUserProfile(instance=request.user)
         jobseeker_form = UpdateJobseekerProfile(instance=request.user)
@@ -57,7 +58,34 @@ def update_jobseeker_profile(request):
         'user_form': user_form,
         'jobseeker_form': jobseeker_form
     }
-    return render(request, 'jobseekers/update.html', params)
+    return render(request, 'jobseeker/update.html', params)
+
+
+# single jobseeker details
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def jobseeker_details(request, user_id):
+    try:
+        jobseeker = get_object_or_404(JobSeeker, pk=user_id)
+        documents = FileUpload.objects.filter(user_id=user_id).all()
+        portfolios = Portfolio.objects.filter(user_id=user_id).all()
+
+    except ObjectDoesNotExist:
+        raise Http404()
+
+    return render(request, '#', {'jobseeker': jobseeker, 'documents': documents, 'portfolios': portfolios})
+
+# delete jobseeker
+
+
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def delete_jobseeker(request, user_id):
+    jobseeker = JobSeeker.objects.get(pk=user_id)
+    if jobseeker:
+        jobseeker.delete_user()
+        messages.success(request, f'User deleted successfully!')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 # employer profle
 
@@ -66,10 +94,10 @@ def update_jobseeker_profile(request):
 # @allowed_users(allowed_roles=['admin','employer'])
 def employerProfile(request):
     employer = request.user
-    available = User.objects.filter(is_jobseeker=True).all()
+    # available = User.objects.filter(is_jobseeker=True).all()
     context = {
         "employer": employer,
-        "available": available,
+        # "available": available,
     }
     return render(request, 'employer/profile.html', context)
 
@@ -95,6 +123,34 @@ def update_employer_profile(request):
         'p_form': p_form
     }
     return render
+
+# delete employers
+
+
+@login_required
+@allowed_users(allowed_roles=['admin'])
+def delete_employer(request, user_id):
+    employer = Employer.objects.get(pk=user_id)
+    if employer:
+        employer.delete_user()
+        messages.success(request, f'Employer deleted successfully!')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+# joobsekers sigle details for jobseekers
+
+
+@login_required
+@allowed_users(allowed_roles=['admin', 'employer'])
+def single_jobseeker(request, user_id):
+    try:
+        jobseeker = get_object_or_404(User, pk=user_id)
+        documents = FileUpload.objects.filter(user_id=user_id)
+        portfolios = Portfolio.objects.filter(user_id=user_id)
+
+    except ObjectDoesNotExist:
+        raise Http404()
+
+    return render(request, '#', {'documents': documents, 'jobseeker': jobseeker, "portfolios": portfolios})
 
 
 def contact(request):
@@ -204,57 +260,6 @@ def employer_signup(request):
         form = EmployerSignUp()
     return render(request, "registration/register.html", {'form': form})
 
-# jobseekers update profile
-
-
-# @login_required
-# # @allowed_users(allowed_roles=['admin','jobseeker'])
-# def update_jobseeker_profile(request):
-#     if request.method == 'POST':
-#         user_form = UpdateUserProfile(
-#             request.POST, request.FILES, instance=request.user)
-#         jobseeker_form = UpdateJobseekerProfile(
-#             request.POST, instance=request.user)
-#         if user_form.is_valid() and jobseeker_form.is_valid():
-#             user_form.save()
-#             jobseeker_form.save()
-#             messages.success(
-#                 request, 'Your Profile account has been updated successfully')
-#             return redirect('#')
-#     else:
-#         user_form = UpdateUserProfile(instance=request.user)
-#         jobseeker_form = UpdateJobseekerProfile(instance=request.user)
-#     params = {
-#         'user_form': user_form,
-#         'jobseeker_form': jobseeker_form
-#     }
-#     return render(request, 'jobseekers/update.html', params)
-
-# employer profle
-
-
-# @login_required
-# # @allowed_users(allowed_roles=['admin','employer'])
-# def update_employer(request):
-#     if request.method == 'POST':
-#         u_form = UpdateUserProfile(
-#             request.POST, request.FILES, instance=request.user)
-#         p_form = UpdateEmployerProfile(request.POST, instance=request.user)
-#         if u_form.is_valid() and p_form.is_valid():
-#             u_form.save()
-#             p_form.save()
-#             messages.success(
-#                 request, 'Your Profile account has been updated successfully')
-#             return redirect('#')
-#     else:
-#         u_form = UpdateUserProfile(instance=request.user)
-#         p_form = UpdateEmployerProfile(instance=request.user)
-#     context = {
-#         'u_form': u_form,
-#         'p_form': p_form
-#     }
-#     return render
-
 
 @login_required
 def dashboard(request):
@@ -338,7 +343,7 @@ def contact(request):
 
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'jobseeker'])
+# @allowed_users(allowed_roles=['admin','jobseeker'])
 def upload_file(request):
     if request.method == 'POST':
         upload_form = UploadFileForm(request.POST, request.FILES)

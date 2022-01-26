@@ -55,17 +55,22 @@
 <section class="profile">
     <div class="container-full container-fluid ">
         <div class="row" style="padding-top: 5rem;">
-           <div class="col-md-6 ">
+           <div class="col-lg-6 col-md-12 ">
             <div class="profile_content">
-                <h4>Full Name : </h4>
-                <h4>Username : </h4>
-                <h4>Bio : </h4>
-                <h4>Phone Number : </h4>
-                <h4>Email Address : </h4>
-                <h4>Company Name : </h4>
+                <h4>Full Name : {{ user.firstName }}</h4>
+                <h4>Last Name: {{ user.lastName }}</h4>
+                <h4>Username : {{ user.user_name }}</h4>
+                <h4>Company Name : {{ user.company }}</h4>
+                <h4>Job Category : {{ user.job_category }}</h4>
             </div>
            </div>
-            <div class="col-md-6">
+            <div class="col-lg-6 col-md-12 ">
+                {% if profile.profile_pic %}
+                <img src="{{profile.profile_pic.url}}" alt="" class="prof-pic">
+                {%else%}
+                <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+                    class="card-img-top prof-pic" alt="My profile picture">
+                {% endif %}
             </div>
         </div>
     </div>

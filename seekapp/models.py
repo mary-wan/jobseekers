@@ -28,24 +28,30 @@ JOB_CATEGORY_CHOICES = (
 class User(AbstractUser):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
+
     is_admin = models.BooleanField(default=False)
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
 
-    def save_user(self):
-        self.save()
+    def __str__(self):
+        return self.email
 
-    def update_user(self):
-        self.update()
+    # @property
+    # def is_admin(self):
+    #     return self.is_admin
 
-    def delete_user(self):
-        self.delete()
+    # @property
+    # def is_employer(self):
+    #     return self.is_employer
 
+    # @property
+    # def is_verified(self):
+    #     return self.is_verified
 
-class JobSeeker(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
+    # @property
+    # def is_jobseeker(self):
+    #     return self.is_jobseeker
 
 
 class JobSeeker(models.Model):
@@ -82,8 +88,7 @@ class Employer(models.Model):
     lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     company = models.CharField(max_length=100, null=True, blank=True)
-    job_category = models.CharField(
-        null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
+    email = models.EmailField(unique=True)
 
     def save_employer(self):
         self.save()
@@ -93,38 +98,6 @@ class Employer(models.Model):
 
     def delete_employer(self):
         self.delete()
-
-
-class FileUpload(models.Model):
-    name = models.CharField(max_length=100)
-    pdf = models.FileField(upload_to='documents/pdf/')
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='documents')
-
-    def save_upload(self):
-        self.save()
-
-    def delete_upload(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name
-
-
-class Portfolio(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='portfolio')
-    name = models.CharField(max_length=50)
-    link = models.URLField(max_length=555)
-
-    def save_portfolio(self):
-        self.save()
-
-    def delete_portfolio(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name
 
 
 class Contact(models.Model):
@@ -175,7 +148,7 @@ class FileUpload(models.Model):
 
 
 class Portfolio(models.Model):
-    User = models.ForeignKey(
+    user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='portfolio')
     name = models.CharField(max_length=50)
     link = models.URLField(max_length=555)
@@ -206,37 +179,6 @@ class Portfolio(models.Model):
         return self.name
 
     def delete_upload(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name
-
-
-class Portfolio(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='portfolio')
-    name = models.CharField(max_length=50)
-    link = models.URLField(max_length=555)
-
-    def save_portfolio(self):
-        self.save()
-
-    def delete_portfolio(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name
-
-
-class Contact(models.Model):
-    name = models.CharField(max_length=30)
-    email = models.EmailField()
-    message = models.TextField()
-
-    def save_contact(self):
-        self.save()
-
-    def delete_contact(self):
         self.delete()
 
     def __str__(self):

@@ -23,36 +23,35 @@
     </div>
 </nav> -->
 
-<nav class="navbar navbar-expand-lg navbar-light navigation" style="z-index: 6;">
-            <a class="navbar-brand" href="/">LOGO</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'services' %}">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile'%}">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Upload Project</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                 {%else%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
-                    {%endif%}
-                    
-                </ul>
-            </div>
-</nav>
+<nav class="navbar navbar-expand-lg navbar-light navigation fixed-top navi" style="z-index: 6;background: linear-gradient(115deg, #F3F9FF 0%,#F3F9FF 51.8%, #0969C3 51.8%,#0969C3 70%);">
+    <a class="navbar-brand" href="/">LOGO</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'services' %}">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile'%}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Upload Project</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            {%else%}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            {%endif%}
 
+        </ul>
+    </div>
+</nav>
