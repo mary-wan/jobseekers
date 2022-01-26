@@ -197,7 +197,7 @@ def upload_file(request):
             return redirect('jobseekerDash')
     else:
         upload_form = UploadFileForm()
-    return render(request, 'jobseekers/upload_file.html', {'upload_form': upload_form})
+    return render(request, 'jobseeker/upload_file.html', {'upload_form': upload_form})
 
 
 def pdf_view(request, file_id):
@@ -348,7 +348,7 @@ def upload_file(request):
             return redirect('jobseekerDash')
     else:
         upload_form = UploadFileForm()
-    return render(request, 'jobseekers/upload_file.html', {'upload_form': upload_form})
+    return render(request, 'jobseeker/upload_file.html', {'upload_form': upload_form})
 
 
 def pdf_view(request, file_id):
