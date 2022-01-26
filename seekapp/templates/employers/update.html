@@ -1,0 +1,13 @@
+{% extends 'slider-base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% load crispy_forms_tags %}
+        {{ u_form | crispy }}
+        {{ p_form | crispy }}
+        {% csrf_token %}
+        <div class="form-group">
+            <button class="btn btn-outline-success" type="submit">Update</button>
+        </div>
+    </form>
+{% endblock %}

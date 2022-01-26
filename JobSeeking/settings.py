@@ -15,6 +15,8 @@ import django_heroku
 import dj_database_url
 from decouple import config
 import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 MODE = config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
@@ -63,6 +65,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,6 +76,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap4',
     'cloudinary',
+    
 
 ]
 
@@ -165,6 +169,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN_REDIRECT_URL = 'profile'
 # LOGOUT_REDIRECT_URL = 'login'
 
+cloudinary.config( 
+  cloud_name = "dxszxm1de", 
+  api_key = "425287129295112", 
+  api_secret = "G2q33r2xhFA47cpvXLhhHWwTNPk" 
+)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dxszxm1de',
+    'API_KEY': '425287129295112',
+    'API_SECRET': 'G2q33r2xhFA47cpvXLhhHWwTNPk'
+}
+
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_URL = 'login'
@@ -180,3 +197,56 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 AUTH_USER_MODEL = 'seekapp.User'
+
+
+
+JAZZMIN_SETTINGS = {
+      # title of the window (Will default to current_admin_site.site_title if absent or None)
+   "site_title": "Jobseekeers",
+# Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "snagjobs",
+     # Welcome text on the login screen
+    "welcome_sign": "Welcome to the Snagjobs",
+    # Copyright on the footer
+    "copyright": "Snagjobs ltd @2022",
+    # The model admin to search from the search bar, search bar omitted if excluded
+    "search_model": "auth.User",
+     "topmenu_links": [
+
+        # Url that gets reversed (Permissions can be added)
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+
+        # external url that opens in a new window (Permissions can be added)
+        {"name": "Support", "url": "https://github.com/mary-wan", "new_window": True},
+
+        # model admin to link to (Permissions checked against model)
+        {"model": "auth.User"},
+
+        # App with dropdown menu to all its models pages (Permissions checked against models)
+        {"app": "seekapp"},
+    ],
+     "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+    "custom_links": {
+    "books": [{
+        
+             
+    }]
+},
+}
+
+#adding config
+cloudinary.config( 
+  cloud_name = 'the-collector', 
+  api_key =  '385692492331583', 
+  api_secret = 'wpPzGYYSWBJ_4NCwwSEC0YUMSO8'
+)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'the-collector',
+    'API_KEY': '385692492331583',
+    'API_SECRET': 'wpPzGYYSWBJ_4NCwwSEC0YUMSO8'
+}

@@ -1,6 +1,4 @@
-{% extends "base.html" %}
-{% block content %}
-{% load static %}
+{% extends 'slider-base.html' %} {% block content %} {% load static %}
 
 <!-- <section class="profile container-fluid">
     <div class=" mt-5">
@@ -55,26 +53,22 @@
 <section class="profile">
     <div class="container-full container-fluid ">
         <div class="row" style="padding-top: 5rem;">
-           <div class="col-lg-6 col-md-12 ">
-            <div class="profile_content">
-                <h4>Full Name : {{ user.firstName }}</h4>
-                <h4>Last Name: {{ user.lastName }}</h4>
-                <h4>Username : {{ user.user_name }}</h4>
-                <h4>Company Name : {{ user.company }}</h4>
-                <h4>Job Category : {{ user.job_category }}</h4>
-            </div>
-           </div>
             <div class="col-lg-6 col-md-12 ">
-                {% if profile.profile_pic %}
-                <img src="{{profile.profile_pic.url}}" alt="" class="prof-pic">
-                {%else%}
-                <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
-                    class="card-img-top prof-pic" alt="My profile picture">
-                {% endif %}
+                <div class="">
+                    {% if profile.profile_photo %}
+                    <img src="{{profile.profile_photo.url}}" alt="" class="prof-pic"> {%else%}
+                    <img src="{%static 'photos/avatar.png' %}" class="card-img-top prof-pic" alt="My profile picture"> {% endif %}
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-md-12 ">
+                <h4>Full Name : {{ user.first_name }}</h4>
+                <h4>Last Name: {{ user.last_name }}</h4>
+                <h4>Username : {{ user.username }}</h4>
+                <h4>Company Name : {{ profile.company }}</h4>
+                <h4>Photo : {{ profile.profile_photo }}</h4>
             </div>
         </div>
-    </div>
-</section>
 
 
-{% endblock %}
+        {%endblock%}

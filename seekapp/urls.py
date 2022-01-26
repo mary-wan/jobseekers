@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     # path('profile/', views.profile_jobseeker, name = 'profile'),
     path('services/', views.services, name='services'),
+    path('register/options/', views.options, name='options'),
     path('jobseeker/profile/', views.profile_jobseeker, name='profile_jobseeker'),
     path('update_jobseeker_profile/',
          views.update_jobseeker_profile, name='update_jobseeker_profile'),

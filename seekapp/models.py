@@ -33,9 +33,11 @@ class User(AbstractUser):
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
 
-    def __str__(self):
-        return self.email
+    def save_user(self):
+        self.save()
 
     # @property
     # def is_admin(self):
@@ -49,16 +51,12 @@ class User(AbstractUser):
     # def is_verified(self):
     #     return self.is_verified
 
-    # @property
-    # def is_jobseeker(self):
-    #     return self.is_jobseeker
-
 
 class JobSeeker(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
-    firstName = models.CharField(max_length=100, null=True, blank=True)
-    lastName = models.CharField(max_length=100, null=True, blank=True)
+    # firstName = models.CharField(max_length=100, null=True, blank=True)
+    # lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
@@ -69,7 +67,7 @@ class JobSeeker(models.Model):
     salary = models.IntegerField(null=True, blank=True)
     job_category = models.CharField(
         null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
-    email = models.EmailField(unique=True)
+    email = models.CharField(max_length=50, null=True)
 
     def save_jobseeker(self):
         self.save()
@@ -84,8 +82,9 @@ class JobSeeker(models.Model):
 class Employer(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
-    firstName = models.CharField(max_length=100, null=True, blank=True)
-    lastName = models.CharField(max_length=100, null=True, blank=True)
+    # firstName = models.CharField(max_length=100, null=True, blank=True)
+    # lastName = models.CharField(max_length=100, null=True, blank=True)
+    email = models.CharField(max_length=50, null=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     company = models.CharField(max_length=100, null=True, blank=True)
     email = models.EmailField(unique=True)
@@ -179,6 +178,37 @@ class Portfolio(models.Model):
         return self.name
 
     def delete_upload(self):
+        self.delete()
+
+    def __str__(self):
+        return self.name
+
+
+class Portfolio(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='portfolio')
+    name = models.CharField(max_length=50)
+    link = models.URLField(max_length=555)
+
+    def save_portfolio(self):
+        self.save()
+
+    def delete_portfolio(self):
+        self.delete()
+
+    def __str__(self):
+        return self.name
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def save_contact(self):
+        self.save()
+
+    def delete_contact(self):
         self.delete()
 
     def __str__(self):
