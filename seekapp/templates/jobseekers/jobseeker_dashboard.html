@@ -1,6 +1,8 @@
 {% extends 'slider-base.html' %}
 {% load bootstrap4 %}
 {% block content %}
+
+{% if request.user.is_verified %}
 <div class="container-fluid mt-5">
   <div class="row">
 
@@ -17,9 +19,9 @@
         </div>
      
         <h4 class="text-center text-dark mb-2">{{user.username}}</h4>
-        <div class="card-header"><a href="">Upload document</a></div>
+        <div class="card-header"><a href="{%url 'upload_file'%}">Upload document</a></div>
         <div class="card-header"><a href="{%url 'update_jobseeker_profile' %}">Update Details</a></div>
-        <div class="card-header"><a href="">Add portfolio</a></div>
+        <div class="card-header"><a href="{%url 'add_portfolio'%}">Add portfolio</a></div>
         <div class="card-header"><a href="{%url 'profile_jobseeker'%}">See my Profile</a></div>
       </div>
 
@@ -58,4 +60,8 @@
     </div>
   </div>
 </div>
+{% else %}
+<h1 class="text-center">Your profile is not verified</h1>
+{% endif %}
+
 {% endblock %}

@@ -89,6 +89,7 @@ body{
 .forms{
     margin-top: 2rem;
 }
+
 .login_form h1{
     text-align: center;
     color: #0969C3;
@@ -192,20 +193,59 @@ body{
     z-index: 4; 
     margin-bottom: 20px;
     margin-left: 2rem;
+    
+}
+.file-pic{
+    /* position: relative; */
+    /* float: right; */
+    margin-right: 4rem;
+    align-content: center;
+    margin-top: 3rem;
+    max-width: 320px;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 4; 
+    
 }
 .update-pic{
     /* position: relative; */
     float: center;
     /* margin-right: 4rem; */
-    margin-left: 5rem;
-    width: 320px;
-    height: 320px;
+    margin-left: 16rem;
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 70%;
+    /* z-index: 4;  */
+}
+.employer-pic{
+    /* position: relative; */
+    /* float: center; */
+    align-content: center;
+    margin-right: 16rem;
+    margin-left: 10rem;
+    max-width: 400px;
+    max-height: 400px;
     object-fit: cover;
     border-radius: 50%;
+    margin-top: 3rem;
+    /* z-index: 4;  */
+}
+.upt-pic{
+    /* position: relative; */
+    float: center;
+    /* margin-right: 4rem; */
+    margin-left: 16rem;
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 70%;
     /* z-index: 4;  */
 }
 .user{
-    margin-right: 12rem;
+    margin-left: 24rem;
+    color: black;
 }
 
 .upt{
@@ -218,12 +258,33 @@ body{
     margin-top: 2rem; */
 
 }
+.upt-employer{
+    padding: 6rem;
+    /* border: 2px solid black; */
+    background: rgba(255, 255, 255, 0.3);
+    color: black;
+    border-radius: 30px;
+    /* margin-bottom: 1rem; */
+    
+
+}
 .format{
     background: #0969C3;
-    width: 100%;
+    width: 80%;
     min-height: 100vh;
     color: #fff;
-    padding: 5rem;
+    padding: 3rem;
+    
+}
+.emp-format{
+    background: #0969C3;
+    width: 80%;
+    min-height: 100vh;
+    color: #fff;
+    padding: 3rem;
+    /* padding-bottom: 1rem; */
+    /* margin-bottom: 3rem; */
+    
 }
 .profile-pic{
     /* position: relative;
@@ -236,7 +297,33 @@ body{
     border-radius: 30px;
     z-index: 4; 
 }
-  
+
+/* forms style */
+.file-name{
+    /* text-align: center; */
+    margin-right: 14rem;
+    color: black;
+}
+
+.file-form{
+    margin-top: 3rem;
+    /* background-color:#7fa3af; */
+    border: solid #486b77;
+    background-color: #ffff;
+    padding:3rem 2rem;
+    border-radius: 30px;
+    font-size: large;
+    color:black;
+}
+
+.documents{
+    min-height: 100vh;
+    background-color: rgba(219, 235, 250, 0.8);
+}
+/* .crispy{
+    padd
+}
+   */
 
 @media only screen and (min-width: 768px) {
     .about-img{
@@ -607,6 +694,20 @@ h1{
 
     .profile::after{
         display: none;
+    }
+    .format{
+        padding: 10px;
+        font-size: 20px;
+        background: transparent;
+    }
+    .upt{
+        font-size: 20px;
+        padding: 10px;
+        background: rgba(19,181,234,0.6);
+    }
+    .forms{
+        font-size: 20px;
+
     }
 }
 

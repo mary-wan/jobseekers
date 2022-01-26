@@ -94,7 +94,7 @@ class Employer(models.Model):
 class FileUpload(models.Model):
     name = models.CharField(max_length=100)
     pdf = models.FileField(upload_to='documents/pdfs/')
-    User = models.ForeignKey(
+    user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='documents')
 
     def save_upload(self):
@@ -124,8 +124,7 @@ class FileUpload(models.Model):
 
 
 class Portfolio(models.Model):
-    User = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='portfolio')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='portfolio')
     name = models.CharField(max_length=50)
     link = models.URLField(max_length=555)
 

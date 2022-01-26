@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 {%load static%}
 {% block content %}
-<div class="container-fluid employ">
+<div class="container-fluid employ mt-5">
   {% if messages %}
   {% for message in messages %}
   <div class="row ">
@@ -21,57 +21,26 @@
   {% endif %}
   <div class="row">
     <div class="col-md-3">
-      <div class="card" style="margin-top: 3rem;">
-        {% if user.profile_picture.url %}
-        <img class="profile_picture my-4" src="{{ user.profile_picture.url }}" style="height: 10vh; width:10vh;" alt="">
-        {% else %}
-        <img class="profile_picture my-4"
-          src="https://res.cloudinary.com/dbos9xidr/image/upload/v1626854682/zvtfufhexa8lqqqgcdt3.png"
-          style="height: 10vh; width:10vh;" alt="">
-        {% endif %}
-        <h4 class="">{{user.username}}</h4>
-        <div class="card-header"><a href="">Update Details</a></div>
-        <div class="card-header"><a href="">See my Profile</a></div>
+      <div class="card">
+        <div class="text-center">
+          {% if profile.profile_photo.url %}
+          <img class="profile_picture my-4"
+             src="{{profile.profile_photo.url}}" style="height: 10vh; width:10vh; border-radius: 50%;" alt="" >
+             {% else %}
+            <img class="profile_picture my-4"
+               src="https://res.cloudinary.com/dbos9xidr/image/upload/v1626854682/zvtfufhexa8lqqqgcdt3.png" style="height: 10vh; width:10vh;" alt="">
+               {% endif %}
+        </div>
+     
+        <h4 class="text-center text-dark mb-2">{{user.username}}</h4>
+        <div class="card-header"><a href="{%url 'update_employer'%}">Update Details</a></div>
+        <div class="card-header"><a href="{%url 'profile'%}">See my Profile</a></div>
       </div>
+
+      
     </div>
     <div class="col-md-8">
-      {% if user.verified is False %}
-      <div class="row">
-        <div class="col-md-8">
-          <form class="forms card" action="{% url 'verify_employer_payment' %}" method="POST"
-            enctype="multipart/form-data">
-            <div class="card-header">
-              <h4>Get verified and enjoy our service,pay Ksh 3000 only using the form below to get started</h4>
-              <p>Note: Phone number format is 254725470732</p>
-            </div>
-            {% csrf_token %}
-            <fieldset class="form-group">
-              {% bootstrap_form payment_form %}
-
-            </fieldset>
-            <div class="form-group">
-              <button class="btn btn-outline-success" type="submit">Submit</button>
-            </div>
-          </form>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-header">
-              <h4>Payment Procedure</h4>
-              <p><strong>MPESA STK payment</strong></p>
-            </div>
-            <ol>
-              <li>Fill in the form.</li>
-              <li>Ensure you enter mpesa no.</li>
-              <li>Submit the form and wait for mpesa notification.</li>
-              <li>Enter your pin.</li>
-              <li>Press ok to send.</li>
-              <li>Upon successful payment you will receive email notification.</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-      {% else %}
+      {% if request.user.is_verified %}
 
       <h5 class="pot" style="text-align: center; color:rgb(24, 24, 238);">POTENTIAL CANDIDATES: </h5>
       <hr>
@@ -102,6 +71,45 @@
         </table>
 
       </div>
+
+      {% else %}
+      <div class="row">
+        <div class="col-md-8">
+          <form class="forms card" action="" method="POST"
+            enctype="multipart/form-data">
+            <div class="card-header">
+              <h4>Get verified and enjoy our service,pay Ksh 3000 only using the form below to get started</h4>
+              <p>Note: Phone number format is 254725470732</p>
+            </div>
+            {% csrf_token %}
+            <fieldset class="form-group">
+              
+
+            </fieldset>
+            <div class="form-group text-center">
+              <button class="btn btn-outline-info" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header">
+              <h4>Payment Procedure</h4>
+              <p><strong>MPESA STK payment</strong></p>
+            </div>
+            <ol class="p-2">
+              <li>Fill in the form.</li>
+              <li>Ensure you enter mpesa no.</li>
+              <li>Submit the form and wait for mpesa notification.</li>
+              <li>Enter your pin.</li>
+              <li>Press ok to send.</li>
+              <li>Upon successful payment you will receive email notification.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+
       {% endif %}
     </div>
     <div class="col-md-1"></div>
