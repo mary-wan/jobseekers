@@ -32,7 +32,7 @@ def home(request):
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
     current_user = request.user
-    profile = JobSeeker.objects.get(user_id=current_user.id)  # get profile
+    profile = JobSeeker.objects.filter(user_id=current_user.id)  # get profile
     documents = FileUpload.objects.filter(User_id=current_user.id).all()
     return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "profile": profile})
 
@@ -43,7 +43,7 @@ def profile_jobseeker(request):
 def update_jobseeker_profile(request):
   if request.method == 'POST':
     user_form = UpdateUserProfile(request.POST,request.FILES,instance=request.user)
-    jobseeker_form = UpdateJobseekerProfile(request.POST,instance=request.user)
+    jobseeker_form = UpdateJobseekerProfile(request.POST,request.FILES,instance=request.user.jobseeker)
     if user_form.is_valid() and jobseeker_form.is_valid():
       user_form.save()
       jobseeker_form.save()
@@ -51,7 +51,7 @@ def update_jobseeker_profile(request):
       return redirect('profile_jobseeker')
   else:
     user_form = UpdateUserProfile(instance=request.user)
-    jobseeker_form = UpdateJobseekerProfile(instance=request.user) 
+    jobseeker_form = UpdateJobseekerProfile(instance=request.user.jobseeker) 
   params = {
     'user_form':user_form,
     'jobseeker_form':jobseeker_form
@@ -88,8 +88,7 @@ def delete_jobseeker(request,user_id):
 # @allowed_users(allowed_roles=['admin','employer'])
 def employerProfile(request):
     employer = request.user
-    profile = Employer.objects.get(
-        user_id=employer.id)  # get profile
+    profile = Employer.objects.get(user_id=employer.id)  # get profile
     available = User.objects.filter(is_jobseeker=True).all()
     profile = Employer.objects.filter(user_id = employer.id).first()  # get profile
     context = {
@@ -105,7 +104,7 @@ def employerProfile(request):
 def update_employer_profile(request):
     if request.method == 'POST':
         u_form = UpdateUserProfile(request.POST, request.FILES, instance=request.user)
-        p_form = UpdateEmployerProfile(request.POST, instance=request.user)
+        p_form = UpdateEmployerProfile(request.POST,request.FILES, instance=request.user.employer)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -114,7 +113,7 @@ def update_employer_profile(request):
             return redirect('profile')
     else:
         u_form = UpdateUserProfile(instance=request.user)
-        p_form = UpdateEmployerProfile(instance=request.user)
+        p_form = UpdateEmployerProfile(instance=request.user.employer)
     context = {
         'u_form': u_form,
         'p_form': p_form
