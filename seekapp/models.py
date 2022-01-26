@@ -31,7 +31,8 @@ class User(AbstractUser):
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
-
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
     def save_user(self):
         self.save()
 
@@ -45,13 +46,8 @@ class User(AbstractUser):
 class JobSeeker(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
-
-
-class JobSeeker(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
-    firstName = models.CharField(max_length=100, null=True, blank=True)
-    lastName = models.CharField(max_length=100, null=True, blank=True)
+    # firstName = models.CharField(max_length=100, null=True, blank=True)
+    # lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
@@ -62,23 +58,25 @@ class JobSeeker(models.Model):
     salary = models.IntegerField(null=True, blank=True)
     job_category = models.CharField(
         null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
-    email = models.EmailField(unique=True)
+    email = models.CharField(max_length=50,null=True)
 
     def save_jobseeker(self):
         self.save()
 
-    def update_jobseeker(self):
-        self.update()
-
     def delete_jobseeker(self):
         self.delete()
 
+    @classmethod
+    def update_user(cls, id ,username,first_name ,last_name,email,phone,location,availability,job_category):
+        update = cls.objects.filter(id = id).update(username = username,first_name = first_name,last_name=last_name,email=email,phone=phone,location=location,availability=availability, job_category=job_category)
+        return update
 
 class Employer(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
-    firstName = models.CharField(max_length=100, null=True, blank=True)
-    lastName = models.CharField(max_length=100, null=True, blank=True)
+    # firstName = models.CharField(max_length=100, null=True, blank=True)
+    # lastName = models.CharField(max_length=100, null=True, blank=True)
+    email = models.CharField(max_length=50,null=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     company = models.CharField(max_length=100, null=True, blank=True)
     job_category = models.CharField(
@@ -94,51 +92,6 @@ class Employer(models.Model):
         self.delete()
 
 
-class FileUpload(models.Model):
-    name = models.CharField(max_length=100)
-    pdf = models.FileField(upload_to='documents/pdf/')
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='documents')
-
-    def save_upload(self):
-        self.save()
-
-    def delete_upload(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name
-
-
-class Portfolio(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='portfolio')
-    name = models.CharField(max_length=50)
-    link = models.URLField(max_length=555)
-
-    def save_portfolio(self):
-        self.save()
-
-    def delete_portfolio(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name
-
-
-class Contact(models.Model):
-    name = models.CharField(max_length=30)
-    email = models.EmailField()
-    message = models.TextField()
-
-    def save_contact(self):
-        self.save()
-
-    def delete_contact(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name
 
 
 class FileUpload(models.Model):
@@ -211,20 +164,6 @@ class Portfolio(models.Model):
         return self.name
 
 
-class Portfolio(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='portfolio')
-    name = models.CharField(max_length=50)
-    link = models.URLField(max_length=555)
-
-    def save_portfolio(self):
-        self.save()
-
-    def delete_portfolio(self):
-        self.delete()
-
-    def __str__(self):
-        return self.name
 
 
 class Contact(models.Model):
@@ -240,3 +179,17 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+
+
+
+
+
+
+
+    
+ 
+    
+    

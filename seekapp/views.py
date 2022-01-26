@@ -126,7 +126,7 @@ def delete_employer(request,user_id):
     messages.success(request, f'Employer deleted successfully!')
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-#joobsekers sigle details for jobseekers
+# sigle details for jobseekers
 @login_required
 @allowed_users(allowed_roles=['admin','employer'])
 def single_jobseeker(request,user_id):

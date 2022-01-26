@@ -70,7 +70,7 @@ class UpdateUserProfile(forms.ModelForm):
   email = forms.EmailField()
   class Meta:
     model = JobSeeker
-    fields = ['firstName', 'lastName','email','contact','location', 'profile_photo','bio']
+    fields = ['email','contact','location', 'profile_photo','bio']
 
 class ContactForm(forms.ModelForm):
     class Meta:
