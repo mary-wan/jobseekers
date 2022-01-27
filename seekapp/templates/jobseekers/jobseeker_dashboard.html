@@ -61,7 +61,14 @@
   </div>
 </div>
 {% else %}
-<h1 class="text-center">Your profile is not verified</h1>
+<div class="not-verified">
+  <div class="text-center">
+    <h1 class="font-weight-bold pt-5">Your profile is not verified.</h1>
+    <h3>You will receive an email once your profile is approved.</h3>
+  </div>
+  
+</div>
+
 {% endif %}
 
 {% endblock %}

@@ -3,22 +3,7 @@
 {%load static%}
 {% block content %}
 <div class="container-fluid employ mt-5">
-  {% if messages %}
-  {% for message in messages %}
-  <div class="row ">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <div class="alert text-center {{ message.tags }} alert-dismissible" role="alert" id="messages">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        {{ message }}
-      </div>
-    </div>
-    <div class="col-md-4"></div>
-  </div>
-  {% endfor %}
-  {% endif %}
+
   <div class="row">
     <div class="col-md-3">
       <div class="card">
@@ -78,8 +63,8 @@
           <form class="forms card" action="" method="POST"
             enctype="multipart/form-data">
             <div class="card-header">
-              <h4>Get verified and enjoy our service,pay Ksh 3000 only using the form below to get started</h4>
-              <p>Note: Phone number format is 254725470732</p>
+              <h4>Get verified and enjoy our service,pay Ksh 2000 only using the form below to get started</h4>
+              <p>Note: Phone number format is 254722698745</p>
             </div>
             {% csrf_token %}
             <fieldset class="form-group">
@@ -97,14 +82,14 @@
               <h4>Payment Procedure</h4>
               <p><strong>MPESA STK payment</strong></p>
             </div>
-            <ol class="p-2">
-              <li>Fill in the form.</li>
-              <li>Ensure you enter mpesa no.</li>
-              <li>Submit the form and wait for mpesa notification.</li>
-              <li>Enter your pin.</li>
-              <li>Press ok to send.</li>
-              <li>Upon successful payment you will receive email notification.</li>
-            </ol>
+            <ul style="list-style-type:disc" class="p-2">
+              <li class="pb-1">Fill in the form.</li>
+              <li class="pb-1">Ensure you enter mpesa no.</li>
+              <li class="pb-1">Submit the form and wait for mpesa notification.</li>
+              <li class="pb-1">Enter your pin.</li>
+              <li class="pb-1">Press ok to send.</li>
+              <li class="pb-1">Upon successful payment you will receive email notification.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -112,7 +97,7 @@
 
       {% endif %}
     </div>
-    <div class="col-md-1"></div>
+    <!-- <div class="col-md-1"></div> -->
   </div>
 </div>
 <script>

@@ -15,7 +15,12 @@ body{
     background: transparent;
     z-index: 5;
 }
-
+.options-page{
+    background-image: url(/static/main-slider/image-1.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 550px;
+}
 .intro-bg{
     background-image: url(/static/photos/connect.jpg);
     background-size: 100% 100%;
@@ -744,4 +749,16 @@ h1{
     /* color: white; */
     /* font-weight: bold; */
  }
- 
+.not-verified{
+    background-image: url(/static/photos/verify1.webp);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 600px;
+    color: white;
+}
+.over{
+    height: 600px;
+    color: white;
+    background-color: rgb(19,181,234,0.1);
+
+}

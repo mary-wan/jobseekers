@@ -107,11 +107,11 @@
                   {%if user.is_authenticated%}
                   {%if user.is_jobseeker%}
                   <a href="{%url 'jobseekerDash'%}" class="text-white pr-2">DASHBOARD</a>
-                  <a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a>
+                  <!-- <a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a> -->
                   {%endif%}
                   {%if user.is_employer%}
                   <a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a>
-                  <a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a>
+                  <!-- <a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a> -->
                   {%endif%}
                   <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a>
                   {%else%}
@@ -174,11 +174,11 @@
                 {%if user.is_authenticated%}
                 {%if user.is_jobseeker%}
                 <li><a href="{%url 'jobseekerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
-                <li><a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a></li>
+                <!-- <li><a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a></li> -->
                 {%endif%}
                 {%if user.is_employer%}
                 <li><a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
-                <li><a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a></li>
+                <!-- <li><a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a></li> -->
                 {%endif%}
                 <li> <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a></li>
                 {%else%}
