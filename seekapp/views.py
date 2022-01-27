@@ -29,7 +29,6 @@ def home(request):
     return render(request, 'index.html')
 
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
     current_user = request.user
     profile = JobSeeker.objects.filter(user_id=current_user.id)  # get profile
@@ -39,7 +38,6 @@ def profile_jobseeker(request):
 
 # jobseekers update profile
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
   current_user = request.user
   profile = JobSeeker.objects.get(user_id=current_user.id)
@@ -64,7 +62,6 @@ def update_jobseeker_profile(request):
 
 #single jobseeker details
 @login_required
-# @allowed_users(allowed_roles=['admin'])
 def jobseeker_details(request,user_id):
   try:
     jobseeker =get_object_or_404(JobSeeker, pk = user_id)
@@ -78,7 +75,7 @@ def jobseeker_details(request,user_id):
 
 #delete jobseeker
 @login_required
-# @allowed_users(allowed_roles=['admin'])
+
 def delete_jobseeker(request,user_id):
   jobseeker = JobSeeker.objects.get(pk=user_id)
   if jobseeker:
@@ -88,7 +85,6 @@ def delete_jobseeker(request,user_id):
 
 #employer profle
 @login_required
-# @allowed_users(allowed_roles=['admin','employer'])
 def employerProfile(request):
     employer = request.user
     profile = Employer.objects.get(user_id=employer.id)  # get profile
@@ -103,7 +99,6 @@ def employerProfile(request):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','employer'])
 def update_employer_profile(request):
     current_user= request.user
     profile = Employer.objects.get(
@@ -129,7 +124,6 @@ def update_employer_profile(request):
 
 #delete employers
 @login_required
-# @allowed_users(allowed_roles=['admin'])
 def delete_employer(request,user_id):
   employer = Employer.objects.get(pk=user_id)
   if employer:
@@ -139,7 +133,6 @@ def delete_employer(request,user_id):
 
 # sigle details for jobseekers
 @login_required
-# @allowed_users(allowed_roles=['admin','employer'])
 def single_jobseeker(request,user_id):
   try:
     jobseeker =get_object_or_404(User, pk = user_id)
@@ -214,7 +207,6 @@ def pdf_view(request, file_id):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
 def jobseekerPage(request):
     current_user = request.user
     documents = FileUpload.objects.filter(user_id=current_user.id).all()
@@ -272,7 +264,6 @@ def dashboard(request):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin', 'jobseeker'])
 def jobseekerDash(request):
     current_user = request.user
     profile = JobSeeker.objects.get(user_id=current_user.id)
@@ -298,7 +289,6 @@ def adminDash(request):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin', 'employer'])
 def employerDash(request):
     user = request.user
     job_seekers = User.objects.filter( is_jobseeker=True).all()
@@ -343,7 +333,6 @@ def contact(request):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
 def upload_file(request):
     if request.method == 'POST':
         upload_form = UploadFileForm(request.POST, request.FILES)
@@ -366,7 +355,6 @@ def pdf_view(request, file_id):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
 def jobseekerPage(request):
     current_user = request.user
     documents = FileUpload.objects.filter(user_id=current_user.id).all()
