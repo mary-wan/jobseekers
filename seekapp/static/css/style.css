@@ -61,10 +61,7 @@ body{
     font-weight: 800;
     color: #0969C3 !important;
 }
-.profile{
-    min-height: 100vh;
-    background-color: #F3F9FF;
-}
+
 
 .login_container{
     background-color: #F3F9FF;
@@ -92,6 +89,7 @@ body{
 .forms{
     margin-top: 2rem;
 }
+
 .login_form h1{
     text-align: center;
     color: #0969C3;
@@ -110,124 +108,144 @@ body{
 }
 
 /* profile styles */
-
 .profile{
-   
-    overflow: hidden;
+    height: 100vh;
+    background-color: #F3F9FF;
+    padding-top: 3rem;
+
 }
-.prof{
-   
-    overflow: hidden;
+.prof_container{
+    margin-top: 3rem;
+    /* padding: 3rem; */
+    align-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    height: 80vh;
+    border-radius: 30px;
+
 }
-.profile_content{
-    background: #0969C3;
-    color: #fff;
-    max-width: 38rem;
-    max-height: 20rem;
-    border-radius: 40px;
-    margin-left: 1rem;
-    padding-left: 1rem;
-    padding-top: 1.5rem;
+.prof_img{
+    background: #13b5ea;
+    padding: 3rem;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
-.profile_cont{
-    background: #F3F9FF;
-    /* color: #fff; */
-    /* width: 38rem;
-    min-height: 20rem; */
-    border-radius: 40px;
-    /* margin-left: 1rem; */
-    padding-left: 1rem;
-    padding-top: 1.5rem;
-}
-.profile_details{
-    margin-top: 2rem;
-}
-.profile_content h4{
-    margin-left: 2rem;
+
+.job_prof{
+    background: #13b5ea;
+    padding: 3rem;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
     
 }
-.circle{
-    position: absolute;
-    left: 2rem;
-    top: -20rem;
-    opacity: 2;
+
+.job-img{
+    margin-top: 5rem;
 }
 
-/* .profile::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #0969C3;
-    clip-path: circle(36% at 86% 26%);
-    z-index: 1;
+.prof_content{
+    background: #fff;
+    padding: 3rem;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.prof_content h3{
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 5px;
+}
+
+.prof_content h4{
+    font-size: 24px;
+    font-weight: 600;
+    margin-left: 1rem;
+    margin-bottom: 9px;
+    /* background: rgba(0, 0, 0, 0.2);
+    margin-bottom: 9px;
+    padding: 6px;
+    border-radius: 10px; */
+}
+/* .prof_content h4:hover{
+    background: none;
+    padding: 0;
+    margin-bottom: 0;
 } */
-.prof::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #0969C3;
-    clip-path: circle(36% at 86% 26%);
-    z-index: 1;
+
+.prof_content h4 span{
+    color: #13b5ea;
 }
 
-.profile:after{
-    content: '';
-    position: absolute;
-    top: -6%;
-    left: 2.6%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    clip-path: circle(16% at 83% 40%);
-    z-index: 1;
 
+.sub-btn{
+    margin-top: 20px;
 }
-.prof:after{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    clip-path: circle(16% at 83% 40%);
-    z-index: 1;
 
-}
-/* .prof-pic{
-    position: relative;
-    margin-left: 23rem;
-    margin-top: 1rem;
+/* .bg-img{
+    background-image: url(../photos/home.svg);
 } */
+
 .prof-pic{
-    position: relative;
-    float: right;
-    margin-right: 4rem;
-    width: 320px;
-    height: 320px;
+    float: center;
+    width: 220px;
+    height: 220px;
     object-fit: cover;
     border-radius: 50%;
     z-index: 4; 
+    margin-bottom: 20px;
+    margin-left: 2rem;
+    
+}
+.file-pic{
+    /* position: relative; */
+    /* float: right; */
+    margin-right: 4rem;
+    align-content: center;
+    margin-top: 3rem;
+    max-width: 320px;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    z-index: 4; 
+    
 }
 .update-pic{
     /* position: relative; */
     float: center;
     /* margin-right: 4rem; */
-    margin-left: 5rem;
-    width: 320px;
-    height: 320px;
+    margin-left: 16rem;
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 70%;
+    /* z-index: 4;  */
+}
+.employer-pic{
+    /* position: relative; */
+    /* float: center; */
+    align-content: center;
+    margin-right: 16rem;
+    margin-left: 10rem;
+    max-width: 400px;
+    max-height: 400px;
     object-fit: cover;
     border-radius: 50%;
+    margin-top: 3rem;
+    /* z-index: 4;  */
+}
+.upt-pic{
+    /* position: relative; */
+    float: center;
+    /* margin-right: 4rem; */
+    margin-left: 16rem;
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 70%;
     /* z-index: 4;  */
 }
 .user{
-    margin-right: 12rem;
+    margin-left: 24rem;
+    color: black;
 }
 
 .upt{
@@ -240,12 +258,33 @@ body{
     margin-top: 2rem; */
 
 }
+.upt-employer{
+    padding: 6rem;
+    /* border: 2px solid black; */
+    background: rgba(255, 255, 255, 0.3);
+    color: black;
+    border-radius: 30px;
+    /* margin-bottom: 1rem; */
+    
+
+}
 .format{
     background: #0969C3;
-    width: 100%;
+    width: 80%;
     min-height: 100vh;
     color: #fff;
-    padding: 5rem;
+    padding: 3rem;
+    
+}
+.emp-format{
+    background: #0969C3;
+    width: 80%;
+    min-height: 100vh;
+    color: #fff;
+    padding: 3rem;
+    /* padding-bottom: 1rem; */
+    /* margin-bottom: 3rem; */
+    
 }
 .profile-pic{
     /* position: relative;
@@ -255,10 +294,36 @@ body{
     width: 320px;
     height: 320px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 30px;
     z-index: 4; 
 }
-  
+
+/* forms style */
+.file-name{
+    /* text-align: center; */
+    margin-right: 14rem;
+    color: black;
+}
+
+.file-form{
+    margin-top: 3rem;
+    /* background-color:#7fa3af; */
+    border: solid #486b77;
+    background-color: #ffff;
+    padding:3rem 2rem;
+    border-radius: 30px;
+    font-size: large;
+    color:black;
+}
+
+.documents{
+    min-height: 100vh;
+    background-color: rgba(219, 235, 250, 0.8);
+}
+/* .crispy{
+    padd
+}
+   */
 
 @media only screen and (min-width: 768px) {
     .about-img{
@@ -629,6 +694,20 @@ h1{
 
     .profile::after{
         display: none;
+    }
+    .format{
+        padding: 10px;
+        font-size: 20px;
+        background: transparent;
+    }
+    .upt{
+        font-size: 20px;
+        padding: 10px;
+        background: rgba(19,181,234,0.6);
+    }
+    .forms{
+        font-size: 20px;
+
     }
 }
 

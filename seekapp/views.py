@@ -31,8 +31,8 @@ def home(request):
 @login_required
 def profile_jobseeker(request):
     current_user = request.user
-    profile = JobSeeker.objects.filter(user_id=current_user.id)  # get profile
-    documents = FileUpload.objects.filter(User_id=current_user.id).all()
+    profile = JobSeeker.objects.get(user_id=current_user.id)  # get profile
+    documents = FileUpload.objects.filter(user_id=current_user.id).all()
     return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "profile": profile})
 
 
@@ -180,12 +180,14 @@ def add_portfolios(request):
     context = {
         'port_form': port_form,
     }
-    return render(request, "jobseekers/portfolio.html", context)
+    return render(request, "jobseeker/portfolio.html", context)
 
 
 @login_required
 @allowed_users(allowed_roles=['admin', 'jobseeker'])
 def upload_file(request):
+    current_user = request.user
+    profile = JobSeeker.objects.get(user_id=current_user.id)
     if request.method == 'POST':
         upload_form = UploadFileForm(request.POST, request.FILES)
         if upload_form.is_valid():
@@ -196,7 +198,7 @@ def upload_file(request):
             return redirect('jobseekerDash')
     else:
         upload_form = UploadFileForm()
-    return render(request, 'jobseekers/upload_file.html', {'upload_form': upload_form})
+    return render(request, 'jobseeker/upload_file.html', {'upload_form': upload_form,'profile':profile})
 
 
 def pdf_view(request, file_id):
@@ -267,8 +269,8 @@ def dashboard(request):
 def jobseekerDash(request):
     current_user = request.user
     profile = JobSeeker.objects.get(user_id=current_user.id)
-    documents = FileUpload.objects.filter(User_id=current_user.id).all()
-    portfolios = Portfolio.objects.filter(User_id=current_user.id)
+    documents = FileUpload.objects.filter(user_id=current_user.id).all()
+    portfolios = Portfolio.objects.filter(user_id=current_user.id)
     return render(request, 'jobseekers/jobseeker_dashboard.html', {"documents": documents, "portfolios": portfolios,'profile':profile})
 
 
@@ -290,13 +292,15 @@ def adminDash(request):
 
 @login_required
 def employerDash(request):
-    user = request.user
+    current_user = request.user
+    profile = Employer.objects.get(user_id=current_user.id)
     job_seekers = User.objects.filter( is_jobseeker=True).all()
     employer = User.objects.all()
 
     context = {
         "job_seekers": job_seekers,
         "employer": employer,
+        'profile':profile
     }
     return render(request, 'employers/employer_dashboard.html', context)
 
@@ -344,7 +348,7 @@ def upload_file(request):
             return redirect('jobseekerDash')
     else:
         upload_form = UploadFileForm()
-    return render(request, 'jobseekers/upload_file.html', {'upload_form': upload_form})
+    return render(request, 'jobseeker/upload_file.html', {'upload_form': upload_form})
 
 
 def pdf_view(request, file_id):
