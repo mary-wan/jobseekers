@@ -27,20 +27,29 @@ JOB_CATEGORY_CHOICES = (
 
 class User(AbstractUser):
     USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
+
     is_admin = models.BooleanField(default=False)
     is_employer = models.BooleanField(default=False)
     is_jobseeker = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+
     def save_user(self):
         self.save()
 
-    def update_user(self):
-        self.update()
+    # @property
+    # def is_admin(self):
+    #     return self.is_admin
 
-    def delete_user(self):
-        self.delete()
+    # @property
+    # def is_employer(self):
+    #     return self.is_employer
+
+    # @property
+    # def is_verified(self):
+    #     return self.is_verified
 
 
 class JobSeeker(models.Model):
@@ -58,7 +67,7 @@ class JobSeeker(models.Model):
     salary = models.IntegerField(null=True, blank=True)
     job_category = models.CharField(
         null=True, blank=True, max_length=180, choices=JOB_CATEGORY_CHOICES)
-    email = models.CharField(max_length=50,null=True)
+    email = models.CharField(max_length=50, null=True)
 
     def save_jobseeker(self):
         self.save()
@@ -70,12 +79,13 @@ class JobSeeker(models.Model):
     def update_jobseeker(self):
         self.update()
 
+
 class Employer(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
     # firstName = models.CharField(max_length=100, null=True, blank=True)
     # lastName = models.CharField(max_length=100, null=True, blank=True)
-    email = models.CharField(max_length=50,null=True)
+    email = models.CharField(max_length=50, null=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     company = models.CharField(max_length=100, null=True, blank=True)
 
@@ -87,8 +97,6 @@ class Employer(models.Model):
 
     def delete_employer(self):
         self.delete()
-
-
 
 
 class FileUpload(models.Model):
@@ -158,8 +166,6 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.name
-
-
 
 
 class Contact(models.Model):
