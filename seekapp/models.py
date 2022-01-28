@@ -76,10 +76,8 @@ class JobSeeker(models.Model):
         self.delete()
 
     @classmethod
-    def update_user(cls, id, username, first_name, last_name, email, phone, location, availability, job_category):
-        update = cls.objects.filter(id=id).update(username=username, first_name=first_name, last_name=last_name,
-                                                  email=email, phone=phone, location=location, availability=availability, job_category=job_category)
-        return update
+    def update_jobseeker(self):
+        self.update()
 
 
 class Employer(models.Model):
@@ -90,7 +88,6 @@ class Employer(models.Model):
     email = models.CharField(max_length=50, null=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     company = models.CharField(max_length=100, null=True, blank=True)
-    email = models.EmailField(unique=True)
 
     def save_employer(self):
         self.save()
@@ -105,7 +102,7 @@ class Employer(models.Model):
 class FileUpload(models.Model):
     name = models.CharField(max_length=100)
     pdf = models.FileField(upload_to='documents/pdfs/')
-    User = models.ForeignKey(
+    user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='documents')
 
     def save_upload(self):
@@ -135,8 +132,7 @@ class FileUpload(models.Model):
 
 
 class Portfolio(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='portfolio')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='portfolio')
     name = models.CharField(max_length=50)
     link = models.URLField(max_length=555)
 
@@ -185,3 +181,17 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+
+
+
+
+
+
+
+    
+ 
+    
+    

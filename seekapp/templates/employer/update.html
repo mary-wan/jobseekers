@@ -1,40 +1,44 @@
 {% extends 'slider-base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-  <div class="container mt-4">
-      <div class="row">
-            <div class="col-md-5">
-                  <div class="pt-5 mt-5 pl-2">
-                      {% if profile.profile_photo.url %}
-                      <img class="update_pic"
-                         src="{{ profile.profile_photo.url }}" style="height: 30vh; width:30vh; border-radius: 100%;" alt="{{ profile.name }}" >
-                         {% else %}
-                         <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
-                         class="card-img-top update-pic" alt="My profile picture">
-                           {% endif %}
-                  </div>
-                  <div>
-                    <h2 class=" user text-center"><small><strong>{{user.username}}</strong></small></h2>
-                  </div>
-            </div>
-          <div class="col-md-7">
-           <div class="format">
-            <div class="upt" id="myContent">
-                <h2 class="text-center">Update Profile</h2>
-                <form class="forms" action="" method="POST" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <fieldset class="form-group">
-                    {% bootstrap_form u_form%}
-                    {% bootstrap_form p_form%}
-                  </fieldset>
-                  <div class="form-group">
-                    <button class="btn btn-success" type="submit">Update</button>
-                  </div>
-                </form>
+<div class="container">
+  <div class="row">
+        <div class="col-md-6">
+              <div class="pl-2 ml-5">
+                  {% if profile.profile_photo.url %}
+                  <img class="employer-pic"
+                     src="{{ profile.profile_photo.url }}" alt="{{ profile.name }}" >
+                     {% else %}
+                     <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+                     class="card-img-top employer-pic" alt="My profile picture">
+                       {% endif %}   
               </div>
-            </div>
-           </div>
+              <div>
+                <h2 class=" user "><small><strong>{{user.username}}</strong></small></h2>
+              </div>
+        </div>
+      <div class="col-lg-12">
+       <div class="emp-format">
+        <div class="upt-employer" id="myContent">
+            <h2 class="text-center">Update Profile</h2>
+            <form class="emp-forms" action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <fieldset class="form-group">
+                {% load crispy_forms_tags %}
+                {{ u_form | crispy }}
+                {{ p_form | crispy }}
+                {% csrf_token %}
+              </fieldset>
+              <div class="form-group">
+                <button class="btn btn-success" type="submit">Update</button>
+              </div>
+            </form>
           </div>
+        </div>
+       </div>
       </div>
   </div>
+</div>
 {% endblock %}
+
+
