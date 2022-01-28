@@ -191,6 +191,8 @@ def contact(request):
 
 @login_required
 def add_portfolios(request):
+    current_user= request.user
+    profile = JobSeeker.objects.get(user_id=current_user.id)
     if request.method == 'POST':
         port_form = AddPortfolio(request.POST, request.FILES)
         if port_form.is_valid():
@@ -206,12 +208,13 @@ def add_portfolios(request):
         port_form = AddPortfolio()
     context = {
         'port_form': port_form,
+        'profile':profile
     }
     return render(request, "jobseeker/portfolio.html", context)
 
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'jobseeker'])
+# @allowed_users(allowed_roles=['admin', 'jobseeker'])
 def upload_file(request):
     current_user = request.user
     profile = JobSeeker.objects.get(user_id=current_user.id)
@@ -365,21 +368,6 @@ def contact(request):
         contact_form = ContactForm()
     return render(request, 'contact.html', {'contact_form': contact_form})
 
-
-@login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
-def upload_file(request):
-    if request.method == 'POST':
-        upload_form = UploadFileForm(request.POST, request.FILES)
-        if upload_form.is_valid():
-            upload = upload_form.save(commit=False)
-            upload.user = request.user
-            upload.save()
-            messages.success(request, "File uploaded successfully")
-            return redirect('jobseekerDash')
-    else:
-        upload_form = UploadFileForm()
-    return render(request, 'jobseeker/upload_file.html', {'upload_form': upload_form})
 
 
 def pdf_view(request, file_id):

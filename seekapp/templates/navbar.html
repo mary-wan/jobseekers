@@ -105,9 +105,11 @@
                             <div class="dropdown">
                                 {%if user.is_authenticated%} {%if user.is_jobseeker%}
                                 <a href="{%url 'jobseekerDash'%}" class="text-white pr-2">DASHBOARD</a>
-                                <a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a> {%endif%} {%if user.is_employer%}
+                                <!-- <a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a> -->
+                                {%endif%} {%if user.is_employer%}
                                 <a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a>
-                                <a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a> {%endif%}
+                                <!-- <a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a> -->
+                                {%endif%}
                                 <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a> {%else%}
                                 <a href="{%url 'login'%}" class="text-white pr-2">LOGIN</a>
                                 <a href="{%url 'options'%}" class="text-white">REGISTER</a> {%endif%}
@@ -115,65 +117,74 @@
 
                                 </ul>
                             </div>
-                            <div class="side-curve"></div>
                         </div>
+
                     </div>
                 </div>
-                <!--End Header Lower-->
+                <div class="side-curve"></div>
+            </div>
+        </div>
+    </div>
+    <!--End Header Lower-->
 
-                <!--Sticky Header-->
-                <div class="sticky-header">
-                    <div class="auto-container clearfix">
-                        <!--Logo-->
-                        <div class="logo pull-left">
-                            <a href="/" class="img-responsive"><img src="{%static 'photos/home.svg' %}" alt="" title="" height="60" width="70"></a>
-                        </div>
+    <!--Sticky Header-->
+    <div class="sticky-header">
+        <div class="auto-container clearfix">
+            <!--Logo-->
+            <div class="logo pull-left">
+                <a href="/" class="img-responsive"><img src="{%static 'photos/home.svg' %}" alt="" title="" height="60" width="70"></a>
+            </div>
 
-                        <!--Right Col-->
-                        <div class="right-col pull-right">
-                            <!-- Main Menu -->
-                            <nav class="main-menu navbar-expand-md">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
+            <!--Right Col-->
+            <div class="right-col pull-right">
+                <!-- Main Menu -->
+                <nav class="main-menu navbar-expand-md">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
 
-                                <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent1">
-                                    <ul class="navigation clearfix">
-                                        <li class="current"><a href="#">Home</a>
-                                            <ul>
-                                                <li><a href="index-2.html">Home Page 01</a></li>
-                                                <li><a href="index-3.html">Home Page 02</a></li>
-                                                <li class=""><a href="#">Header Styles</a>
-                                                    <ul>
-                                                        <li><a href="index-2.html">Header Style 01</a></li>
-                                                        <li><a href="index-3.html">Header Style 02</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <!-- <li class=""><a href="#">About</a> -->
-                                        </li>
-                                        <li class=""><a href="{%url 'services'%}">Services</a>
+                    <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent1">
+                        <ul class="navigation clearfix">
+                            <li class="current"><a href="#">Home</a>
+                                <ul>
+                                    <li><a href="index-2.html">Home Page 01</a></li>
+                                    <li><a href="index-3.html">Home Page 02</a></li>
+                                    <li class=""><a href="#">Header Styles</a>
+                                        <ul>
+                                            <li><a href="index-2.html">Header Style 01</a></li>
+                                            <li><a href="index-3.html">Header Style 02</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- <li class=""><a href="#">About</a> -->
+                            </li>
+                            <li class=""><a href="{%url 'services'%}">Services</a>
 
 
-                                            <li><a href="{%url 'contact_us'%}">Contact us</a></li>
-                                            {%if user.is_authenticated%} {%if user.is_jobseeker%}
-                                            <li><a href="{%url 'jobseekerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
-                                            <li><a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a></li>
-                                            {%endif%} {%if user.is_employer%}
-                                            <li><a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
-                                            <li><a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a></li>
-                                            {%endif%}
-                                            <li> <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a></li>
-                                            {%else%}
-                                            <li><a href="{%url 'login'%}" class="text-dark pr-2">LOGIN</a></li>
-                                            <li> <a href="{%url 'options'%}" class="text-dark">REGISTER</a></li>
-                                            {%endif%}
-                                    </ul>
-                                </div>
-                        </div>
-                        <!--End Sticky Header-->
+                                <li><a href="{%url 'contact_us'%}">Contact us</a></li>
+                                {%if user.is_authenticated%} {%if user.is_jobseeker%}
+                                <li><a href="{%url 'jobseekerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
+                                <!-- <li><a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a></li> -->
+                                {%endif%} {%if user.is_employer%}
+                                <li><a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
+                                <!-- <li><a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a></li> -->
+                                {%endif%}
+                                <li> <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a></li>
+                                {%else%}
+                                <li><a href="{%url 'login'%}" class="text-dark pr-2">LOGIN</a></li>
+                                <li> <a href="{%url 'options'%}" class="text-dark">REGISTER</a></li>
+                                {%endif%}
+                        </ul>
+                    </div>
+                </nav>
+                <!-- Main Menu End-->
+            </div>
+
+        </div>
+    </div>
+    <!--End Sticky Header-->
 
 </header>
