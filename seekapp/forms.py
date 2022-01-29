@@ -97,3 +97,9 @@ class UpdateEmployerProfile(forms.ModelForm):
     class Meta:
         model = Employer
         fields = ('company', 'profile_photo', )
+
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'contact']
