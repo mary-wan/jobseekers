@@ -32,14 +32,25 @@ def home(request):
 
 @login_required
 # @allowed_users(allowed_roles=['admin','jobseeker'])
+def jobseeker_profile(request, id):
+    current_user = request.user
+    profile = JobSeeker.objects.get(pk=id)  # get profile
+    user = get_object_or_404(User, pk=id)
+    documents = FileUpload.objects.filter(user_id=current_user.id).all()
+    return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "user": user, "profile": profile})
+# jobseekers update profile
+
+
+@login_required
+# @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
     current_user = request.user
+    user = get_object_or_404(User, pk=current_user.id)
     profile = JobSeeker.objects.get(user_id=current_user.id)  # get profile
     documents = FileUpload.objects.filter(user_id=current_user.id).all()
     return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "profile": profile})
 
 
-# jobseekers update profile
 @login_required
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
@@ -191,7 +202,7 @@ def contact(request):
 
 @login_required
 def add_portfolios(request):
-    current_user= request.user
+    current_user = request.user
     profile = JobSeeker.objects.get(user_id=current_user.id)
     if request.method == 'POST':
         port_form = AddPortfolio(request.POST, request.FILES)
@@ -208,7 +219,7 @@ def add_portfolios(request):
         port_form = AddPortfolio()
     context = {
         'port_form': port_form,
-        'profile':profile
+        'profile': profile
     }
     return render(request, "jobseeker/portfolio.html", context)
 
@@ -328,9 +339,11 @@ def employerDash(request):
     current_user = request.user
     profile = Employer.objects.get(user_id=current_user.id)
     job_seekers = User.objects.filter(is_jobseeker=True).all()
+    # potential = JobSeeker.objects.all()
     employer = User.objects.all()
 
     context = {
+        # "potential": potential,
         "job_seekers": job_seekers,
         "employer": employer,
         'profile': profile
@@ -367,7 +380,6 @@ def contact(request):
     else:
         contact_form = ContactForm()
     return render(request, 'contact.html', {'contact_form': contact_form})
-
 
 
 def pdf_view(request, file_id):

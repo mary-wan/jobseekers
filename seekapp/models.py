@@ -35,9 +35,14 @@ class User(AbstractUser):
     is_verified = models.BooleanField(default=False)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    contact = models.CharField(
+        unique=True, max_length=10, null=True, blank=True)
 
     def save_user(self):
         self.save()
+
+    # def __str__(self):
+    #     return self.User
 
     # @property
     # def is_admin(self):
@@ -53,15 +58,16 @@ class User(AbstractUser):
 
 
 class JobSeeker(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE, default='')
     # firstName = models.CharField(max_length=100, null=True, blank=True)
     # lastName = models.CharField(max_length=100, null=True, blank=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
-    contact = models.CharField(
-        unique=True, max_length=10, null=True, blank=True)
+    # contact = models.CharField(
+    #     unique=True, max_length=10, null=True, blank=True)
     availability = models.CharField(
         null=True, blank=True, choices=JOBSEEKER_WORKHOUR_CHOICES, max_length=20)
     salary = models.IntegerField(null=True, blank=True)
@@ -79,12 +85,16 @@ class JobSeeker(models.Model):
     def update_jobseeker(self):
         self.update()
 
+    def __str__(self):
+        return self.user
+
 
 class Employer(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
-    # firstName = models.CharField(max_length=100, null=True, blank=True)
-    # lastName = models.CharField(max_length=100, null=True, blank=True)
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE, default='')
+    # contact = models.CharField(
+    #     unique=True, max_length=10, null=True, blank=True)
     email = models.CharField(max_length=50, null=True)
     profile_photo = CloudinaryField('image', null=True, blank=True)
     company = models.CharField(max_length=100, null=True, blank=True)
@@ -97,6 +107,9 @@ class Employer(models.Model):
 
     def delete_employer(self):
         self.delete()
+
+    def __str__(self):
+        return self.user
 
 
 class FileUpload(models.Model):
@@ -132,7 +145,8 @@ class FileUpload(models.Model):
 
 
 class Portfolio(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='portfolio')
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='portfolio')
     name = models.CharField(max_length=50)
     link = models.URLField(max_length=555)
 
@@ -181,17 +195,3 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
-
-
-
-
-
-
-
-    
- 
-    
-    
