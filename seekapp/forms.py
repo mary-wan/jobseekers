@@ -65,7 +65,7 @@ class UpdateJobseekerProfile(forms.ModelForm):
     class Meta:
         model = JobSeeker
         fields = ('job_category', 'availability', 'salary',
-                  'location', 'bio', 'profile_photo')
+                  'location','contact', 'bio', 'profile_photo')
 
 
         # widgets = {
