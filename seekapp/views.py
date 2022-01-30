@@ -318,11 +318,11 @@ def employerDash(request):
 def search_jobseekers(request):
     if 'job_category' in request.GET and request.GET["job_category"]:
         search_term = request.GET.get("job_category")
-        searched_jobseekers = User.search_jobseekers_by_job_category(
+        searched_jobseekers = JobSeeker.search_jobseekers_by_job_category(
             search_term)
         message = f"{search_term}"
 
-        return render(request, 'employers/search.html', {"message": message, "jobseekers": searched_jobseekers})
+        return render(request, 'employer/search.html', {"message": message, "jobseekers": searched_jobseekers})
 
     else:
         message = 'You have not searched for any term'

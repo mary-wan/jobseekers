@@ -1,63 +1,13 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light navigation" style="z-index: 6;">
-            <a class="navbar-brand" href="/">LOGO</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'services' %}">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
-                    </li>
-
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile'%}">Profile</a>
-                    </li>
-                    {% for prof in profiles %}
-                    <li class="nav-item">
-                      <a class="" href="{% url 'profile'%}">{{prof.user.username}} </a>
-                    </li>
-                    {% endfor %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Upload Project</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                 {%else%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
-                    {%endif%}
-                    
-                </ul>
-            </div>
-</nav> -->
-
 {%load static%}
  <header class="main-header header-style-two">
-
-
-    <!--End Header Upper-->
-  
-    <!-- Hidden Nav Toggler -->
-    <!-- <div class="nav-toggler">
-      <div class="nav-btn"><button class="hidden-bar-opener"><span class="icon flaticon-menu"></span></button></div>
-    </div> -->
-    <!-- / Hidden Nav Toggler -->
-  
-    <!--Header Lower-->
     <div class="header-lower">
   
       <div class="auto-container">
         <div class="nav-outer clearfix">
-          <!-- Main Menu -->
+          
           <nav class="main-menu navbar-expand-md">
             <div class="navbar-header">
-              <!-- Toggle Button -->
+              
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="icon-bar"></span>
@@ -80,7 +30,7 @@
                     </li>
                   </ul>
                 </li>
-                <!-- <li class=""><a href="#">About</a> -->
+                
                 </li>
                 <li class=""><a href="{%url 'services'%}">Services</a>
   
@@ -91,17 +41,17 @@
             </div>
           </nav>
   
-          <!-- Main Menu End-->
+          
           <div class="outer-box clearfix">
   
-            <!--Option Box-->
+            
             <div class="option-box">
-              <!--Cart Box-->
+              
               <div class="cart-box">
     
               </div>
   
-              <!--Search Box-->
+              
               <div class="search-box-outer">
                 <div class="dropdown">
                   {%if user.is_authenticated%}
@@ -112,6 +62,8 @@
                   {%if user.is_employer%}
                   <a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a>
                   <a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a>
+                  
+                  
                   {%endif%}
                   <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a>
                   {%else%}
@@ -130,19 +82,19 @@
         </div>
       </div>
     </div>
-    <!--End Header Lower-->
+    
   
-    <!--Sticky Header-->
+    
     <div class="sticky-header">
       <div class="auto-container clearfix">
-        <!--Logo-->
+        
         <div class="logo pull-left">
           <a href="/" class="img-responsive"><img src="{%static 'photos/home.svg' %}" alt="" title="" height="60" width="70"></a>
         </div>
   
-        <!--Right Col-->
+        
         <div class="right-col pull-right">
-          <!-- Main Menu -->
+          
           <nav class="main-menu navbar-expand-md">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
               aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
@@ -165,7 +117,7 @@
                     </li>
                   </ul>
                 </li>
-                <!-- <li class=""><a href="#">About</a> -->
+                
                 </li>
                 <li class=""><a href="{%url 'services'%}">Services</a>
   
@@ -179,6 +131,7 @@
                 {%if user.is_employer%}
                 <li><a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
                 <li><a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a></li>
+               <li><a href="{%url 'search_categories'%}" class="text-white pr-2">SEARCH</a></li>
                 {%endif%}
                 <li> <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a></li>
                 {%else%}
@@ -187,11 +140,11 @@
                   {%endif%}
               </ul>
             </div>
-          </nav><!-- Main Menu End-->
+          </nav>
         </div>
   
       </div>
     </div>
-    <!--End Sticky Header-->
+    
   
   </header>

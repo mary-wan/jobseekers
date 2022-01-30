@@ -70,6 +70,15 @@ class JobSeeker(models.Model):
     def update_jobseeker(self):
         self.update()
 
+    @classmethod
+    def search_jobseekers_by_job_category(cls,job_category):
+        jobseekers = JobSeeker.objects.filter(job_category__icontains=job_category)
+        return jobseekers
+
+    # def __str__(self):
+    #     return self.username
+
+
 class Employer(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)

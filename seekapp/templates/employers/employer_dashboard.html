@@ -19,6 +19,7 @@
   </div>
   {% endfor %}
   {% endif %}
+  
   <div class="row">
     <div class="col-md-3">
       <div class="card">
@@ -41,6 +42,14 @@
     </div>
     <div class="col-md-8">
       {% if request.user.is_verified %}
+
+      <form class="navbar-form" role="search" action="{% url 'search_jobseekers' %}">
+        <div class="input-group">
+        <input type="text"  class="form-control search-form" placeholder="Search by job category e.g IT" name="job_category">
+            <input class="btn btn-success search-form" type="submit">
+        </div>
+
+    </form> <br>
 
       <h5 class="pot" style="text-align: center; color:rgb(24, 24, 238);">POTENTIAL CANDIDATES: </h5>
       <hr>
@@ -130,3 +139,5 @@
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 {% endblock %}
+
+
