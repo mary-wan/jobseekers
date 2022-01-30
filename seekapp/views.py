@@ -1,17 +1,18 @@
+import json
+from urllib.request import HTTPBasicAuthHandler
 from django.shortcuts import render, redirect
 from seekapp.models import *
-# from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.shortcuts import redirect, render, get_object_or_404
 from seekapp.models import *
-# from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
 import os
+import time
 from .email import *
 from django.http.response import Http404
 from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
@@ -33,11 +34,11 @@ def home(request):
 @login_required
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def jobseeker_profile(request, id):
-    current_user = request.user
-    profile = JobSeeker.objects.get(pk=id)  # get profile
-    user = get_object_or_404(User, pk=id)
-    documents = FileUpload.objects.filter(user_id=current_user.id).all()
-    return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "user": user, "profile": profile})
+    jobseeker = User.objects.get(id=id)
+    profile = JobSeeker.objects.get(user_id=id)  # get profile
+    portfolio = Portfolio.objects.filter(user_id=id)
+    # user = get_object_or_404(User, pk=user.id)
+    return render(request, "employer/jobseekerview.html", {"jobseeker": jobseeker, "portfolio": portfolio, "profile": profile})
 # jobseekers update profile
 
 
@@ -333,38 +334,47 @@ def adminDash(request):
     return render(request, 'admin/admin_dashboard.html', {"unverified_employers": unverified_employers, "verified_employers": verified_employers, "all_employers": all_employers, 'verified_jobseekers': verified_jobseekers, 'unverified_jobseekers': unverified_jobseekers, 'all_jobseekers': all_jobseekers})
 
 
+@login_required
+# @allowed_users(allowed_roles=['admin', 'employer'])
+def employerDash(request):
+    current_user = request.user
+    profile = Employer.objects.get(user_id=current_user.id)
+    job_seekers = User.objects.filter(is_jobseeker=True).all()
+    # potential = JobSeeker.objects.all()
+    employer = User.objects.all()
+    if request.method == 'POST':
+        mpesa_form = PaymentForm(
+            request.POST, request.FILES, instance=request.user)
+        if mpesa_form.is_valid():
+            mpesa_form.save()
+            messages.success(
+                request, 'Your Payment has been made successfully')
+            return redirect('employerDash')
+    else:
+        mpesa_form = PaymentForm(instance=request.user)
+
+    context = {
+        # "potential": potential,
+        "job_seekers": job_seekers,
+        "employer": employer,
+        'profile': profile,
+        'mpesa_form':mpesa_form
+    }
+    return render(request, 'employers/employer_dashboard.html', context)
+
+
 # @login_required
-# # @allowed_users(allowed_roles=['admin', 'employer'])
 # def employerDash(request):
-#     current_user = request.user
-#     profile = Employer.objects.get(user_id=current_user.id)
-#     job_seekers = User.objects.filter(is_jobseeker=True).all()
-#     # potential = JobSeeker.objects.all()
+#     user = request.user
+#     job_seekers = User.objects.filter(
+#         is_verified=True, is_jobseeker=True).all()
 #     employer = User.objects.all()
 
 #     context = {
-#         # "potential": potential,
 #         "job_seekers": job_seekers,
 #         "employer": employer,
-#         'profile': profile
 #     }
 #     return render(request, 'employers/employer_dashboard.html', context)
-
-
-@login_required
-def employerDash(request):
-    user = request.user
-    mpesa_form = PaymentForm(instance=request.user)
-    job_seekers = User.objects.filter(
-        is_verified=True, is_jobseeker=True).all()
-    employer = User.objects.all()
-
-    context = {
-        "job_seekers": job_seekers,
-        "employer": employer,
-        "mpesa_form": mpesa_form
-    }
-    return render(request, 'employers/employer_dashboard.html', context)
 
 
 @login_required
@@ -385,19 +395,45 @@ def employerPayment(request):
     }
     return render(request, 'employers/paymentform.html', context)
 
+# Mpesa
+
+
+def getAccessToken(request):
+    consumer_key = os.environ.get("CONSUMER_KEY")
+    consumer_secret = os.environ.get("CONSUMER_SECRET")
+    api_URL = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
+    # r = requests.get(api_URL, auth=HTTPBasicAuthHandler(
+    #     consumer_key, consumer_secret))
+    mpesa_access_token = json.loads(r.text)
+    validated_mpesa_access_token = mpesa_access_token['access_token']
+    return HttpResponse(validated_mpesa_access_token)
+
+
+def success(request):
+    time.sleep(10)
+    return HttpResponseRedirect("/employerDash")
+
+    return render('mpesa/success.html')
+
+
+def stk_push_callback(request):
+    data = request.body
+
 
 def search_jobseekers(request):
+    current_user = request.user
+    profile = Employer.objects.get(user_id=current_user.id)
     if 'job_category' in request.GET and request.GET["job_category"]:
         search_term = request.GET.get("job_category")
-        searched_jobseekers = User.search_jobseekers_by_job_category(
+        searched_jobseekers = JobSeeker.search_jobseekers_by_job_category(
             search_term)
         message = f"{search_term}"
 
-        return render(request, 'employers/search.html', {"message": message, "jobseekers": searched_jobseekers})
+        return render(request, 'employer/search.html', {"message": message, "jobseekers": searched_jobseekers,'profile':profile})
 
     else:
         message = 'You have not searched for any term'
-        return render(request, 'employer/search.html', {"message": message})
+        return render(request, 'employer/search.html', {"message": message,})
 
 
 def contact(request):

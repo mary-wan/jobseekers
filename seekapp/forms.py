@@ -61,11 +61,16 @@ class EmployerSignUp(UserCreationForm):
 
 
 class UpdateJobseekerProfile(forms.ModelForm):
+
     class Meta:
         model = JobSeeker
         fields = ('job_category', 'availability', 'salary',
-                  'location', 'bio', 'profile_photo')
+                  'location','contact', 'bio', 'profile_photo')
 
+
+        # widgets = {
+        #     'contact': forms.CharField(attrs={'class': 'col-md-6'})
+        # }
 
 class UpdateUserProfile(forms.ModelForm):
     email = forms.EmailField()
