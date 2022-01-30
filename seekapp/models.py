@@ -133,8 +133,12 @@ class Portfolio(models.Model):
         return self.name
     def delete_upload(self):
         self.delete()
-    def __str__(self):
-        return self.name
+
+   
+
+
+
+
 class Contact(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField()
