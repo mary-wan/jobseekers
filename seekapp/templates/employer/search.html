@@ -2,19 +2,14 @@
 {% load bootstrap4 %}
 {%load static%}
 {% block content %}
-<div class="container-fluid employ">
+<div class="container-fluid employ mt-5">
   <div class="row">
     {% if messages %}
     {% for message in messages %}
     <div class="row ">
       <div class="col-md-4"></div>
       <div class="col-md-4">
-        <div class="alert text-center {{ message.tags }} alert-dismissible" role="alert" id="messages">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          {{ message }}
-        </div>
+        
       </div>
       <div class="col-md-4"></div>
     </div>
@@ -60,11 +55,11 @@
               {% for job_seeker in jobseekers %}
               <tr class="tr1">
                 <!-- a href="" data-product="{{job_seeker.id}}" data-action="add" class="btn btn-outline-info btn-sm hire">Hire</a> -->
-                  <td>{{job_seeker.first_name}} {{job_seeker.last_name}}</td>
+                  <td>{{job_seeker.user.first_name}}</td>
                   <td>{{job_seeker.email}}</td>
-                  <td>{{job_seeker.phone}}</td>
+                  <td>{{job_seeker.contact}}</td>
                   <td>{{job_seeker.location}}</td>
-                  <td><a href="{% url 'specific_details' job_seeker.id%}" ><button class="button">View</button></a></td>
+                  <td><a href="" ><button class="button">View</button></a></td>
                   <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
               </tr>
               {%endfor%}
