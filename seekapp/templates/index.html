@@ -1,144 +1,159 @@
-{% extends 'slider-base.html' %} {% load static %} {% load crispy_forms_tags %} {% load bootstrap4 %} {% block content%} {{block.super}}
+{% extends 'slider-base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+{% block content%}
+{{block.super}}
 
 
 
 <section class="main-slider">
 
-    <div class="main-slider-carousel owl-carousel owl-theme">
+  <div class="main-slider-carousel owl-carousel owl-theme">
 
-        <div class="slide" style="background-image:url({%static 'main-slider/image-1.jpg'%})">
-            <div class="auto-container">
-                <div class="content clearfix">
-                    <div class="title">We Help</div>
-                    <h1>Grow Your Career</h1>
-                    <div class="text">We help you showcase your skills and qualifications to potiential employers and get a chance to be hired and grow your skills.</div>
-                    <div class="link-box">
-                        <a href="{%url 'services'%}" class="theme-btn btn-style-one">Learn More</a> <a href="{%url 'contact_us'%}" class="theme-btn btn-style-two">Contact Us</a>
-                    </div>
-                </div>
+    <div class="slide" style="background-image:url({%static 'main-slider/image-1.jpg'%})">
+      <div class="auto-container">
+        <div class="content clearfix">
+          <div class="title">We Help</div>
+          <h1>Grow Your Career</h1>
+          <div class="text">We help you showcase your skills and qualifications to potiential employers and get a chance to be hired and grow your skills.</div>
+          <div class="link-box">
+            <a href="{%url 'services'%}" class="theme-btn btn-style-one">Learn More</a> <a href="{%url 'contact_us'%}"
+              class="theme-btn btn-style-two">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                <div class="slide" style="background-image:url({%static 'main-slider/image-2.jpg'%})">
-                    <div class="auto-container">
-                        <div class="content centered clearfix">
-                            <div class="title">We Help</div>
-                            <h1>Find The Best Employee</h1>
-                            <div class="text">We help you browse through jobseekers' profiles based on categories, slary expectations and find the best fit employee for the position.</div>
-                            <div class="link-box">
-                                <a href="{%url 'services'%}" class="theme-btn btn-style-one">Learn More</a> <a href="{%url 'contact_us'%}" class="theme-btn btn-style-two">Contact Us</a>
-                            </div>
-                        </div>
+    <div class="slide" style="background-image:url({%static 'main-slider/image-2.jpg'%})">
+      <div class="auto-container">
+        <div class="content centered clearfix">
+          <div class="title">We Help</div>
+          <h1>Find The Best Employee</h1>
+          <div class="text">We help you browse through jobseekers' profiles based on categories, slary expectations and find the best fit employee for the position.</div>
+          <div class="link-box">
+            <a href="{%url 'services'%}" class="theme-btn btn-style-one">Learn More</a> <a href="{%url 'contact_us'%}"
+              class="theme-btn btn-style-two">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                        <div class="slide" style="background-image:url({%static 'main-slider/image-3.jpg'%})">
-                            <div class="auto-container">
-                                <div class="content clearfix">
-                                    <div class="title">We Help</div>
-                                    <h1>Create Connections</h1>
-                                    <div class="text">We help employers and jobseekers connect for better work experience.</div>
-                                    <div class="link-box">
-                                        <a href="{%url 'services'%}" class="theme-btn btn-style-one">Learn More</a> <a href="{%url 'contact_us'%}" class="theme-btn btn-style-two">Contact Us</a>
-                                    </div>
-                                </div>
+    <div class="slide" style="background-image:url({%static 'main-slider/image-3.jpg'%})">
+      <div class="auto-container">
+        <div class="content clearfix">
+          <div class="title">We Help</div>
+          <h1>Create Connections</h1>
+          <div class="text">We help employers and jobseekers connect for better work experience.</div>
+          <div class="link-box">
+            <a href="{%url 'services'%}" class="theme-btn btn-style-one">Learn More</a> <a href="{%url 'contact_us'%}"
+              class="theme-btn btn-style-two">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                            </div>
+  </div>
 </section>
 
 <section class="about-section-two">
-    <div class="auto-container">
-        <div class="row clearfix">
-            <!--Column-->
-            <div class="column col-lg-7 col-md-12 col-sm-12">
-                <div class="about-content-box">
-                    <div class="sec-title">
-                        <h2>About our company</h2>
-                    </div>
-                    <h4><span class="number">30</span>years of connecting Jobseekers and Employers</h4>
-                    <div class="text">Millions of people are searching for jobs, salary information, company reviews, and interview questions. Snagjobs makes it possible for jobseekers to be considered for employment.</div>
-                    <!--Awards-->
+  <div class="auto-container">
+    <div class="row clearfix">
+      <!--Column-->
+      <div class="column col-lg-7 col-md-12 col-sm-12">
+        <div class="about-content-box">
+          <div class="sec-title">
+            <h2>About our company</h2>
+          </div>
+          <h4><span class="number">30</span>years of connecting Jobseekers and Employers</h4>
+          <div class="text">Millions of people are searching for jobs, salary information, company 
+            reviews, and interview questions. Snagjobs makes it possible for jobseekers to be considered for employment.</div>
+          <!--Awards-->
 
 
-                </div>
-            </div>
-
-            <!--Column-->
-            <div class="column col-lg-5 col-md-12 col-sm-12">
-                <div class="image-box">
-                    <figure class="image">
-                        <img src="{%static 'photos/about.jpg' %}" alt="" />
-                    </figure>
-                </div>
-            </div>
         </div>
+      </div>
+
+      <!--Column-->
+      <div class="column col-lg-5 col-md-12 col-sm-12">
+        <div class="image-box">
+          <figure class="image">
+            <img src="{%static 'photos/about.jpg' %}" alt="" />
+          </figure>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <section class="fluid-section-one">
-    <div class="outer-container clearfix">
+  <div class="outer-container clearfix">
 
-        <!--Image Column-->
-        <div class="image-column" style="background-image:url({%static 'photos/image-1.jpg'%});">
-            <figure class="image-box"><img src="images/resource/image-1.jpg" alt=""></figure>
-        </div>
-
-        <!--Content Column-->
-        <div class="content-column">
-            <div class="inner-column">
-                <h2>How JobsLux Works for You</h2>
-                <div class="text">Snagjob verifies all users and allows jobseekers to create a profile and upload their documents. Employers can search for jobseekers, view jobseekers' profiles and contact the best fit for the position. </div>
-                <div class="row clearfix">
-
-                    <!--Column-->
-                    <div class="column col-lg-6 col-md-6 col-sm-12">
-                        <!--Featured Block-->
-                        <div class="featured-block">
-                            <div class="feature-inner">
-                                <div class="icon-box">
-                                    <span class="icon"> <i class="fas fa-save"></i></span>
-                                </div>
-                                <h3>Save Profile <br> Information</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column col-lg-6 col-md-6 col-sm-12">
-                        <!--Featured Block-->
-                        <div class="featured-block">
-                            <div class="feature-inner">
-                                <div class="icon-box">
-                                    <span class="icon "><i class="fas fa-search"></i></span>
-                                </div>
-                                <h3>Search <br> Jobseekers</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Column-->
-                    <div class="column col-lg-6 col-md-6 col-sm-12">
-                        <!--Featured Block-->
-                        <div class="featured-block">
-                            <div class="feature-inner">
-                                <div class="icon-box">
-                                    <span class="icon"><i class="fas fa-check-double"></i></span>
-                                </div>
-                                <h3>Only verified <br>Profiles</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Column-->
-                    <div class="column col-lg-6 col-md-6 col-sm-12">
-                        <!--Featured Block-->
-                        <div class="featured-block">
-                            <div class="feature-inner">
-                                <div class="icon-box">
-                                    <span class="icon"><i class="fas fa-comment-dollar"></i></span>
-                                </div>
-                                <h3>Contact <br> Jobseeker</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Column-->
-
-                </div>
-            </div>
-        </div>
+    <!--Image Column-->
+    <div class="image-column" style="background-image:url({%static 'photos/image-1.jpg'%});">
+      <figure class="image-box"><img src="images/resource/image-1.jpg" alt=""></figure>
     </div>
+
+    <!--Content Column-->
+    <div class="content-column">
+      <div class="inner-column">
+        <h2>How JobsLux Works for You</h2>
+        <div class="text">JobsLux verifies all users and allows jobseekers to create a profile and upload their documents. Employers can search for jobseekers, view jobseekers' profiles and contact the best fit for the position. </div>
+        <div class="row clearfix">
+
+          <!--Column-->
+          <div class="column col-lg-6 col-md-6 col-sm-12">
+            <!--Featured Block-->
+            <div class="featured-block">
+              <div class="feature-inner">
+                <div class="icon-box">
+                  <span class="icon"> <i class="fas fa-save"></i></span>
+                </div>
+                <h3>Save Profile <br> Information</h3>
+              </div>
+            </div>
+          </div>
+          <div class="column col-lg-6 col-md-6 col-sm-12">
+            <!--Featured Block-->
+            <div class="featured-block">
+              <div class="feature-inner">
+                <div class="icon-box">
+                  <span class="icon "><i class="fas fa-search"></i></span>
+                </div>
+                <h3>Search <br> Jobseekers</h3>
+              </div>
+            </div>
+          </div>
+          <!--Column-->
+          <div class="column col-lg-6 col-md-6 col-sm-12">
+            <!--Featured Block-->
+            <div class="featured-block">
+              <div class="feature-inner">
+                <div class="icon-box">
+                  <span class="icon"><i class="fas fa-check-double"></i></span>
+                </div>
+                <h3>Only verified <br>Profiles</h3>
+              </div>
+            </div>
+          </div>
+          <!--Column-->
+          <div class="column col-lg-6 col-md-6 col-sm-12">
+            <!--Featured Block-->
+            <div class="featured-block">
+              <div class="feature-inner">
+                <div class="icon-box">
+                  <span class="icon"><i class="fas fa-comment-dollar"></i></span>
+                </div>
+                <h3>Contact <br> Jobseeker</h3>
+              </div>
+            </div>
+          </div>
+          <!--Column-->
+
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 
@@ -155,47 +170,36 @@
           <img src="{%static 'photos/home.svg' %}" class="" alt="" height="100" width="100">
         </div>
         <div class="mt-5">
-
           More than 3.8 million visitors every day
         </div>
       </div>
-
       <div class="col-md-2 value-container mr-5 mb-2 text-center "
         style="background-color: #0969C3; height: 300px;color: white; border-radius: 50px;">
         <div class="pt-3">
           <img src="{%static 'photos/hand.png' %}" class="" alt="" height="100" width="100">
         </div>
         <div class="mt-5">
-
           Leading recruiting website in the East Africa
         </div>
-
       </div>
-
       <div class="col-md-2 value-container mr-5 mb-2 text-center "
         style="background-color: #0969C3; height: 300px;color: white; border-radius: 50px;">
         <div class="pt-3">
           <img src="{%static 'photos/message.png' %}" class="" alt="" height="100" width="100">
         </div>
         <div class="mt-5">
-
           24\7 Dedicated and free Support
         </div>
       </div>
-
       <div class="col-md-2 value-container mb-2 text-center "
         style="background-color: #0969C3; height: 300px;color: white; border-radius: 50px;">
         <div class="pt-3">
           <img src="{%static 'photos/home.svg' %}" class="" alt="" height="100" width="100">
         </div>
         <div class="mt-5">
-
           Only relevant and verified vacancies
         </div>
       </div>
-
-
-
 </section> -->
 
 
@@ -203,93 +207,99 @@
 
 
 <div class="foot-cont mt-5">
-    <footer class="text-center text-dark text-lg-start " style="background-color:  #e6f0f9;">
-        <!-- Grid container -->
-        <div class="container p-4 pb-0">
-            <!-- Section: Links -->
-            <section class="">
-                <!--Grid row-->
-                <div class="row">
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">
-                            JobsLux
-                        </h6>
-                        <p>
-                            Millions of people are searching for jobs, salary information, company reviews, and interview questions. Snagjobs makes it possible for jobseekers to be considered for employment.
-                        </p>
-                    </div>
-                    <!-- Grid column -->
+  <footer class="text-center text-dark text-lg-start " style="background-color:  #e6f0f9;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">
+              JobsLux
+            </h6>
+            <p>
+              Millions of people are searching for jobs, salary information,
+               company reviews, and interview questions. Snagjobs makes it 
+               possible for jobseekers to be considered for employment.
+            </p>
+          </div>
+          <!-- Grid column -->
 
-                    <hr class="w-100 clearfix d-md-none" />
+          <hr class="w-100 clearfix d-md-none" />
 
-                    <!-- Grid column -->
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-                        <p>
-                            <a href="{%url 'services'%}" class="text-dark">Services</a>
-                        </p>
-                        <p>
-                            <a href="{%url 'contact_us'%}" class="text-dark">Contact</a>
-                        </p>
-                        <p>
-                            <a href="/" class="text-dark">Home</a>
-                        </p>
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+            <p>
+              <a href="{%url 'services'%}" class="text-dark">Services</a>
+            </p>
+            <p>
+              <a href="{%url 'contact_us'%}"  class="text-dark">Contact</a>
+            </p>
+            <p>
+              <a href="/" class="text-dark">Home</a>
+            </p>
+ 
+          </div>
+          <!-- Grid column -->
 
-                    </div>
-                    <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
 
-                    <hr class="w-100 clearfix d-md-none" />
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
 
-                    <!-- Grid column -->
-                    <hr class="w-100 clearfix d-md-none" />
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+            <p><i class="fas fa-home mr-3"></i> Ngong Road, NP12, Nairobi</p>
+            <p><i class="fas fa-envelope mr-3"></i> JobsLux@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> +254 768 990</p>
+            <p><i class="fas fa-print mr-3"></i> +254 983 224</p>
+          </div>
+          <!-- Grid column -->
 
-                    <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                        <p><i class="fas fa-home mr-3"></i> Ngong Road, NP12, Nairobi</p>
-                        <p><i class="fas fa-envelope mr-3"></i> JobsLux@gmail.com</p>
-                        <p><i class="fas fa-phone mr-3"></i> +254 768 990</p>
-                        <p><i class="fas fa-print mr-3"></i> +254 983 224</p>
-                    </div>
-                    <!-- Grid column -->
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
 
-                    <!-- Grid column -->
-                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
-
-                        <!-- Facebook -->
-                        <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i
+            <!-- Facebook -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i
                 class="fab fa-facebook-f"></i></a>
 
-                        <!-- Twitter -->
-                        <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee" href="#!" role="button"><i
+            <!-- Twitter -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee" href="#!" role="button"><i
                 class="fab fa-twitter"></i></a>
 
-                        <!-- Google -->
-                        <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39" href="#!" role="button"><i
+            <!-- Google -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39" href="#!" role="button"><i
                 class="fab fa-google"></i></a>
 
-                        <!-- Instagram -->
-                        <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i
+            <!-- Instagram -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i
                 class="fab fa-instagram"></i></a>
 
-                        <!-- Linkedin -->
-                        <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca" href="#!" role="button"><i
+            <!-- Linkedin -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca" href="#!" role="button"><i
                 class="fab fa-linkedin-in"></i></a>
-                        <!-- Github -->
-                        <a class="btn btn-primary btn-floating m-1" style="background-color: #333333" href="#!" role="button"><i
+            <!-- Github -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #333333" href="#!" role="button"><i
                 class="fab fa-github"></i></a>
-                    </div>
-                </div>
-                <!-- Grid container -->
-
-                <!-- Copyright -->
-                <div class="text-center p-3 text-white" style="background-color: #0969C3">
-                    © 2022 Copyright:
-                    <a class="text-white" href="https://mdbootstrap.com/">JobsLux.com</a>
-                </div>
-                <!-- Copyright -->
-    </footer>
+          </div>
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
     </div>
-    {%endblock%}
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3 text-white" style="background-color: #0969C3">
+      © 2022 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">JobsLux.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+</div>
+{%endblock%}
