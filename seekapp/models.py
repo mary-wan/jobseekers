@@ -195,3 +195,10 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Subscribe(models.Model):
+    first_name = models.CharField(max_length=144, null=True, blank=True)
+    last_name = models.CharField(max_length=144, null=True, blank=True)
+    contact = models.CharField(
+        unique=True, max_length=10, null=True, blank=True)

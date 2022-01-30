@@ -69,7 +69,7 @@
                     <div class="card-header">
                         <h4>Get verified and enjoy our service,pay Ksh 2000 only using the form below to get started
                         </h4>
-                        <p>Note: Phone number format is 254722698745</p>
+                        <p>Note: Phone number format is <b>0722698745</b></p>
                     </div>
                     {% csrf_token %}
                     <fieldset class="form-group">
@@ -77,7 +77,7 @@
 
                     </fieldset>
                     <div class="form-group text-center">
-                        <button class="btn btn-outline-info" href="{%url 'employerPayment'%}" type="submit">Submit</button>
+                        <a href="{%url 'employerPayment'%}">Pay</a>
                     </div>
                 </form>
             </div>
