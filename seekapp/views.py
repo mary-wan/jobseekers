@@ -1,17 +1,16 @@
 from django.shortcuts import render, redirect
 from seekapp.models import *
-# from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.shortcuts import redirect, render, get_object_or_404
 from seekapp.models import *
-# from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
 import os
+import time
 from .email import *
 from django.http.response import Http404
 from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
@@ -354,7 +353,6 @@ def adminDash(request):
 @login_required
 def employerDash(request):
     user = request.user
-    mpesa_form = PaymentForm(instance=request.user)
     job_seekers = User.objects.filter(
         is_verified=True, is_jobseeker=True).all()
     employer = User.objects.all()
@@ -362,7 +360,6 @@ def employerDash(request):
     context = {
         "job_seekers": job_seekers,
         "employer": employer,
-        "mpesa_form": mpesa_form
     }
     return render(request, 'employers/employer_dashboard.html', context)
 
@@ -384,6 +381,30 @@ def employerPayment(request):
         'mpesa_form': mpesa_form,
     }
     return render(request, 'employers/paymentform.html', context)
+
+# Mpesa
+
+
+def getAccessToken(request):
+    consumer_key = os.environ.get("CONSUMER_KEY")
+    consumer_secret = os.environ.get("CONSUMER_SECRET")
+    api_URL = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
+    r = requests.get(api_URL, auth=HTTPBasicAuth(
+        consumer_key, consumer_secret))
+    mpesa_access_token = json.loads(r.text)
+    validated_mpesa_access_token = mpesa_access_token['access_token']
+    return HttpResponse(validated_mpesa_access_token)
+
+
+def success(request):
+    time.sleep(10)
+    return HttpResponseRedirect("/employerDash")
+
+    return render('mpesa/success.html')
+
+
+def stk_push_callback(request):
+    data = request.body
 
 
 def search_jobseekers(request):

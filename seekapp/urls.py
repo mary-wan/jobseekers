@@ -33,4 +33,10 @@ urlpatterns = [
     path('employerPayment/', app_views.employerPayment, name='employerPayment'),
     path('search_jobseekers/', views.search_jobseekers, name='search_jobseekers'),
     path('search_category/', views.search_by_category, name='search_categories'),
+    path('daraja/stk-push', app_views.stk_push_callback,
+         name='mpesa_stk_push_callback'),
+    path('access/token', app_views.getAccessToken,
+         name='get_mpesa_access_token'),
+    path('online/lipa', app_views.employerDash, name='mpesa_payment'),
+    path('successful', app_views.success, name='success'),
 ]

@@ -101,5 +101,5 @@ class UpdateEmployerProfile(forms.ModelForm):
 
 class PaymentForm(forms.ModelForm):
     class Meta:
-        model = Subscribe
+        model = User
         fields = ['first_name', 'last_name', 'contact']

@@ -178,8 +178,7 @@ class Portfolio(models.Model):
     def delete_upload(self):
         self.delete()
 
-    def __str__(self):
-        return self.name
+   
 
 
 class Contact(models.Model):
