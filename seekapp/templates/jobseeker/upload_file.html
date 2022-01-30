@@ -1,8 +1,8 @@
-{% extends 'slider-base.html' %}
+{% extends 'forms/slider-base.html' %}
 {% load bootstrap4 %}
 {% load static %}
 {% block content %}
-    <div class="documents">
+    <!-- <div class="documents">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
@@ -31,5 +31,23 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+
+    <body>
+
+		<div class="wrapper">
+			<div class="inner">
+				<form action="" method="POST" enctype="multipart/form-data" class="crispy  input-class">
+                    <h3>Upload Files</h3>
+                    {% load crispy_forms_tags %}
+                    {{ upload_form | crispy }}
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <button class="btn btn-primary input-button" type="submit">Update</button>
+                    </div>
+                </form>
+			</div>
+		</div>
+		
+	</body>
 {% endblock %}
