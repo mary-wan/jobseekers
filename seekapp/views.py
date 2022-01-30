@@ -333,22 +333,57 @@ def adminDash(request):
     return render(request, 'admin/admin_dashboard.html', {"unverified_employers": unverified_employers, "verified_employers": verified_employers, "all_employers": all_employers, 'verified_jobseekers': verified_jobseekers, 'unverified_jobseekers': unverified_jobseekers, 'all_jobseekers': all_jobseekers})
 
 
+# @login_required
+# # @allowed_users(allowed_roles=['admin', 'employer'])
+# def employerDash(request):
+#     current_user = request.user
+#     profile = Employer.objects.get(user_id=current_user.id)
+#     job_seekers = User.objects.filter(is_jobseeker=True).all()
+#     # potential = JobSeeker.objects.all()
+#     employer = User.objects.all()
+
+#     context = {
+#         # "potential": potential,
+#         "job_seekers": job_seekers,
+#         "employer": employer,
+#         'profile': profile
+#     }
+#     return render(request, 'employers/employer_dashboard.html', context)
+
+
 @login_required
-# @allowed_users(allowed_roles=['admin', 'employer'])
 def employerDash(request):
-    current_user = request.user
-    profile = Employer.objects.get(user_id=current_user.id)
-    job_seekers = User.objects.filter(is_jobseeker=True).all()
-    # potential = JobSeeker.objects.all()
+    user = request.user
+    mpesa_form = PaymentForm(instance=request.user)
+    job_seekers = User.objects.filter(
+        is_verified=True, is_jobseeker=True).all()
     employer = User.objects.all()
 
     context = {
-        # "potential": potential,
         "job_seekers": job_seekers,
         "employer": employer,
-        'profile': profile
+        "mpesa_form": mpesa_form
     }
     return render(request, 'employers/employer_dashboard.html', context)
+
+
+@login_required
+def employerPayment(request):
+    current_user = request.user
+    if request.method == 'POST':
+        mpesa_form = PaymentForm(
+            request.POST, request.FILES, instance=request.user)
+        if mpesa_form.is_valid():
+            mpesa_form.save()
+            messages.success(
+                request, 'Your Payment has been made successfully')
+            return redirect('employerDash')
+    else:
+        mpesa_form = PaymentForm(instance=request.user)
+    context = {
+        'mpesa_form': mpesa_form,
+    }
+    return render(request, 'employers/paymentform.html', context)
 
 
 def search_jobseekers(request):

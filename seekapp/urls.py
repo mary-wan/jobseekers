@@ -30,6 +30,7 @@ urlpatterns = [
     path('dashboard/', app_views.dashboard, name='dashboard'),
     path('admin_dashboard/', app_views.adminDash, name='admin_dashboard'),
     path('employerDash/', app_views.employerDash, name='employerDash'),
+    path('employerPayment/', app_views.employerPayment, name='employerPayment'),
     path('search_jobseekers/', views.search_jobseekers, name='search_jobseekers'),
     path('search_category/', views.search_by_category, name='search_categories'),
 ]
