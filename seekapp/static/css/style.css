@@ -829,12 +829,12 @@ h1 {
     background-image: url(/static/photos/verify1.webp);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    height: 600px;
+    height: 900px;
     color: white;
 }
 
 .over {
-    height: 600px;
+    height: 900px;
     color: white;
     background-color: rgb(19, 181, 234, 0.1);
 }
