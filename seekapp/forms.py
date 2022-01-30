@@ -63,7 +63,7 @@ class EmployerSignUp(UserCreationForm):
 class UpdateJobseekerProfile(forms.ModelForm):
     class Meta:
         model = JobSeeker
-        fields = ('job_category', 'availability', 'salary',
+        fields = ('job_category', 'availability', 'contact', 'salary',
                   'location', 'bio', 'profile_photo')
 
 
@@ -101,5 +101,5 @@ class UpdateEmployerProfile(forms.ModelForm):
 
 class PaymentForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = Subscribe
         fields = ['first_name', 'last_name', 'contact']

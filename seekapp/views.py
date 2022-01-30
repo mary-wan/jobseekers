@@ -32,11 +32,11 @@ def home(request):
 @login_required
 # @allowed_users(allowed_roles=['admin','jobseeker'])
 def jobseeker_profile(request, id):
-    current_user = request.user
-    profile = JobSeeker.objects.get(pk=id)  # get profile
-    user = get_object_or_404(User, pk=id)
-    documents = FileUpload.objects.filter(user_id=current_user.id).all()
-    return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "user": user, "profile": profile})
+    jobseeker = User.objects.get(id=id)
+    profile = JobSeeker.objects.get(user_id=id)  # get profile
+    portfolio = Portfolio.objects.filter(user_id=id)
+    # user = get_object_or_404(User, pk=user.id)
+    return render(request, "employer/jobseekerview.html", {"jobseeker": jobseeker, "portfolio": portfolio, "profile": profile})
 # jobseekers update profile
 
 
@@ -332,36 +332,36 @@ def adminDash(request):
     return render(request, 'admin/admin_dashboard.html', {"unverified_employers": unverified_employers, "verified_employers": verified_employers, "all_employers": all_employers, 'verified_jobseekers': verified_jobseekers, 'unverified_jobseekers': unverified_jobseekers, 'all_jobseekers': all_jobseekers})
 
 
-# @login_required
-# # @allowed_users(allowed_roles=['admin', 'employer'])
-# def employerDash(request):
-#     current_user = request.user
-#     profile = Employer.objects.get(user_id=current_user.id)
-#     job_seekers = User.objects.filter(is_jobseeker=True).all()
-#     # potential = JobSeeker.objects.all()
-#     employer = User.objects.all()
-
-#     context = {
-#         # "potential": potential,
-#         "job_seekers": job_seekers,
-#         "employer": employer,
-#         'profile': profile
-#     }
-#     return render(request, 'employers/employer_dashboard.html', context)
-
-
 @login_required
+# @allowed_users(allowed_roles=['admin', 'employer'])
 def employerDash(request):
-    user = request.user
-    job_seekers = User.objects.filter(
-        is_verified=True, is_jobseeker=True).all()
+    current_user = request.user
+    profile = Employer.objects.get(user_id=current_user.id)
+    job_seekers = User.objects.filter(is_jobseeker=True).all()
+    # potential = JobSeeker.objects.all()
     employer = User.objects.all()
 
     context = {
+        # "potential": potential,
         "job_seekers": job_seekers,
         "employer": employer,
+        'profile': profile
     }
     return render(request, 'employers/employer_dashboard.html', context)
+
+
+# @login_required
+# def employerDash(request):
+#     user = request.user
+#     job_seekers = User.objects.filter(
+#         is_verified=True, is_jobseeker=True).all()
+#     employer = User.objects.all()
+
+#     context = {
+#         "job_seekers": job_seekers,
+#         "employer": employer,
+#     }
+#     return render(request, 'employers/employer_dashboard.html', context)
 
 
 @login_required
