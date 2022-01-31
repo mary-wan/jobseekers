@@ -133,7 +133,6 @@ body {
     background-color: #F3F9FF;
     padding-top: 3rem;
 }
-<<<<<<< HEAD
 .profile_content{
     background: #0969C3;
     color: #fff;
@@ -143,8 +142,7 @@ body {
     margin-left: 1rem;
     padding-left: 1rem;
     padding-top: 1.5rem;
-=======
-
+}
 
 .prof_container {
     margin-top: 3rem;
@@ -153,7 +151,6 @@ body {
     background: rgba(255, 255, 255, 0.1);
     height: 80vh;
     border-radius: 30px;
->>>>>>> 329c076ded61a6f82f16685f8db385905c4c1e29
 }
 
 .prof_img {
@@ -1071,7 +1068,7 @@ h3 {
                     font-size: 13px; }
 
 .conc-height{
-    min-height: 95vh;
+    min-height: 83vh;
 }
 
 .address .topic{
