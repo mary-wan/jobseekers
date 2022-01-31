@@ -893,7 +893,7 @@ h3 {
     padding-top: 2rem;
 }
 .mation-pic{
-    margin-left: 12rem;
+    margin-left: 16rem;
     margin-bottom: 1rem;
 }
 .seek_content {
@@ -947,8 +947,134 @@ h3 {
     height: 120px;
     width: 120px;
 }
+.cont-info {
+    font-family: "Poppins", sans-serif;
+    background-color: rgb(19, 181, 234, 0.1);
+    line-height: 1.9;
+    color: #8c8c8c;
+    position: relative; } 
+     /* .cont-info:before {
+      z-index: -1;
+      position: absolute;
+      height: 50vh;
+      content: "";
+      top: 0;
+      left: 0;
+      right: 0;
+    }  */
+  
+  /* h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Poppins", sans-serif;
+    /* color: rgb(65, 62, 62);; } */
+    .contact-wrap {
+        -webkit-box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2); }
+        .contact-wrap .col-form-label {
+          font-size: 18px;
+          color: rgb(56, 50, 50);
+          margin: 0 0 10px 0;
+          display: inline-block;
+          padding: 0; }
+        .contact-wrap .form, .contact-wrap .contact-info {
+          padding: 40px; }
+        .contact-wrap .contact-info {
+          color: #fff;
+          font-size: large; }
+          .contact-wrap .contact-info ul li {
+            margin-bottom: 15px;
+            color: #fff; 
+            font-size: large;
+        }
+            .contact-wrap .contact-info ul li .wrap-icon {
+              font-size: 20px;
+              color: #fff;
+              margin-top: 5px; }
+        .contact-wrap .form {
+          background: #fff; }
+          .contact-wrap .form h3 {
+            color: #13b5ea;
+            font-size: 30px;
+            margin-bottom: 30px; }
+        .contact-wrap .contact-info {
+          background: #13b5ea; }
+          .contact-wrap .contact-info h3 {
+            color: #000;
+            font-size: 25px;
+            
+            margin-bottom: 30px; }
 
+            label.error {
+                font-size: 12px;
+                color: red; }
+              
+              #message {
+                resize: vertical; }
+              
+              #form-message-warning, #form-message-success {
+                display: none; }
+              
+              #form-message-warning {
+                color: #B90B0B; }
+              
+              #form-message-success {
+                color: #55A44E;
+                font-size: 18px;
+                font-weight: bold; }
+              
+              .submitting {
+                float: left;
+                width: 100%;
+                padding: 10px 0;
+                display: none;
+                font-weight: bold;
+                font-size: 12px;
+                color: #000; }
+              
+                .text-black {
+                    color: rgb(90, 176, 216); }
+                  
+                  .conc-content {
+                    padding: 3rem 0; }
+                  
+                  .heading {
+                    font-size: 2.5rem;
+                    font-weight: 900; }
+                  
+                  /* .form-control {
+                    border: none;
+                    border-bottom: 1px solid #ccc;
+                    padding-left: 0;
+                    padding-right: 0;
+                    border-radius: 0;
+                    background: none; }
+                    .form-control:active, .form-control:focus {
+                      outline: none;
+                      -webkit-box-shadow: none;
+                      box-shadow: none;
+                      border-color:  rgb(90, 176, 216); }
+                   */
+                  .col-form-label {
+                    color: rgb(43, 40, 40);
+                    font-size: 13px; }
 
+.conc-height{
+    min-height: 95vh;
+}
 
-
+.address .topic{
+    font-size:20px ;
+    font-weight: 600;
+    border-bottom: 2px solid #fff;
+}
+.phone .topic{
+    font-size:20px ;
+    font-weight: 600;
+    border-bottom: 2px solid #fff;
+}
+.email .topic{
+    font-size:20px ;
+    font-weight: 600;
+    border-bottom: 2px solid #fff;
+}
           
