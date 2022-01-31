@@ -3,158 +3,103 @@
 {% load static %}
 {%load crispy_forms_tags%} 
 {% block content %}
-<div class="container-fluid p-0 border-contact">
-    <!-- <div class="intro-bg">
-        <div class="intro-overlay">
-            <h1 class="mb-5 intro-header">Contact Us</h1>
-
-            <p style="color:rgb(255, 255, 255);text-size-adjust: 70px;">
-                <strong style="font-size: xx-large;"> If you have question, concern or suggestion, you can send us message from here. It's our pleasure to help you.
-                </strong></p>
+<body class="cont-info">
+  <div class="conc-content">
+    
+    <div class="container">
+      <div class="row align-items-stretch no-gutters contact-wrap">
+        <div class="col-md-8 ">
+          <div class="form  conc-height">
+            <h3>Send us a message</h3>
+            <form class="mb-5" method="post" id="contactForm" name="contactForm">
+              
+                <div class="col-md-6 form-group mb-5">
+                  <label for="" class="col-form-label">Name *</label>
+                  <input type="text" class="form-control" name="name" id="name" placeholder="Your name">
+                </div>
+                <div class="col-md-6 form-group mb-5">
+                  <label for="" class="col-form-label">Email *</label>
+                  <input type="text" class="form-control" name="email" id="email"  placeholder="Your email">
+                </div>
+              <div class="row">
+                <div class="col-md-12 form-group mb-5">
+                  <label for="message" class="col-form-label">Message *</label>
+                  <textarea class="form-control" name="message" id="message" cols="30" rows="4"  placeholder="Write your message"></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <input type="submit" value="Send Message" class="btn btn-primary rounded-0 py-2 px-4">
+                  <span class="submitting"></span>
+                </div>
+              </div>
+            </form>
+  
+            <div id="form-message-warning mt-4"></div> 
+            <div id="form-message-success">
+              Your message was sent, thank you!
+            </div>
+  
+          </div>
         </div>
-
-    </div> -->
-    <img src="{% static 'photos/contact1.jpg' %}" class="contact-img" alt="">
-
-</div>
-
-<section class="contact_us pt-5 pl-4 mb-5">
-  <div class="container conta">
-    <legend class="intro-header text-center">Send us a Message</legend>
-    <hr>
-    <!-- <div class="topic-text text-center">Send us a message</div> -->
-    <div class="content">
-      <div class="left-side">
-        <div class="address details">
-          <i class="fas fa-map-marker-alt"></i>
-          <div class="topic">Address</div>
-          <div class="text-one">Ngong Road, NP12</div>
-          <div class="text-two">Karen 06</div>
-        </div>
-        <div class="phone details">
-          <i class="fas fa-phone-alt"></i>
-          <div class="topic">Phone</div>
-          <div class="text-one">+254 768 990</div>
-          <div class="text-two">+254 983 224</div>
-        </div>
-        <div class="email details">
-          <i class="fas fa-envelope"></i>
-          <div class="topic">Email</div>
-          <div class="text-one">JobsLux@gmail.com</div>
-          <div class="text-two">info.JobsLux@gmail.com</div>
+        <div class="col-md-4">
+          <div class="contact-info conc-height">
+            <h3>Contact Information</h3>
+            <!-- <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, magnam!</p>
+            <ul class="list-unstyled">
+              <li class="d-flex">
+                <span class="wrap-icon icon-room mr-3"></span>
+                <span class="text">9757 Aspen Lane South Richmond Hill, NY 11419</span>
+              </li>
+              <li class="d-flex">
+                <span class="wrap-icon icon-phone mr-3"></span>
+                <span class="text">+1 (291) 939 9321</span>
+              </li>
+              <li class="d-flex">
+                <span class="wrap-icon icon-envelope mr-3"></span>
+                <span class="text">info@mywebsite.com</span>
+              </li>
+            </ul> -->
+            <div class="left-side">
+              <div class="address details mb-5">
+                
+                <div class="topic">
+                <i class="fas fa-map-marker-alt"></i>
+                &nbsp;
+                Address</div>
+                <div class="text-one">Ngong Road, NP12</div>
+                <div class="text-two">Karen 06</div>
+              </div>
+              <div class="phone details  mb-5">
+                
+                <div class="topic">
+                <i class="fas fa-phone-alt"></i>
+                &nbsp;
+                Phone</div>
+                <div class="text-one">+254 768 990</div>
+                <div class="text-two">+254 983 224</div>
+              </div>
+              <div class="email details mb-5">
+                
+                <div class="topic">
+                <i class="fas fa-envelope"></i>
+                &nbsp;
+                Email</div>
+                <div class="text-one">JobsLux@gmail.com</div>
+                <div class="text-two">info.JobsLux@gmail.com</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="right-side">
-        <!-- <div class="topic-text ">Send us a message</div> -->
-        <form class="mt-3" action="" id="contactForm" method="POST">
-            {% csrf_token %}
-            {{contact_form|crispy}}
-            <div class="text-center">
-                <input type="submit" class="btn btn-color pl-4 pr-4" value="Send">
-            </div>
-            
-        </form>
     </div>
+  
   </div>
-</section>
 
-<div class="foot-cont">
-  <footer class="text-center text-dark text-lg-start " style="background-color:  #e6f0f9;">
-    <!-- Grid container -->
-    <div class="container p-4 pb-0">
-      <!-- Section: Links -->
-      <section class="">
-        <!--Grid row-->
-        <div class="row">
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">
-              Company name
-            </h6>
-            <p>
-              Here you can use rows and columns to organize your footer
-              content. Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit.
-            </p>
-          </div>
-          <!-- Grid column -->
+</body>
 
-          <hr class="w-100 clearfix d-md-none" />
 
-          <!-- Grid column -->
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-            <p>
-              <a class="">Services</a>
-            </p>
-            <p>
-              <a class="">Contact</a>
-            </p>
-            <p>
-              <a class="">Home</a>
-            </p>
-            <p>
-              <a class="">Bootstrap Angular</a>
-            </p>
-          </div>
-          <!-- Grid column -->
 
-          <hr class="w-100 clearfix d-md-none" />
 
-          <!-- Grid column -->
-          <hr class="w-100 clearfix d-md-none" />
-
-          <!-- Grid column -->
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-            <p><i class="fas fa-home mr-3"></i> Ngong Road, NP12, Nairobi</p>
-            <p><i class="fas fa-envelope mr-3"></i> snagjob@gmail.com</p>
-            <p><i class="fas fa-phone mr-3"></i> +254 768 990</p>
-            <p><i class="fas fa-print mr-3"></i> +254 983 224</p>
-          </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
-
-            <!-- Facebook -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i
-                class="fab fa-facebook-f"></i></a>
-
-            <!-- Twitter -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee" href="#!" role="button"><i
-                class="fab fa-twitter"></i></a>
-
-            <!-- Google -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39" href="#!" role="button"><i
-                class="fab fa-google"></i></a>
-
-            <!-- Instagram -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i
-                class="fab fa-instagram"></i></a>
-
-            <!-- Linkedin -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca" href="#!" role="button"><i
-                class="fab fa-linkedin-in"></i></a>
-            <!-- Github -->
-            <a class="btn btn-primary btn-floating m-1" style="background-color: #333333" href="#!" role="button"><i
-                class="fab fa-github"></i></a>
-          </div>
-        </div>
-        <!--Grid row-->
-      </section>
-      <!-- Section: Links -->
-    </div>
-    <!-- Grid container -->
-
-    <!-- Copyright -->
-    <div class="text-center p-3 text-white" style="background-color: #0969C3">
-      © 2022 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">Snagjob.com</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
-</div>
 
 {% endblock %}
