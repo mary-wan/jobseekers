@@ -1,65 +1,237 @@
-{% extends "base.html" %}
+{% extends 'slider-base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-<div class="container-fluid">
+<section style="background-color: #F3F9FF; height: 700px;">
+{% if request.user.is_verified %}
+<div class="container-fluid pt-5">
   <div class="row">
-    {% if messages %}
-    {% for message in messages %}
-    <div class="row ">
-      <div class="col-md-4"></div>
-      <div class="col-md-4">
-        <div id="messages" class="alert text-center {{ message.tags }} alert-dismissible" role="alert" id="messages">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          {{ message }}
-        </div>
-      </div>
-      <div class="col-md-4"></div>
-    </div>
-  {% endfor %}
-{% endif %}
 
     <div class="col-md-3">
       <div class="card">
-        {% if user.profile_picture.url %}
-        <img class="profile_picture my-4"
-           src="{{ user.profile_picture.url }}" style="height: 10vh; width:10vh;" alt="">
-           {% else %}
+        <div class="text-center">
+          {% if profile.profile_photo.url %}
           <img class="profile_picture my-4"
-             src="https://res.cloudinary.com/dbos9xidr/image/upload/v1626854682/zvtfufhexa8lqqqgcdt3.png" style="height: 10vh; width:10vh;" alt="">
-             {% endif %}
-        <h4 class="">{{user.username}}</h4>
-        <div class="card-header"><a href="{% url 'upload_file' %}">Upload document</a></div>
-        <div class="card-header"><a href="{% url 'update_jobseeker_profile' %}">Update Details</a></div>
-        <div class="card-header"><a href="{% url 'portfolio' %}">Add portfolio</a></div>
-        <div class="card-header"><a href="{% url 'jobseeker_profile' %}">See my Profile</a></div>
+             src="{{profile.profile_photo.url}}" style="height: 10vh; width:10vh; border-radius: 50%;" alt="" >
+             {% else %}
+            <img class="profile_picture my-4"
+               src="https://res.cloudinary.com/dbos9xidr/image/upload/v1626854682/zvtfufhexa8lqqqgcdt3.png" style="height: 10vh; width:10vh;" alt="">
+               {% endif %}
+        </div>
+     
+        <h4 class="text-center text-dark mb-2">{{user.username}}</h4>
+        <div class="card-header"><a href="{%url 'upload_file'%}">Upload document</a></div>
+        <div class="card-header"><a href="{%url 'update_jobseeker_profile' %}">Update Details</a></div>
+        <div class="card-header"><a href="{%url 'add_portfolio'%}">Add portfolio</a></div>
+        <div class="card-header"><a href="{%url 'profile_jobseeker'%}">See my Profile</a></div>
       </div>
 
     </div>
     <div class="col-md-6">
-      <h4>Documents and Resumes</h4>
       {% if documents %}
+      <h4 class="text-center">Documents and Resumes</h4>
       {% for document in documents %}
-      <div class="card">
+      <div class="card p-2 mb-3">
         <h2><i class="fas fa-file-pdf"></i> {{document.name}}</h2>
-        <a href="{% url 'pdf_view' document.id %}" target="_blank" class="btn btn-outline-success doc"><i class="fas fa-eye"></i> View</a>
-        <a href="{{ document.pdf.url }}" download="" class="btn btn-outline-success doc"><i class="fa fa-download" aria-hidden="true"></i> Download</a>      </div>
+        <a href="" target="_blank" class="btn btn-outline-info doc mb-1"><i class="fas fa-eye"></i> View</a>
+        <a href="{{ document.pdf.url }}" download="" class="btn btn-outline-info doc mb-1"><i class="fa fa-download" aria-hidden="true"></i> Download</a>  
+      </div>
       {% endfor %}
+      {%else%}
+      <div class="card">
+        <h4 class ="text-center">Start Uploading Documents and Resume</h4>
+      </div>
       {% endif %}
     </div>
     <div class="col-md-3">
-      <h4>Portfolios</h4>
       {% if portfolios %}
+      <h4 class="text-center">Portfolios</h4>
       {% for portfolio in portfolios %}
-      <div class="card">
-        <h2><i class="fas fa-globe"></i> {{portfolio.name}}</h2>
-        <a href="{{ portfolio.link }}" download="" class="btn btn-outline-success doc">View</a>
+      <div class="card p-2 mb-2">
+        <h2><i class="fas fa-link"></i>{{portfolio.name}}</h2>
+        <a href="{{ portfolio.link }}" target="_blank" class="btn btn-outline-info doc">View</a>
       </div>
       {% endfor %}
+      {%else%}
+      <div class="card">
+        <h4 class="text-center">Upload Portfolio</h4>
+      </div>
       {% endif %}
         
     </div>
   </div>
 </div>
+{% else %}
+<p class="alert-warning text-center">Pending Verification !!. You will receive an email on verification and your profile will be visible to employers once verified.</p>
+<div class="container-fluid pt-5">
+  <div class="row">
+
+    <div class="col-md-3">
+      <div class="card">
+        <div class="text-center">
+          {% if profile.profile_photo.url %}
+          <img class="profile_picture my-4"
+             src="{{profile.profile_photo.url}}" style="height: 10vh; width:10vh; border-radius: 50%;" alt="" >
+             {% else %}
+            <img class="profile_picture my-4"
+               src="https://res.cloudinary.com/dbos9xidr/image/upload/v1626854682/zvtfufhexa8lqqqgcdt3.png" style="height: 10vh; width:10vh;" alt="">
+               {% endif %}
+        </div>
+     
+        <h4 class="text-center text-dark mb-2">{{user.username}}</h4>
+        <div class="card-header"><a href="{%url 'upload_file'%}">Upload document</a></div>
+        <div class="card-header"><a href="{%url 'update_jobseeker_profile' %}">Update Details</a></div>
+        <div class="card-header"><a href="{%url 'add_portfolio'%}">Add portfolio</a></div>
+        <div class="card-header"><a href="{%url 'profile_jobseeker'%}">See my Profile</a></div>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      {% if documents %}
+      <h4 class="text-center">Documents and Resumes</h4>
+      {% for document in documents %}
+      <div class="card p-2 mb-3">
+        <h2><i class="fas fa-file-pdf"></i> {{document.name}}</h2>
+        <a href="" target="_blank" class="btn btn-outline-info doc mb-1"><i class="fas fa-eye"></i> View</a>
+        <a href="{{ document.pdf.url }}" download="" class="btn btn-outline-info doc mb-1"><i class="fa fa-download" aria-hidden="true"></i> Download</a>  
+      </div>
+      {% endfor %}
+      {%else%}
+      <div class="card">
+        <h4 class ="text-center">Start Uploading Documents and Resume</h4>
+      </div>
+      {% endif %}
+    </div>
+    <div class="col-md-3">
+      {% if portfolios %}
+      <h4 class="text-center">Portfolios</h4>
+      {% for portfolio in portfolios %}
+      <div class="card p-2 mb-2">
+        <h2><i class="fas fa-link"></i>{{portfolio.name}}</h2>
+        <a href="{{ portfolio.link }}" target="_blank" class="btn btn-outline-info doc">View</a>
+      </div>
+      {% endfor %}
+      {%else%}
+      <div class="card">
+        <h4 class="text-center">Upload Portfolio</h4>
+      </div>
+      {% endif %}
+        
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- <div class="not-verified">
+  <div class="text-center">
+    <p class="alert-warning">Pending Verification !!</p>
+    <h2 class="font-weight-bold" style="padding-top: 100px;">Your profile is not verified.</h2>
+    <h3>You will receive an email once your profile is approved.</h3>
+  </div>
+  
+</div> -->
+
+{% endif %}
+</section>
+<div class="foot-cont">
+  <footer class="text-center text-dark text-lg-start " style="background-color:  #e6f0f9;">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">
+              JobsLux
+            </h6>
+            <p>
+              Millions of people are searching for jobs, salary information,
+               company reviews, and interview questions. Snagjobs makes it 
+               possible for jobseekers to be considered for employment.
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+            <p>
+              <a href="{%url 'services'%}" class="text-dark">Services</a>
+            </p>
+            <p>
+              <a href="{%url 'contact_us'%}"  class="text-dark">Contact</a>
+            </p>
+            <p>
+              <a href="/" class="text-dark">Home</a>
+            </p>
+ 
+          </div>
+          <!-- Grid column -->
+
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+            <p><i class="fas fa-home mr-3"></i> Ngong Road, NP12, Nairobi</p>
+            <p><i class="fas fa-envelope mr-3"></i> JobsLux@gmail.com</p>
+            <p><i class="fas fa-phone mr-3"></i> +254 768 990</p>
+            <p><i class="fas fa-print mr-3"></i> +254 983 224</p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+
+            <!-- Facebook -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998" href="#!" role="button"><i
+                class="fab fa-facebook-f"></i></a>
+
+            <!-- Twitter -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee" href="#!" role="button"><i
+                class="fab fa-twitter"></i></a>
+
+            <!-- Google -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #dd4b39" href="#!" role="button"><i
+                class="fab fa-google"></i></a>
+
+            <!-- Instagram -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button"><i
+                class="fab fa-instagram"></i></a>
+
+            <!-- Linkedin -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca" href="#!" role="button"><i
+                class="fab fa-linkedin-in"></i></a>
+            <!-- Github -->
+            <a class="btn btn-primary btn-floating m-1" style="background-color: #333333" href="#!" role="button"><i
+                class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <!--Grid row-->
+      </section>
+      <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3 text-white" style="background-color: #0969C3">
+      © 2022 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">JobsLux.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+</div>
 {% endblock %}
+
