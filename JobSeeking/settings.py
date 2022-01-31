@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import django_heroku
 import dj_database_url
-from decouple import config
+from decouple import config,Csv
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -44,6 +44,9 @@ else:
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+# DATABASES = { 'default': dj_database_url.config() }
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -59,7 +62,7 @@ SECRET_KEY = '-n3=(*3k)zjzjkz^mlb*)1iknt20y*pla7i3e^kkdl0!gm(qy9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -81,6 +84,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -217,7 +221,7 @@ JAZZMIN_SETTINGS = {
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "Support", "url": "https://github.com/mary-wan", "new_window": True},
+        {"name": "View Site", "url": "http://127.0.0.1:8000/", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
@@ -250,3 +254,6 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '385692492331583',
     'API_SECRET': 'wpPzGYYSWBJ_4NCwwSEC0YUMSO8'
 }
+
+
+django_heroku.settings(locals())

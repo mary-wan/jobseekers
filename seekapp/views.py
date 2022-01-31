@@ -1,42 +1,58 @@
+import json
+import random
+import re
+from urllib.request import HTTPBasicAuthHandler
 from django.shortcuts import render, redirect
 from seekapp.models import *
-# from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.shortcuts import redirect, render, get_object_or_404
 from seekapp.models import *
-# from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
 import os
+import time
 from .email import *
 from django.http.response import Http404
-from django.http import HttpResponse,HttpResponseRedirect,Http404,JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 
 
 def services(request):
-    return render(request, 'services.html')
+  return render(request, 'services.html')
+
 
 def options(request):
-    return render(request, 'registration/options.html')
+  return render(request, 'registration/options.html')
 
 
 def home(request):
-    return render(request, 'index.html')
+  return render(request, 'index.html')
+
+
+@login_required
+# @allowed_users(allowed_roles=['admin','jobseeker'])
+def jobseeker_profile(request, id):
+  jobseeker = User.objects.get(id=id)
+  profile = JobSeeker.objects.get(user_id=id)  # get profile
+  portfolio = Portfolio.objects.filter(user_id=id)
+  # user = get_object_or_404(User, pk=user.id)
+  return render(request, "employer/jobseekerview.html", {"jobseeker": jobseeker, "portfolio": portfolio, "profile": profile})
+# jobseekers update profile
+
 
 @login_required
 def profile_jobseeker(request):
-    current_user = request.user
-    profile = JobSeeker.objects.get(user_id=current_user.id)  # get profile
-    documents = FileUpload.objects.filter(user_id=current_user.id).all()
-    return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "profile": profile})
+  current_user = request.user
+  user = get_object_or_404(User, pk=current_user.id)
+  profile = JobSeeker.objects.get(user_id=current_user.id)  # get profile
+  documents = FileUpload.objects.filter(user_id=current_user.id).all()
+  return render(request, "jobseeker/profile.html", {"documents": documents, "current_user": current_user, "profile": profile})
 
 
-# jobseekers update profile
 @login_required
 def update_jobseeker_profile(request):
   current_user = request.user
@@ -51,7 +67,7 @@ def update_jobseeker_profile(request):
       return redirect('profile_jobseeker')
   else:
     user_form = UpdateUserProfile(instance=request.user)
-    jobseeker_form = UpdateJobseekerProfile(instance=request.user.jobseeker) 
+    jobseeker_form = UpdateJobseekerProfile(instance=request.user.jobseeker)
   params = {
     'user_form':user_form,
     'jobseeker_form':jobseeker_form,
@@ -63,19 +79,35 @@ def update_jobseeker_profile(request):
 #single jobseeker details
 @login_required
 def jobseeker_details(request,user_id):
-  try:
+  
     jobseeker =get_object_or_404(JobSeeker, pk = user_id)
     documents = FileUpload.objects.filter(user_id = user_id).all()
     portfolios=Portfolio.objects.filter(user_id = user_id).all()
+    return render(request,)
 
-  except ObjectDoesNotExist:
-    raise Http404()
+# single jobseeker details
+# @login_required
+# # @allowed_users(allowed_roles=['admin'])
+# def jobseeker_details(request,user_id):
+#   try:
+#     jobseeker =get_object_or_404(JobSeeker, pk = user_id)
+#     documents = FileUpload.objects.filter(user_id = user_id).all()
+#     portfolios=Portfolio.objects.filter(user_id = user_id).all()
 
-  return render(request,'#',{'jobseeker':jobseeker,'documents':documents,'portfolios':portfolios})
 
-#delete jobseeker
+# single jobseeker details
+# @login_required
+# # @allowed_users(allowed_roles=['admin'])
+# def jobseeker_details(request, user_id):
+#     try:
+#         jobseeker = get_object_or_404(JobSeeker, pk=user_id)
+#         documents = FileUpload.objects.filter(user_id=user_id).all()
+#         portfolios = Portfolio.objects.filter(user_id=user_id).all()
+
+#         return render(request, '#', {'jobseeker': jobseeker, 'documents': documents, 'portfolios': portfolios})
+
+# delete jobseeker
 @login_required
-
 def delete_jobseeker(request,user_id):
   jobseeker = JobSeeker.objects.get(pk=user_id)
   if jobseeker:
@@ -89,23 +121,26 @@ def employerProfile(request):
     employer = request.user
     profile = Employer.objects.get(user_id=employer.id)  # get profile
     available = User.objects.filter(is_jobseeker=True).all()
-    profile = Employer.objects.filter(user_id = employer.id).first()  # get profile
+    profile = Employer.objects.filter(
+        user_id=employer.id).first()  # get profile
     context = {
         "employer": employer,
         "available": available,
-        'profile':profile
+        'profile': profile
     }
     return render(request, 'employer/profile.html', context)
 
 
 @login_required
 def update_employer_profile(request):
-    current_user= request.user
+    current_user = request.user
     profile = Employer.objects.get(
         user_id=current_user.id)  # get profile
     if request.method == 'POST':
-        u_form = UpdateUserProfile(request.POST, request.FILES, instance=request.user)
-        p_form = UpdateEmployerProfile(request.POST,request.FILES, instance=request.user.employer)
+        u_form = UpdateUserProfile(
+            request.POST, request.FILES, instance=request.user)
+        p_form = UpdateEmployerProfile(
+            request.POST, request.FILES, instance=request.user.employer)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -118,11 +153,13 @@ def update_employer_profile(request):
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        'profile':profile
+        'profile': profile
     }
-    return render(request,'employer/update.html',context)
+    return render(request, 'employer/update.html', context)
 
-#delete employers
+# delete employers
+
+
 @login_required
 def delete_employer(request,user_id):
   employer = Employer.objects.get(pk=user_id)
@@ -134,15 +171,15 @@ def delete_employer(request,user_id):
 # sigle details for jobseekers
 @login_required
 def single_jobseeker(request,user_id):
-  try:
+
     jobseeker =get_object_or_404(User, pk = user_id)
     documents = FileUpload.objects.filter(user_id = user_id)
     portfolios=Portfolio.objects.filter(user_id = user_id)
 
-  except ObjectDoesNotExist:
-    raise Http404()
+# #         except ObjectDoesNotExist:
+# #             raise Http404()
 
-  return render(request,'#',{'documents':documents, 'jobseeker':jobseeker,"portfolios":portfolios})
+# #         return render(request, '#', {'documents': documents, 'jobseeker': jobseeker, "portfolios": portfolios})
 
 
 def contact(request):
@@ -164,6 +201,8 @@ def contact(request):
 
 @login_required
 def add_portfolios(request):
+    current_user = request.user
+    profile = JobSeeker.objects.get(user_id=current_user.id)
     if request.method == 'POST':
         port_form = AddPortfolio(request.POST, request.FILES)
         if port_form.is_valid():
@@ -179,12 +218,13 @@ def add_portfolios(request):
         port_form = AddPortfolio()
     context = {
         'port_form': port_form,
+        'profile': profile
     }
     return render(request, "jobseeker/portfolio.html", context)
 
 
 @login_required
-@allowed_users(allowed_roles=['admin', 'jobseeker'])
+# @allowed_users(allowed_roles=['admin', 'jobseeker'])
 def upload_file(request):
     current_user = request.user
     profile = JobSeeker.objects.get(user_id=current_user.id)
@@ -198,7 +238,7 @@ def upload_file(request):
             return redirect('jobseekerDash')
     else:
         upload_form = UploadFileForm()
-    return render(request, 'jobseeker/upload_file.html', {'upload_form': upload_form,'profile':profile})
+    return render(request, 'jobseeker/upload_file.html', {'upload_form': upload_form, 'profile': profile})
 
 
 def pdf_view(request, file_id):
@@ -271,7 +311,7 @@ def jobseekerDash(request):
     profile = JobSeeker.objects.get(user_id=current_user.id)
     documents = FileUpload.objects.filter(user_id=current_user.id).all()
     portfolios = Portfolio.objects.filter(user_id=current_user.id)
-    return render(request, 'jobseekers/jobseeker_dashboard.html', {"documents": documents, "portfolios": portfolios,'profile':profile})
+    return render(request, 'jobseekers/jobseeker_dashboard.html', {"documents": documents, "portfolios": portfolios, 'profile': profile})
 
 
 @login_required
@@ -294,29 +334,101 @@ def adminDash(request):
 def employerDash(request):
     current_user = request.user
     profile = Employer.objects.get(user_id=current_user.id)
-    job_seekers = User.objects.filter( is_jobseeker=True).all()
+    job_seekers = User.objects.filter(is_jobseeker=True).all()
+    # potential = JobSeeker.objects.all()
     employer = User.objects.all()
+    if request.method == 'POST':
+        mpesa_form = PaymentForm(
+            request.POST, request.FILES, instance=request.user)
+        if mpesa_form.is_valid():
+            mpesa_form.save()
+            messages.success(
+                request, 'Your Payment has been made successfully')
+            return redirect('employerDash')
+    else:
+        mpesa_form = PaymentForm(instance=request.user)
 
     context = {
+        # "potential": potential,
         "job_seekers": job_seekers,
         "employer": employer,
-        'profile':profile
+        'profile': profile,
+        'mpesa_form':mpesa_form
     }
     return render(request, 'employers/employer_dashboard.html', context)
 
 
+# @login_required
+# def employerDash(request):
+#     user = request.user
+#     job_seekers = User.objects.filter(
+#         is_verified=True, is_jobseeker=True).all()
+#     employer = User.objects.all()
+
+#     context = {
+#         "job_seekers": job_seekers,
+#         "employer": employer,
+#     }
+#     return render(request, 'employers/employer_dashboard.html', context)
+
+
+@login_required
+def employerPayment(request):
+    current_user = request.user
+    if request.method == 'POST':
+        mpesa_form = PaymentForm(
+            request.POST, request.FILES, instance=request.user)
+        if mpesa_form.is_valid():
+            mpesa_form.save()
+            messages.success(
+                request, 'Your Payment has been made successfully')
+            return redirect('employerDash')
+    else:
+        mpesa_form = PaymentForm(instance=request.user)
+    context = {
+        'mpesa_form': mpesa_form,
+    }
+    return render(request, 'employers/paymentform.html', context)
+
+# Mpesa
+
+
+def getAccessToken(request):
+    consumer_key = os.environ.get("CONSUMER_KEY")
+    consumer_secret = os.environ.get("CONSUMER_SECRET")
+    api_URL = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
+    # r = requests.get(api_URL, auth=HTTPBasicAuthHandler(
+    #     consumer_key, consumer_secret))
+    mpesa_access_token = json.loads(re.text)
+    validated_mpesa_access_token = mpesa_access_token['access_token']
+    return HttpResponse(validated_mpesa_access_token)
+
+
+def success(request):
+    time.sleep(10)
+    return HttpResponseRedirect("/employerDash")
+
+    return render('mpesa/success.html')
+
+
+def stk_push_callback(request):
+    data = request.body
+
+
 def search_jobseekers(request):
+    current_user = request.user
+    profile = Employer.objects.get(user_id=current_user.id)
     if 'job_category' in request.GET and request.GET["job_category"]:
         search_term = request.GET.get("job_category")
-        searched_jobseekers = User.search_jobseekers_by_job_category(
+        searched_jobseekers = JobSeeker.search_jobseekers_by_job_category(
             search_term)
         message = f"{search_term}"
 
-        return render(request, 'employers/search.html', {"message": message, "jobseekers": searched_jobseekers})
+        return render(request, 'employer/search.html', {"message": message, "jobseekers": searched_jobseekers,'profile':profile})
 
     else:
         message = 'You have not searched for any term'
-        return render(request, 'employer/search.html', {"message": message})
+        return render(request, 'employer/search.html', {"message": message,})
 
 
 def contact(request):

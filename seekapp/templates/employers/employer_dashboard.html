@@ -3,117 +3,129 @@
 {%load static%}
 {% block content %}
 <div class="container-fluid employ mt-5">
-  {% if messages %}
-  {% for message in messages %}
-  <div class="row ">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <div class="alert text-center {{ message.tags }} alert-dismissible" role="alert" id="messages">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        {{ message }}
-      </div>
-    </div>
-    <div class="col-md-4"></div>
-  </div>
-  {% endfor %}
-  {% endif %}
   <div class="row">
     <div class="col-md-3">
       <div class="card">
         <div class="text-center">
           {% if profile.profile_photo.url %}
+          <img class="profile_picture my-4" src="{{profile.profile_photo.url}}"
+            style="height: 10vh; width:10vh; border-radius: 50%;" alt="">
+          {% else %}
           <img class="profile_picture my-4"
-             src="{{profile.profile_photo.url}}" style="height: 10vh; width:10vh; border-radius: 50%;" alt="" >
-             {% else %}
-            <img class="profile_picture my-4"
-               src="https://res.cloudinary.com/dbos9xidr/image/upload/v1626854682/zvtfufhexa8lqqqgcdt3.png" style="height: 10vh; width:10vh;" alt="">
-               {% endif %}
+            src="https://res.cloudinary.com/dbos9xidr/image/upload/v1626854682/zvtfufhexa8lqqqgcdt3.png"
+            style="height: 10vh; width:10vh;" alt="">
+          {% endif %}
         </div>
-     
+
         <h4 class="text-center text-dark mb-2">{{user.username}}</h4>
         <div class="card-header"><a href="{%url 'update_employer'%}">Update Details</a></div>
         <div class="card-header"><a href="{%url 'profile'%}">See my Profile</a></div>
       </div>
 
-      
+
     </div>
     <div class="col-md-8">
       {% if request.user.is_verified %}
 
+      <form class="navbar-form" role="search" action="{% url 'search_jobseekers' %}">
+        <div class="input-group">
+          <input type="text" class="form-control search-form" placeholder="Search by job category e.g IT"
+            name="job_category">
+          <input class="btn btn-success search-form" type="submit">
+        </div>
+
+      </form> <br>
+
       <h5 class="pot" style="text-align: center; color:rgb(24, 24, 238);">POTENTIAL CANDIDATES: </h5>
       <hr>
 
-      <div class="container-fluid add" style="padding: 3rem; background-color: #0482f7; width: max-content; border-radius: 30px;">
+      <div class="container-fluid add"
+        style="padding: 3rem; background-color: #0482f7; width: max-content; border-radius: 30px;">
 
-        <table class="table table-striped" style="background-color: #0969C3; color: black; font-weight: 400;" border="1">
-          <tr class="details" >
-            <th scope="col">Candidate <br><ion-icon name="person-outline"></ion-icon></th>
-            <th scope="col" class="icon"> Email <br><ion-icon name="mail-outline"></ion-icon></th>
-            <th scope="col">Phone <br><ion-icon name="call-outline"></ion-icon></th>
-            <th scope="col">Location <br><ion-icon name="location-outline"></ion-icon></th>
-            <th scope="col">View <br><ion-icon name="eye-outline"></ion-icon></th>
-            <th scope="col">Hire <br><ion-icon name="git-network-outline"></ion-icon></th>
+        <table class="table table-striped" style="background-color: #0969C3; color: black; font-weight: 400;"
+          border="1">
+          <tr class="details">
+            <th scope="col">Candidate <br>
+              <ion-icon name="person-outline"></ion-icon>
+            </th>
+            <th scope="col" class="icon"> Email <br>
+              <ion-icon name="mail-outline"></ion-icon>
+            </th>
+            <th scope="col">Phone <br>
+              <ion-icon name="call-outline"></ion-icon>
+            </th>
+            <th scope="col">Location <br>
+              <ion-icon name="location-outline"></ion-icon>
+            </th>
+            <th scope="col">View <br>
+              <ion-icon name="eye-outline"></ion-icon>
+            </th>
+            <th scope="col">Hire <br>
+              <ion-icon name="git-network-outline"></ion-icon>
+            </th>
           </tr>
-          </div>
-          {% for job_seeker in job_seekers %}
-          <tr class="link">
-            <td>{{job_seeker.first_name}} {{job_seeker.last_name}}</td>
-            <td>{{job_seeker.email}}</td>
-            <td>{{job_seeker.phone}}</td>
-            <td>{{job_seeker.location}}</td>
-            <td><a href=""><button class="button">View</button></a></td>
-            <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
-          </tr>
-          {%endfor%}
-
-        </table>
-
       </div>
+      {% for job_seeker in job_seekers %}
+      {% if job_seeker.is_verified %}
+      <tr class="link">
+        <td>{{job_seeker.first_name}} {{job_seeker.last_name}}</td>
+        <td>{{job_seeker.email}}</td>
+        <td>{{job_seeker.phone}}</td>
+        <td>{{job_seeker.location}}</td>
+        <td><a href="{%url 'jobseeker_profile' job_seeker.id %}"><button class="button">View</button></a></td>
+        <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
+      </tr>
+      {%endif%}
+      {%endfor%}
 
-      {% else %}
-      <div class="row">
-        <div class="col-md-8">
-          <form class="forms card" action="" method="POST"
-            enctype="multipart/form-data">
-            <div class="card-header">
-              <h4>Get verified and enjoy our service,pay Ksh 3000 only using the form below to get started</h4>
-              <p>Note: Phone number format is 254725470732</p>
-            </div>
-            {% csrf_token %}
-            <fieldset class="form-group">
-              
+      </table>
 
-            </fieldset>
-            <div class="form-group text-center">
-              <button class="btn btn-outline-info" type="submit">Submit</button>
-            </div>
-          </form>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-header">
-              <h4>Payment Procedure</h4>
-              <p><strong>MPESA STK payment</strong></p>
-            </div>
-            <ol class="p-2">
-              <li>Fill in the form.</li>
-              <li>Ensure you enter mpesa no.</li>
-              <li>Submit the form and wait for mpesa notification.</li>
-              <li>Enter your pin.</li>
-              <li>Press ok to send.</li>
-              <li>Upon successful payment you will receive email notification.</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-
-
-      {% endif %}
     </div>
-    <div class="col-md-1"></div>
+
+    {% else %}
+    <div class="row">
+      <div class="col-md-8">
+        <form class="forms card" action="" method="POST" enctype="multipart/form-data">
+          <div class="card-header">
+            <h4>Get verified and enjoy our service,pay Ksh 3000 only using the form below to get started</h4>
+            <p>Note: Phone number format is 0725470732</p>
+          </div>
+         
+          <fieldset class="form-group">
+            {% csrf_token %}
+             {% load crispy_forms_tags %}
+              {{ mpesa_form | crispy }}
+               {% csrf_token %}
+
+          </fieldset>
+          <div class="form-group text-center">
+            <button class="btn btn-outline-info" type="submit">Mpesa Payment</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <h4>Payment Procedure</h4>
+            <p><strong>MPESA STK payment</strong></p>
+          </div>
+          <ol class="p-2">
+            <li>Fill in the form.</li>
+            <li>Ensure you enter mpesa no.</li>
+            <li>Submit the form and wait for mpesa notification.</li>
+            <li>Enter your pin.</li>
+            <li>Press ok to send.</li>
+            <li>Upon successful payment you will receive email notification.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+
+    {% endif %}
   </div>
+  <div class="col-md-1"></div>
+</div>
 </div>
 <script>
   let hireJobSeeker = document.getElementsByClassName("hireJobSeeker");

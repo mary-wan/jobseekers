@@ -1,197 +1,151 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light navigation" style="z-index: 6;">
-            <a class="navbar-brand" href="/">LOGO</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'services' %}">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
-                    </li>
-
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile'%}">Profile</a>
-                    </li>
-                    {% for prof in profiles %}
-                    <li class="nav-item">
-                      <a class="" href="{% url 'profile'%}">{{prof.user.username}} </a>
-                    </li>
-                    {% endfor %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Upload Project</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                 {%else%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
-                    {%endif%}
-                    
-                </ul>
-            </div>
-</nav> -->
-
 {%load static%}
- <header class="main-header header-style-two">
+<header class="main-header header-style-two">
 
 
     <!--End Header Upper-->
-  
+
     <!-- Hidden Nav Toggler -->
     <!-- <div class="nav-toggler">
       <div class="nav-btn"><button class="hidden-bar-opener"><span class="icon flaticon-menu"></span></button></div>
     </div> -->
     <!-- / Hidden Nav Toggler -->
-  
+
     <!--Header Lower-->
     <div class="header-lower">
-  
-      <div class="auto-container">
-        <div class="nav-outer clearfix">
-          <!-- Main Menu -->
-          <nav class="main-menu navbar-expand-md">
-            <div class="navbar-header">
-              <!-- Toggle Button -->
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-            </div>
-  
-            <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
-              <ul class="navigation clearfix">
-                <li class="current "><a href="/">Home</a>
-                  <ul>
-                    <li><a href="index-2.html">Home Page 01</a></li>
-                    <li><a href="index-3.html">Home Page 02</a></li>
-                    <li class="dropdown"><a href="#">Header Styles</a>
-                      <ul>
-                        <li><a href="index-2.html">Header Style 01</a></li>
-                        <li><a href="index-3.html">Header Style 02</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <!-- <li class=""><a href="#">About</a> -->
-                </li>
-                <li class=""><a href="{%url 'services'%}">Services</a>
-  
-                </li>
-  
-                <li><a href="{%url 'contact_us'%}">Contact us</a></li>
-              </ul>
-            </div>
-          </nav>
-  
-          <!-- Main Menu End-->
-          <div class="outer-box clearfix">
-  
-            <!--Option Box-->
-            <div class="option-box">
-              <!--Cart Box-->
-              <div class="cart-box">
-    
-              </div>
-  
-              <!--Search Box-->
-              <div class="search-box-outer">
-                <div class="dropdown">
-                  {%if user.is_authenticated%}
-                  {%if user.is_jobseeker%}
-                  <a href="{%url 'jobseekerDash'%}" class="text-white pr-2">DASHBOARD</a>
-                  <a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a>
-                  {%endif%}
-                  {%if user.is_employer%}
-                  <a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a>
-                  <a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a>
-                  {%endif%}
-                  <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a>
-                  {%else%}
-                    <a href="{%url 'login'%}" class="text-white pr-2">LOGIN</a>
-                    <a href="{%url 'options'%}" class="text-white">REGISTER</a>
-                  {%endif%}
-                  <ul class="dropdown-menu pull-right search-panel" aria-labelledby="dropdownMenu3">
 
-                  </ul>
-                </div>
-              </div>
-  
-            </div>
-          </div>
-          <div class="side-curve"></div>
-        </div>
-      </div>
-    </div>
-    <!--End Header Lower-->
-  
-    <!--Sticky Header-->
-    <div class="sticky-header">
-      <div class="auto-container clearfix">
-        <!--Logo-->
-        <div class="logo pull-left">
-          <a href="/" class="img-responsive"><img src="{%static 'photos/home.svg' %}" alt="" title="" height="60" width="70"></a>
-        </div>
-  
-        <!--Right Col-->
-        <div class="right-col pull-right">
-          <!-- Main Menu -->
-          <nav class="main-menu navbar-expand-md">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
-              aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="auto-container">
+            <div class="nav-outer clearfix">
+                <!-- Main Menu -->
+                <nav class="main-menu navbar-expand-md">
+                    <div class="navbar-header">
+                        <!-- Toggle Button -->
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-  
-            <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent1">
-              <ul class="navigation clearfix">
-                <li class="current"><a href="#">Home</a>
-                  <ul>
-                    <li><a href="index-2.html">Home Page 01</a></li>
-                    <li><a href="index-3.html">Home Page 02</a></li>
-                    <li class=""><a href="#">Header Styles</a>
-                      <ul>
-                        <li><a href="index-2.html">Header Style 01</a></li>
-                        <li><a href="index-3.html">Header Style 02</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <!-- <li class=""><a href="#">About</a> -->
-                </li>
-                <li class=""><a href="{%url 'services'%}">Services</a>
-  
-  
-                <li><a href="{%url 'contact_us'%}">Contact us</a></li>
-                {%if user.is_authenticated%}
-                {%if user.is_jobseeker%}
-                <li><a href="{%url 'jobseekerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
-                <li><a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a></li>
-                {%endif%}
-                {%if user.is_employer%}
-                <li><a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
-                <li><a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a></li>
-                {%endif%}
-                <li> <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a></li>
-                {%else%}
-                <li><a href="{%url 'login'%}" class="text-dark pr-2">LOGIN</a></li>
-                  <li> <a href="{%url 'options'%}" class="text-dark">REGISTER</a></li>
-                  {%endif%}
-              </ul>
+                    </div>
+
+                    <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
+                        <ul class="navigation clearfix">
+                            <li class="current "><a href="/">Home</a>
+                                <ul>
+                                    <li><a href="index-2.html">Home Page 01</a></li>
+                                    <li><a href="index-3.html">Home Page 02</a></li>
+                                    <li class="dropdown"><a href="#">Header Styles</a>
+                                        <ul>
+                                            <li><a href="index-2.html">Header Style 01</a></li>
+                                            <li><a href="index-3.html">Header Style 02</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- <li class=""><a href="#">About</a> -->
+                            </li>
+                            <li class=""><a href="{%url 'services'%}">Services</a>
+
+                            </li>
+
+                            <li><a href="{%url 'contact_us'%}">Contact us</a></li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- Main Menu End-->
+                <div class="outer-box clearfix">
+
+                    <!--Option Box-->
+                    <div class="option-box">
+                        <!--Cart Box-->
+                        <div class="cart-box">
+
+                        </div>
+
+                        <!--Search Box-->
+                        <div class="search-box-outer">
+                            <div class="dropdown">
+                                {%if user.is_authenticated%} {%if user.is_jobseeker%}
+                                <a href="{%url 'jobseekerDash'%}" class="text-white pr-2">DASHBOARD</a>
+                                <!-- <a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a> -->
+                                {%endif%} {%if user.is_employer%}
+                                <a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a>
+                                <!-- <a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a> -->
+                                {%endif%}
+                                <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a> {%else%}
+                                <a href="{%url 'login'%}" class="text-white pr-2">LOGIN</a>
+                                <a href="{%url 'options'%}" class="text-white">REGISTER</a> {%endif%}
+                                <ul class="dropdown-menu pull-right search-panel" aria-labelledby="dropdownMenu3">
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="side-curve"></div>
             </div>
-          </nav><!-- Main Menu End-->
         </div>
-  
-      </div>
+    </div>
+    <!--End Header Lower-->
+
+    <!--Sticky Header-->
+    <div class="sticky-header">
+        <div class="auto-container clearfix">
+            <!--Logo-->
+            <div class="logo pull-left">
+                <a href="/" class="img-responsive"><img src="{%static 'photos/home.svg' %}" alt="" title="" height="60" width="70"></a>
+            </div>
+
+            <!--Right Col-->
+            <div class="right-col pull-right">
+                <!-- Main Menu -->
+                <nav class="main-menu navbar-expand-md">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+                    <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent1">
+                        <ul class="navigation clearfix">
+                            <li class="current"><a href="#">Home</a>
+                                <ul>
+                                    <li><a href="index-2.html">Home Page 01</a></li>
+                                    <li><a href="index-3.html">Home Page 02</a></li>
+                                    <li class=""><a href="#">Header Styles</a>
+                                        <ul>
+                                            <li><a href="index-2.html">Header Style 01</a></li>
+                                            <li><a href="index-3.html">Header Style 02</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- <li class=""><a href="#">About</a> -->
+                            </li>
+                            <li class=""><a href="{%url 'services'%}">Services</a>
+
+
+                                <li><a href="{%url 'contact_us'%}">Contact us</a></li>
+                                {%if user.is_authenticated%} {%if user.is_jobseeker%}
+                                <li><a href="{%url 'jobseekerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
+                                <!-- <li><a href="{%url 'profile_jobseeker'%}" class="text-white pr-2">PROFILE</a></li> -->
+                                {%endif%} {%if user.is_employer%}
+                                <li><a href="{%url 'employerDash'%}" class="text-white pr-2">DASHBOARD</a></li>
+                                <!-- <li><a href="{%url 'profile'%}" class="text-white pr-2">PROFILE</a></li> -->
+                                {%endif%}
+                                <li> <a href="{% url 'logout'%}" class="text-white pr-2">LOGOUT</a></li>
+                                {%else%}
+                                <li><a href="{%url 'login'%}" class="text-dark pr-2">LOGIN</a></li>
+                                <li> <a href="{%url 'options'%}" class="text-dark">REGISTER</a></li>
+                                {%endif%}
+                        </ul>
+                    </div>
+                </nav>
+                <!-- Main Menu End-->
+            </div>
+
+        </div>
     </div>
     <!--End Sticky Header-->
-  
-  </header>
+
+</header>
