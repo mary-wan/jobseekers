@@ -1,7 +1,7 @@
 {% extends 'slider-base.html' %} {% block content %} {% load static %}
 <section class="profile">
 
-    <div class="container-full container">
+    <!-- <div class="container-full container">
         <div class="prof_container">
             <div class="col-lg-7 col-md-12 prof_content">
                 <h3>INFORMATION</h3>
@@ -63,8 +63,67 @@
     </div>
     </div>
 
-    </div>
+    </div> -->
 
+
+    <div class="container-full container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="prof_content">
+                    <h3>INFORMATION</h3>
+                    <hr>
+                    <div>
+                        <h4>First Name : <span>{{ jobseeker.first_name }}</span> </h4>
+                        <h4>Last Name: <span>{{ jobseeker.last_name }}</span> </h4>
+                        <h4>Username : <span>{{ jobseeker.username }}</span> </h4>
+                        <h4>Email Address : <span>{{ jobseeker.email }}</span> </h4>
+                        <h4>Bio : <span>{{ profile.bio }}</span> </h4>
+                        <h4>Location : <span>{{ profile.location }}</span> </h4>
+                        <h4>Availability : <span class="badge badge-danger text-white">{{ profile.availability }}</span>
+                        </h4>
+                        <h4>Job Category : <span class="badge badge-warning text-dark">{{ profile.job_category }}</span>
+                        </h4>
+                        <h4>Salary Expectations : <span class="badge badge-primary text-white">
+                                {{profile.salary}}</span> </h4>
+                        <h4>Contact : <span>{{ profile.contact }}</span> </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5">
+                <div class="">
+                    {% if documents %}
+                    <h4 class="text-center">Documents and Resumes</h4>
+                    {% for document in documents %}
+                    <div class="card p-2 mb-3">
+                        <h2><i class="fas fa-file-pdf"></i> {{document.name}}</h2>
+                        <a href="" target="_blank" class="btn btn-outline-info doc mb-1"><i class="fas fa-eye"></i> View</a>
+                        <a href="{{ document.pdf.url }}" download="" class="btn btn-outline-info doc mb-1"><i class="fa fa-download"
+                                aria-hidden="true"></i> Download</a>
+                    </div>
+                    {% endfor %} {%else%}
+                    <div class="card">
+                        <h4 class="text-center">No Uploaded Documents and Resumes</h4>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="">
+                    {% if portfolio %}
+                    <h4 class="text-center">Portfolios</h4>
+                    {% for portfolio in portfolio %}
+                    <div class="card p-2 mb-2">
+                        <h2><i class="fas fa-link"></i>{{portfolio.name}}</h2>
+                        <a href="{{ portfolio.link }}" target="_blank" class="btn btn-outline-info doc">View</a>
+                    </div>
+                    {% endfor %} {%else%}
+                    <div class="card">
+                        <h4 class="text-center">No Portfolio Uploaded</h4>
+                    </div>
+                    {% endif %}
+            
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </section>
