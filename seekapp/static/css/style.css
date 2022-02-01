@@ -763,6 +763,13 @@ h1 {
     margin-bottom: 200px;
 }
 
+@media screen and (max-width: 350px){
+    .seek_content{
+        padding: 0;
+        margin-left: 0;
+    }
+}
+
 @media screen and (max-width: 550px) {
     .profile::before {
         display: none;
@@ -804,6 +811,10 @@ h1 {
     .forms {
         font-size: 20px;
     }
+    .seek_content{
+        padding: 0;
+        margin-left: 0;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -813,6 +824,10 @@ h1 {
     .profile::after {
         display: none;
     }
+    .seek_content{
+        padding: 0;
+        margin-left: 0;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -821,6 +836,10 @@ h1 {
     }
     .profile::after {
         display: none;
+    }
+    .seek_content{
+        padding: 0;
+        margin-left: 0;
     }
 }
 
@@ -912,8 +931,7 @@ h3 {
 }
 .seek_content {
     background: #fff;
-    padding: 3rem;
-    margin-left: 3rem;
+    padding: 2rem;
     min-width: 90vh;
 
     /* border: #13b5ea solid 2px; */
