@@ -17,6 +17,8 @@ from .email import *
 from django.http.response import Http404
 from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from seekapp.mpesa import utils
+from seekapp.mpesa.core import MpesaClient
 
 
 def services(request):
@@ -358,7 +360,7 @@ def employerDash(request):
         "job_seekers": job_seekers,
         "employer": employer,
         'profile': profile,
-        'mpesa_form':mpesa_form
+        'mpesa_form': mpesa_form
     }
     return render(request, 'employers/employer_dashboard.html', context)
 
@@ -398,26 +400,47 @@ def employerPayment(request):
 # Mpesa
 
 
-def getAccessToken(request):
-    consumer_key = os.environ.get("CONSUMER_KEY")
-    consumer_secret = os.environ.get("CONSUMER_SECRET")
-    api_URL = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
-    # r = requests.get(api_URL, auth=HTTPBasicAuthHandler(
-    #     consumer_key, consumer_secret))
-    mpesa_access_token = json.loads(r.text)
-    validated_mpesa_access_token = mpesa_access_token['access_token']
-    return HttpResponse(validated_mpesa_access_token)
+cl = MpesaClient()
+stk_push_callback_url = ''
+c2b_callback_url = ''
 
 
-def success(request):
-    time.sleep(10)
-    return HttpResponseRedirect("/employerDash")
-
-    return render('mpesa/success.html')
+def oauth_success(request):
+    r = cl.access_token()
+    return JsonResponse(r, safe=False)
 
 
-def stk_push_callback(request):
-    data = request.body
+def stk_push_success(request):
+    phone_number = config('LNM_PHONE_NUMBER')
+    amount = 1
+    account_reference = 'ABC001'
+    transaction_desc = 'STK Push Description'
+    callback_url = stk_push_callback_url
+    r = cl.stk_push(phone_number, amount, account_reference,
+                    transaction_desc, callback_url)
+    return JsonResponse(r.response_description, safe=False)
+
+
+def customer_payment_success(request):
+    phone_number = config('C2B_PHONE_NUMBER')
+    amount = 1
+    transaction_desc = 'Customer Payment Description'
+    occassion = 'Test customer payment occassion'
+    callback_url = c2b_callback_url
+    r = cl.business_payment(phone_number, amount,
+                            transaction_desc, callback_url, occassion)
+    return JsonResponse(r.response_description, safe=False)
+
+
+def promotion_payment_success(request):
+    phone_number = config('C2B_PHONE_NUMBER')
+    amount = 1
+    transaction_desc = 'Promotion Payment Description'
+    occassion = 'Test promotion payment occassion'
+    callback_url = b2c_callback_url
+    r = cl.promotion_payment(phone_number, amount,
+                             transaction_desc, callback_url, occassion)
+    return JsonResponse(r.response_description, safe=False)
 
 
 def search_jobseekers(request):
@@ -429,11 +452,11 @@ def search_jobseekers(request):
             search_term)
         message = f"{search_term}"
 
-        return render(request, 'employer/search.html', {"message": message, "jobseekers": searched_jobseekers,'profile':profile})
+        return render(request, 'employer/search.html', {"message": message, "jobseekers": searched_jobseekers, 'profile': profile})
 
     else:
         message = 'You have not searched for any term'
-        return render(request, 'employer/search.html', {"message": message,})
+        return render(request, 'employer/search.html', {"message": message, })
 
 
 def contact(request):
