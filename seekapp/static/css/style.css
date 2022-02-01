@@ -683,6 +683,7 @@ h1 {
     .contact-img {
         height: 500px !important;
     }
+   
 }
 
 .border-contact {
@@ -758,6 +759,10 @@ h1 {
     margin-bottom: 200px;
 }
 
+@media screen and (max-width: 350px){
+   
+}
+
 @media screen and (max-width: 550px) {
     .profile::before {
         display: none;
@@ -765,6 +770,7 @@ h1 {
     .profile::after {
         display: none;
     }
+    
     .profile_content h4 {
         font-size: 20px;
     }
@@ -774,6 +780,7 @@ h1 {
         object-fit: cover;
         border-radius: 50%;
     }
+    
 }
 
 
@@ -786,6 +793,7 @@ h1 {
     .profile::after {
         display: none;
     }
+    
     .format {
         padding: 10px;
         font-size: 20px;
@@ -799,6 +807,7 @@ h1 {
     .forms {
         font-size: 20px;
     }
+   
 }
 
 @media screen and (min-width: 768px) {
@@ -808,6 +817,7 @@ h1 {
     .profile::after {
         display: none;
     }
+    
 }
 
 @media screen and (max-width: 768px) {
@@ -817,6 +827,12 @@ h1 {
     .profile::after {
         display: none;
     }
+    
+    
+    
+    
+     
+    
 }
 
 @media screen and (min-width: 1224px) {
@@ -826,9 +842,10 @@ h1 {
     .profile::after {
         display: none;
     }
-    .seek_container{
-        width: 100%;
-    }
+    
+ 
+
+
 }
 
 .table-striped>tbody>tr:nth-child(2n+1)>td,
@@ -897,35 +914,55 @@ h3 {
         font-weight: 500; }
 
 .jobseeker{
-    min-height: 100vh;
+    min-height: 80vh;
     background-color: #F3F9FF;
     padding-top: 2rem;
 }
 .mation-pic{
-    margin-left: 16rem;
-    margin-bottom: 1rem;
+    border-radius: 50%;
+    max-width: 120px;
+    max-height: 120px;
+    margin: 2rem;
+
+    /* margin-left: 16rem;  */
+    /* margin-bottom: 2rem; */
+
+}
+.job_cont{
+    padding:0 ;
+    margin: 0;
 }
 .seek_content {
     background: #fff;
-    padding: 3rem;
+    /* padding: 2rem;
+    margin: 3rem;
+    margin-left: 5rem;
+    margin-right: 2rem; */
     margin-left: 3rem;
-    min-width: 90vh;
+    
+    max-width: 100vh;
     /* border: #13b5ea solid 2px; */
     /* border-top-right-radius: 20px;
     border-bottom-right-radius: 20px; */
 }
 .folio{
     margin-top: 7rem;
+    max-width: 90%;
+    margin-left: 1rem;
     
 }
+.docc{
+    max-width: 90%;
+    margin-left: 1rem;
+}
 .folio h4{
-    color: rgb(65, 62, 62);
+    color: rgb(107, 102, 102);
     font-size: 24px;
     font-weight: 600;
 }
 
 .folio h3{
-    color: rgb(65, 62, 62);
+    color: rgb(107, 102, 102);
     font-size: 24px;
     font-weight: 600;
 }
@@ -933,7 +970,7 @@ h3 {
 .seek_content h4 {
     font-size: 24px;
     font-weight: 600;
-    margin-left: 1rem;
+    margin-left: 4rem;
     margin-bottom: 9px;
     /* background: rgba(0, 0, 0, 0.2);
     margin-bottom: 9px;
@@ -943,15 +980,21 @@ h3 {
 .seek_content h4 span {
     color: #13b5ea;
 }
+/* .heading4{
+    color: #13b5ea;
+    text-align: center;
+    font-size: 50px;
+} */
 .seek_content h3 {
     font-size: 30px;
     font-weight: 800;
     text-align: center;
     letter-spacing: 5px;
+    /* color: #13b5ea; */
 }
-.card{
+/* .card{
     border: solid 2px #13b5ea ;
-}
+} */
 .mation-pic{
     height: 120px;
     width: 120px;
