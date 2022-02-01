@@ -1090,12 +1090,12 @@ h3 {
 .phone .topic{
     font-size:20px ;
     font-weight: 600;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px dashed #fff;
 }
 .email .topic{
     font-size:20px ;
     font-weight: 600;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px dashed #fff;
 }
           
 .search1 h6{
