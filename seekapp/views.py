@@ -19,6 +19,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonRespons
 from django.core.exceptions import ObjectDoesNotExist
 from seekapp.mpesa import utils
 from seekapp.mpesa.core import MpesaClient
+from .models import *
 
 
 def services(request):
