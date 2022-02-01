@@ -437,7 +437,7 @@ def promotion_payment_success(request):
     amount = 1
     transaction_desc = 'Promotion Payment Description'
     occassion = 'Test promotion payment occassion'
-    callback_url = b2c_callback_url
+    callback_url = c2b_callback_url
     r = cl.promotion_payment(phone_number, amount,
                              transaction_desc, callback_url, occassion)
     return JsonResponse(r.response_description, safe=False)
