@@ -1,63 +1,29 @@
 {% extends 'slider-base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-<div class="container mt-4 ">
-  <!-- <div class="row">
-    <div class="col-lg-12">
-      <div class=" pl-2 ml-5">
-        {% if profile.profile_photo.url %}
-        <img class="update-pic" src="{{ profile.profile_photo.url }}" alt="{{ profile.name }}">
-        {% else %}
-        <img
-          src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
-          class="card-img-top update-pic" alt="My profile picture">
-        {% endif %}
-      </div>
-      <div>
-        <h2 class=" user "><small><strong>{{user.username}}</strong></small></h2>
+<div class="container-full">
+  <div class="">
+   <div class="format">
+    <div class="upt" id="myContent">
+        <h2 class="text-center">Update Profile</h2>
+        <form class="forms" action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group row" style="gap: 10px; ">
+              <div class="col-md-6">
+                {% bootstrap_form user_form%}
+              </div>
+              {% bootstrap_form jobseeker_form%}
+          </fieldset>
+          <div class="form-group">
+            <button class="btn btn-success" type="submit">Update</button>
+          </div>
+        </form>
       </div>
     </div>
-  </div> -->
-
-
-
-  <!-- <div class="container-fluid mt-4">
-      <div class="row">
-            <div class="col-md-6">
-                  <div class="pt-5 mt-5 pl-2">
-                      {% if profile.profile_photo.url %}
-                      <img class="update_pic"
-                         src="{{ profile.profile_photo.url }}" style="height: 30vh; width:30vh; border-radius: 100%;" alt="{{ profile.name }}" >
-                         {% else %}
-                         <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
-                         class="card-img-top update-pic" alt="My profile picture">
-                           {% endif %}
-                  </div>
-                  <div>
-                    <h2 class=" user text-center"><small><strong>{{user.username}}</strong></small></h2>
-                  </div>
-            </div> -->
-
-
-          <div class="">
-           <div class="format">
-            <div class="upt" id="myContent">
-                <h2 class="text-center">Update Profile</h2>
-                <form class="forms" action="" method="POST" enctype="multipart/form-data">
-                  {% csrf_token %}
-                  <fieldset class="form-group row" style="gap: 10px; ">
-                      <div class="col-md-6">
-                        {% bootstrap_form user_form%}
-                      </div>
-                      {% bootstrap_form jobseeker_form%}
-                  </fieldset>
-                  <div class="form-group">
-                    <button class="btn btn-success" type="submit">Update</button>
-                  </div>
-                </form>
-              </div>
+  </div>
+</div>
  
-<section style="background-color: #f3f9ff;">
+<!-- <section style="background-color: #f3f9ff;">
   <div class="container  pt-5">
     <div class="format" style="width: 100%;">
       <div class="upt" id="myContent">
@@ -83,6 +49,6 @@
 
 </div>
 </div>
-</section>
+</section> -->
       
 {% endblock %}

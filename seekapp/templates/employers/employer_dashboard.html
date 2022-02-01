@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container-fluid employ mt-5">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 mb-3">
       <div class="card">
         <div class="text-center">
           {% if profile.profile_photo.url %}
@@ -31,57 +31,72 @@
         <div class="input-group">
           <input type="text" class="form-control search-form" placeholder="Search by job category e.g IT"
             name="job_category">
-          <input class="btn btn-success search-form" type="submit">
+          <input class="btn btn-primary search-form" type="submit">
         </div>
 
       </form> <br>
 
-      <h5 class="pot" style="text-align: center; color:rgb(24, 24, 238);">POTENTIAL CANDIDATES: </h5>
-      <hr>
+      <h3 class="text-center">POPULAR SEARCHES</h3>
 
-      <div class="container-fluid add"
-        style="padding: 3rem; background-color: #0482f7; width: max-content; border-radius: 30px;">
+        <div class="row">
+            <div class="search1 col-lg-4 col-md-6">
+                <h6>Ui/Ux Designer</h6>
+                <h6>Data Scientist</h6>
+            </div>
+            <div class="search1 col-lg-4 col-md-6">
+                <h6>System Analyst</h6>
+                <h6>Software Developer</h6>
+            </div>
+            <div class="search1 col-lg-4 col-md-6">
+                <h6>Solution Architect</h6>
+                <h6>IT Support Technician</h6>
+            </div>
+        </div>
+    </div>
 
-        <table class="table table-striped" style="background-color: #0969C3; color: black; font-weight: 400;"
-          border="1">
-          <tr class="details">
-            <th scope="col">Candidate <br>
-              <ion-icon name="person-outline"></ion-icon>
-            </th>
-            <th scope="col" class="icon"> Email <br>
-              <ion-icon name="mail-outline"></ion-icon>
-            </th>
-            <th scope="col">Phone <br>
-              <ion-icon name="call-outline"></ion-icon>
-            </th>
-            <th scope="col">Location <br>
-              <ion-icon name="location-outline"></ion-icon>
-            </th>
-            <th scope="col">View <br>
-              <ion-icon name="eye-outline"></ion-icon>
-            </th>
-            <th scope="col">Hire <br>
-              <ion-icon name="git-network-outline"></ion-icon>
-            </th>
-          </tr>
-      </div>
-      {% for job_seeker in job_seekers %}
-      {% if job_seeker.is_verified %}
-      <tr class="link">
-        <td>{{job_seeker.first_name}} {{job_seeker.last_name}}</td>
-        <td>{{job_seeker.email}}</td>
-        <td>{{job_seeker.phone}}</td>
-        <td>{{job_seeker.location}}</td>
-        <td><a href="{%url 'jobseeker_profile' job_seeker.id %}"><button class="button">View</button></a></td>
-        <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
-      </tr>
-      {%endif%}
-      {%endfor%}
+    <table class="tble" >
+        <tr>
+            <th scope="col"><h3 class="thead">Name</h3></th>
+            <th scope="col"><h3 class="thead">Email</h3></th>
+            <th scope="col"><h3 class="thead">Phone</h3></th>
+            <th scope="col"><h3 class="thead">Location</h3></th>
+            <th scope="col"><h3 class="thead">View</h3></th>
+            <th scope="col"><h3 class="thead">Contact</h3></th>
+        </tr>
+        {% for job_seeker in job_seekers %}
+        {% if job_seeker.is_verified %}
+        <tr class="tr1">
+          <!-- a href="" data-product="{{job_seeker.id}}" data-action="add" class="btn btn-outline-info btn-sm hire">Hire</a> -->
+          <td>{{job_seeker.first_name}} &nbsp; {{job_seeker.last_name}}</td>
+          <td>{{job_seeker.email}}</td>
+          <td>{{job_seeker.contact}}</td>
+          <td>{{job_seeker.location}}</td>
+          <td><a href="{%url 'jobseeker_profile' job_seeker.id %}"><button class="button dash-button">View info</button></a></td>
+          <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
+        </tr>
+        {%endif%}
+        {%endfor%}
 
       </table>
 
+      
+   <!-- <div class="container add"style="padding: 1rem; background-color: #5facfa; width: max-content; border-radius: 30px; float:center;">
+    <div class="row-mt-2" style="color: navy; text-align: center;">
+        <h2>POTENTIAL CANDIDATES:</h2>
     </div>
-
+    {% for job_seeker in job_seekers %}
+      {% if job_seeker.is_verified %}
+    <div class="col-md-6" style="color: black; ">
+      <h5>Name:{{job_seeker.first_name}}{{job_seeker.last_name}}</h5>
+      <h5>Email:{{job_seeker.email}}</h5>
+      <h5>Contact:{{job_seeker.phone}}</h5>
+      <h5>Location:{{job_seeker.location}}</h5>
+      <h5><a href="{%url 'jobseeker_profile' job_seeker.id %}"><button class="button dash-button">View info</button></a></h5> <br>
+      <h5><a href="mailto:{{job_seeker.email}}"><button class="button dash-button">Hire</button></a></h5>
+    </div>
+    {%endif%}
+      {%endfor%}
+  </div>  -->
     {% else %}
     <div class="row">
       <div class="col-md-8">
