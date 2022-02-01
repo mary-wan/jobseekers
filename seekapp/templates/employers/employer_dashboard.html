@@ -57,13 +57,13 @@
     {% else %}
     <div class="row">
       <div class="col-md-8">
-        <form class="forms card" action="" method="POST" enctype="multipart/form-data">
+        <form class="card" action="" method="POST" enctype="multipart/form-data" style="filter: drop-shadow(2px 4px 8px #585858);">
           <div class="card-header">
             <h4>Get verified and enjoy our service,pay Ksh 3000 only using the form below to get started</h4>
             <p>Note: Phone number format is 0725470732</p>
           </div>
          
-          <fieldset class="form-group">
+          <fieldset class="form-group p-2">
             {% csrf_token %}
              {% load crispy_forms_tags %}
               {{ mpesa_form | crispy }}
@@ -73,7 +73,7 @@
           <div class="form-group text-center">
             <button class="btn btn-outline-info" type="submit">Mpesa Payment</button>
           </div>
-        </form>
+        </form>       
       </div>
       <div class="col-md-4">
         <div class="card">
@@ -81,14 +81,14 @@
             <h4>Payment Procedure</h4>
             <p><strong>MPESA STK payment</strong></p>
           </div>
-          <ol class="p-2">
-            <li>Fill in the form.</li>
-            <li>Ensure you enter mpesa no.</li>
-            <li>Submit the form and wait for mpesa notification.</li>
-            <li>Enter your pin.</li>
-            <li>Press ok to send.</li>
-            <li>Upon successful payment you will receive email notification.</li>
-          </ol>
+          <ul class="p-2">
+            <li><i class="fas fa-check-square"></i> Fill in the form.</li>
+            <li><i class="fas fa-check-square"></i> Ensure you enter mpesa no.</li>
+            <li><i class="fas fa-check-square"></i> Submit the form and wait for mpesa notification.</li>
+            <li><i class="fas fa-check-square"></i> Enter your pin.</li>
+            <li><i class="fas fa-check-square"></i> Press ok to send.</li>
+            <li><i class="fas fa-check-square"></i> Upon successful payment you will receive email notification.</li>
+          </ul>
         </div>
       </div>
     </div>
