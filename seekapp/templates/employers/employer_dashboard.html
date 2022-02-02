@@ -1,7 +1,4 @@
-{% extends 'slider-base.html' %}
-{% load bootstrap4 %}
-{%load static%}
-{% block content %}
+{% extends 'slider-base.html' %} {% load bootstrap4 %} {%load static%} {% block content %}
 <div class="container-fluid employ mt-5">
   <div class="row">
     <div class="col-md-3 mb-3">
@@ -16,25 +13,73 @@
             style="height: 10vh; width:10vh;" alt="">
           {% endif %}
         </div>
+        <div class="col-md-8">
+            {% if request.user.is_verified %}
 
-        <h4 class="text-center text-dark mb-2">{{user.username}}</h4>
-        <div class="card-header"><a href="{%url 'update_employer'%}">Update Details</a></div>
-        <div class="card-header"><a href="{%url 'profile'%}">See my Profile</a></div>
-      </div>
+            <form class="navbar-form" role="search" action="{% url 'search_jobseekers' %}">
+                <div class="input-group">
+                    <input type="text" class="form-control search-form" placeholder="Search by job category e.g IT" name="job_category">
+                    <input class="btn btn-primary search-form" type="submit">
+                </div>
+
+            </form> <br>
 
 
-    </div>
-    <div class="col-md-8">
-      {% if request.user.is_verified %}
+            <div class="container add" style="padding: 1rem; background-color: #5facfa; width: max-content; border-radius: 30px; float:center;">
+                <div class="row-mt-2" style="color: navy; text-align: center;">
+                    <h2>POTENTIAL CANDIDATES:</h2>
+                </div>
+                {% for job_seeker in job_seekers %} {% if job_seeker.is_verified %}
+                <div class="col-md-6" style="color: black; ">
+                    <h5>Name:{{job_seeker.first_name}}{{job_seeker.last_name}}</h5>
+                    <h5>Email:{{job_seeker.email}}</h5>
+                    <h5>Contact:{{job_seeker.phone}}</h5>
+                    <h5>Location:{{job_seeker.location}}</h5>
+                    <h5><a href="{%url 'jobseeker_profile' job_seeker.id %}"><button class="button dash-button">View
+                                info</button></a></h5> <br>
+                    <h5><a href="mailto:{{job_seeker.email}}"><button class="button dash-button">Hire</button></a></h5>
+                </div>
+                {%endif%} {%endfor%}
+            </div>
+            {% else %}
+            <div class="row">
+                <div class="col-md-8">
+                    <form class="card" action="{%url 'employerPayment' %}" method="POST" enctype="multipart/form-data" style=" -webkit-box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);">
+                        <div class="card-header" style="background-color: #F3F9FF;">
+                            <h4 class="text-dark">Get verified and enjoy our service,pay Ksh 3000 only using the form below to get started</h4>
+                            <p class="text-center">Note: Phone number format is 0725470732</p>
+                        </div>
 
-      <form class="navbar-form" role="search" action="{% url 'search_jobseekers' %}">
-        <div class="input-group">
-          <input type="text" class="form-control search-form" placeholder="Search by job category e.g IT"
-            name="job_category">
-          <input class="btn btn-primary search-form" type="submit">
-        </div>
+                        <fieldset class="form-group p-3">
+                            {% csrf_token %} {% load crispy_forms_tags %} {{ mpesa_form | crispy }} {% csrf_token %}
 
-      </form> <br>
+                        </fieldset>
+                        <div class="form-group text-center">
+                            <button class="btn btn-outline-info" type="submit">Mpesa Payment</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style=" -webkit-box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);">
+                        <div class="card-header" style="background-color: #F3F9FF;">
+                            <h4 class="text-dark">Payment Procedure</h4>
+                            <p class="text-center"><strong>MPESA STK payment</strong></p>
+                        </div>
+                        <ul class="p-3">
+                            <li><i class="fas fa-check-square"></i> Fill in the form.</li>
+                            <li><i class="fas fa-check-square"></i> Ensure you enter mpesa no.</li>
+                            <li><i class="fas fa-check-square"></i> Submit the form and wait for mpesa notification.
+                            </li>
+                            <li><i class="fas fa-check-square"></i> Enter your pin.</li>
+                            <li><i class="fas fa-check-square"></i> Press ok to send.</li>
+                            <li><i class="fas fa-check-square"></i> Upon successful payment you will receive email notification.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
       <h3 class="text-center">POPULAR SEARCHES</h3>
 
@@ -135,25 +180,19 @@
             <li><i class="fas fa-check-square"></i> Upon successful payment you will receive email notification.</li>
           </ul>
         </div>
-      </div>
+        <div class="col-md-1"></div>
     </div>
-
-
-    {% endif %}
-  </div>
-  <div class="col-md-1"></div>
-</div>
 </div>
 <script>
-  let hireJobSeeker = document.getElementsByClassName("hireJobSeeker");
+    let hireJobSeeker = document.getElementsByClassName("hireJobSeeker");
 
-  for (let i = 0; i < hireJobSeeker.length; i++) {
-    hireJobSeeker[i].addEventListener("click", function () {
-      let seekerId = this.dataset.product;
-      let action = this.dataset.action;
-      console.log("seekerId:", seekerId);
-    })
-  }
+    for (let i = 0; i < hireJobSeeker.length; i++) {
+        hireJobSeeker[i].addEventListener("click", function() {
+            let seekerId = this.dataset.product;
+            let action = this.dataset.action;
+            console.log("seekerId:", seekerId);
+        })
+    }
 </script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
