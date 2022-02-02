@@ -17,9 +17,16 @@ from .email import *
 from django.http.response import Http404
 from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
-from seekapp.mpesa import utils
-from seekapp.mpesa.core import MpesaClient
-from .models import *
+
+
+from os import access
+from decouple import config, Csv
+from django.views.decorators.csrf import csrf_exempt
+import json
+import requests
+
+from .mpesa_credentials import MpesaAccessToken, LipaNaMpesaPassword
+from .models import MpesaPayment
 
 
 def services(request):
@@ -365,20 +372,7 @@ def employerDash(request):
     }
     return render(request, 'employers/employer_dashboard.html', context)
 
-
-# @login_required
-# def employerDash(request):
-#     user = request.user
-#     job_seekers = User.objects.filter(
-#         is_verified=True, is_jobseeker=True).all()
-#     employer = User.objects.all()
-
-#     context = {
-#         "job_seekers": job_seekers,
-#         "employer": employer,
-#     }
-#     return render(request, 'employers/employer_dashboard.html', context)
-
+# Mpesa
 
 @login_required
 def employerPayment(request):
@@ -387,9 +381,35 @@ def employerPayment(request):
         mpesa_form = PaymentForm(
             request.POST, request.FILES, instance=request.user)
         if mpesa_form.is_valid():
+            access_token = MpesaAccessToken().validated_mpesa_access_token
+            stk_push_api_url = config("STK_PUSH_API_URL")
+            headers = {
+                "Authorization": "Bearer %s" % access_token,
+                "Content-Type": "application/json",
+            }
+            request = {
+                "BusinessShortCode": LipaNaMpesaPassword().BusinessShortCode,
+                "Password": LipaNaMpesaPassword().decode_password,
+                "Timestamp": LipaNaMpesaPassword().payment_time,
+                "TransactionType": "CustomerPayBillOnline",
+                "Amount": "1",
+                "PartyA": request.POST.get('contact'),
+                "PartyB": LipaNaMpesaPassword().BusinessShortCode,
+                "PhoneNumber": request.POST.get('contact'),
+                # "CallBackURL": "https://mpesa-api-python.herokuapp.com/api/v1/mpesa/callback/",
+                "CallBackURL": "https://sandbox.safaricom.co.ke/mpesa/",
+                "AccountReference": "Jobslux",
+                "TransactionDesc": "Testing stk push",
+            }
+            response = requests.post(
+                stk_push_api_url, json=request, headers=headers)
+
             mpesa_form.save()
-            messages.success(
-                request, 'Your Payment has been made successfully')
+            # messages.success(
+            # request, 'Your Payment has been made successfully')
+            user = User.objects.get(id=current_user.id)
+            user.is_verified = True
+            user.save()
             return redirect('employerDash')
     else:
         mpesa_form = PaymentForm(instance=request.user)
@@ -398,50 +418,6 @@ def employerPayment(request):
     }
     return render(request, 'employers/paymentform.html', context)
 
-# Mpesa
-
-
-cl = MpesaClient()
-stk_push_callback_url = ''
-c2b_callback_url = ''
-
-
-def oauth_success(request):
-    r = cl.access_token()
-    return JsonResponse(r, safe=False)
-
-
-def stk_push_success(request):
-    phone_number = config('LNM_PHONE_NUMBER')
-    amount = 1
-    account_reference = 'ABC001'
-    transaction_desc = 'STK Push Description'
-    callback_url = stk_push_callback_url
-    r = cl.stk_push(phone_number, amount, account_reference,
-                    transaction_desc, callback_url)
-    return JsonResponse(r.response_description, safe=False)
-
-
-def customer_payment_success(request):
-    phone_number = config('C2B_PHONE_NUMBER')
-    amount = 1
-    transaction_desc = 'Customer Payment Description'
-    occassion = 'Test customer payment occassion'
-    callback_url = c2b_callback_url
-    r = cl.business_payment(phone_number, amount,
-                            transaction_desc, callback_url, occassion)
-    return JsonResponse(r.response_description, safe=False)
-
-
-def promotion_payment_success(request):
-    phone_number = config('C2B_PHONE_NUMBER')
-    amount = 1
-    transaction_desc = 'Promotion Payment Description'
-    occassion = 'Test promotion payment occassion'
-    callback_url = b2c_callback_url
-    r = cl.promotion_payment(phone_number, amount,
-                             transaction_desc, callback_url, occassion)
-    return JsonResponse(r.response_description, safe=False)
 
 
 def search_jobseekers(request):
