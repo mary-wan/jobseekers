@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container-fluid employ mt-5">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 mb-3">
       <div class="card">
         <div class="text-center">
           {% if profile.profile_photo.url %}
@@ -36,8 +36,51 @@
 
       </form> <br>
 
+      <h3 class="text-center">POPULAR SEARCHES</h3>
+
+        <div class="row">
+            <div class="search1 col-lg-4 col-md-6">
+                <h6>Ui/Ux Designer</h6>
+                <h6>Data Scientist</h6>
+            </div>
+            <div class="search1 col-lg-4 col-md-6">
+                <h6>System Analyst</h6>
+                <h6>Software Developer</h6>
+            </div>
+            <div class="search1 col-lg-4 col-md-6">
+                <h6>Solution Architect</h6>
+                <h6>IT Support Technician</h6>
+            </div>
+        </div>
+    </div>
+
+    <table class="tble" >
+        <tr>
+            <th scope="col"><h3 class="thead">Name</h3></th>
+            <th scope="col"><h3 class="thead">Email</h3></th>
+            <th scope="col"><h3 class="thead">Phone</h3></th>
+            <th scope="col"><h3 class="thead">Location</h3></th>
+            <th scope="col"><h3 class="thead">View</h3></th>
+            <th scope="col"><h3 class="thead">Contact</h3></th>
+        </tr>
+        {% for job_seeker in job_seekers %}
+        {% if job_seeker.is_verified %}
+        <tr class="tr1">
+          <!-- a href="" data-product="{{job_seeker.id}}" data-action="add" class="btn btn-outline-info btn-sm hire">Hire</a> -->
+          <td>{{job_seeker.first_name}} &nbsp; {{job_seeker.last_name}}</td>
+          <td>{{job_seeker.email}}</td>
+          <td>{{job_seeker.contact}}</td>
+          <td>{{job_seeker.location}}</td>
+          <td><a href="{%url 'jobseeker_profile' job_seeker.id %}"><button class="button dash-button">View info</button></a></td>
+          <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
+        </tr>
+        {%endif%}
+        {%endfor%}
+
+      </table>
+
       
-   <div class="container add"style="padding: 1rem; background-color: #5facfa; width: max-content; border-radius: 30px; float:center;">
+   <!-- <div class="container add"style="padding: 1rem; background-color: #5facfa; width: max-content; border-radius: 30px; float:center;">
     <div class="row-mt-2" style="color: navy; text-align: center;">
         <h2>POTENTIAL CANDIDATES:</h2>
     </div>
@@ -53,7 +96,7 @@
     </div>
     {%endif%}
       {%endfor%}
-  </div> 
+  </div>  -->
     {% else %}
     <div class="row">
       <div class="col-md-8">

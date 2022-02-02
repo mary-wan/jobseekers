@@ -82,24 +82,26 @@
     </div>
     </div>
 
-    </div>
+    </div> 
+
 
 </section> -->
 
 <section class="jobseeker">
     <div class="container-full container-fluid">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6  job_cont">
                 <div class="seek_content mt-3 mb-5">
                     <div class="mation">
-                        <div class="mation-image  justify-content-start">
+                        <div class="mation-image">
                             {% if profile.profile_photo %}
                             <img src="{{profile.profile_photo.url}}" alt="" class="mation-pic"> {%else%}
                             <img src="{%static 'photos/avatar.png' %}" class="mation-pic" alt="My profile picture"> {% endif %}
     
                         </div>
-                        <h3 class="justify-content-end">INFORMATION</h3>
+                       
                     </div>
+                    <h2 class="heading4" style="color: #13b5ea; text-align: center; font-weight: 500;">INFORMATION</h2>
                     <hr>
                     <div>
                         <h4>First Name : <span>{{ jobseeker.first_name }}</span> </h4>
