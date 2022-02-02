@@ -372,20 +372,7 @@ def employerDash(request):
     }
     return render(request, 'employers/employer_dashboard.html', context)
 
-
-# @login_required
-# def employerDash(request):
-#     user = request.user
-#     job_seekers = User.objects.filter(
-#         is_verified=True, is_jobseeker=True).all()
-#     employer = User.objects.all()
-
-#     context = {
-#         "job_seekers": job_seekers,
-#         "employer": employer,
-#     }
-#     return render(request, 'employers/employer_dashboard.html', context)
-
+# Mpesa
 
 @login_required
 def employerPayment(request):
