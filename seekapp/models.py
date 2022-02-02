@@ -102,7 +102,7 @@ class Employer(models.Model):
 
 class FileUpload(models.Model):
     name = models.CharField(max_length=100)
-    pdf = models.FileField(upload_to='documents/pdfs/')
+    pdf= models.FileField(upload_to='static/',null=True, blank=True)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='documents')
 
@@ -189,6 +189,20 @@ class Subscribe(models.Model):
         unique=True, max_length=30, null=True, blank=True)
 
 
+# class AccessToken(models.Model):
+#     token = models.CharField(max_length=30)
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     class Meta:
+#         get_latest_by = 'created_at'
+
+#     def __str__(self):
+#         return self.token
+
+
+# accepted/completed transactions
+
+
 class MpesaPayment(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
@@ -203,3 +217,8 @@ class MpesaPayment(models.Model):
 
     def __str__(self):
         return self.first_name
+
+
+
+
+
