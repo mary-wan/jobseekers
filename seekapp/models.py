@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
-import datetime as dt
 from tinymce.models import HTMLField
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
@@ -54,7 +53,7 @@ class JobSeeker(models.Model):
     bio = models.TextField(null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     contact = models.CharField(
-        unique=True, max_length=10, null=True, blank=True)
+        unique=True, max_length=30, null=True, blank=True)
     availability = models.CharField(
         null=True, blank=True, choices=JOBSEEKER_WORKHOUR_CHOICES, max_length=20)
     salary = models.IntegerField(null=True, blank=True)
@@ -187,15 +186,39 @@ class Subscribe(models.Model):
     first_name = models.CharField(max_length=144, null=True, blank=True)
     last_name = models.CharField(max_length=144, null=True, blank=True)
     contact = models.CharField(
-        unique=True, max_length=10, null=True, blank=True)
+        unique=True, max_length=30, null=True, blank=True)
 
 
-class AccessToken(models.Model):
-    token = models.CharField(max_length=30)
-    created_at = models.DateTimeField(auto_now_add=True)
+# class AccessToken(models.Model):
+#     token = models.CharField(max_length=30)
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     class Meta:
+#         get_latest_by = 'created_at'
+
+#     def __str__(self):
+#         return self.token
+
+
+# accepted/completed transactions
+
+
+class MpesaPayment(models.Model):
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField()
+    type = models.TextField()
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    contact = models.TextField()
 
     class Meta:
-        get_latest_by = 'created_at'
+        verbose_name = "Mpesa Payment"
+        verbose_name_plural = "Mpesa Payments"
 
     def __str__(self):
-        return self.token
+        return self.first_name
+
+
+
+
+
