@@ -1,5 +1,7 @@
+from http import server
 from unicodedata import name
-from django.urls import path
+from django import urls
+from django.urls import URLPattern, URLResolver, path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -38,5 +40,9 @@ urlpatterns = [
     path('access/token', app_views.getAccessToken,
          name='get_mpesa_access_token'),
     path('online/lipa', app_views.employerDash, name='mpesa_payment'),
+    path('pdf_view/', views.pdf_view, name='pdf_view'),
     path('successful', app_views.success, name='success'),
+    path('download/_file', app_views.download_file, name='download_file'),
+    
+    
 ]

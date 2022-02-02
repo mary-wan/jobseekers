@@ -86,7 +86,7 @@ class Employer(models.Model):
         self.delete()
 class FileUpload(models.Model):
     name = models.CharField(max_length=100)
-    pdf = models.FileField(upload_to='documents/pdfs/')
+    pdf= models.FileField(upload_to='static/',null=True, blank=True)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='documents')
     def save_upload(self):

@@ -1,8 +1,12 @@
+from distutils.command.upload import upload
 import json
+import mimetypes
 import random
 import re
 from urllib.request import HTTPBasicAuthHandler
 from django.shortcuts import render, redirect
+from django.urls import reverse
+from JobSeeking import settings
 from seekapp.models import *
 from django.contrib.auth.decorators import login_required
 from .forms import *
@@ -241,11 +245,32 @@ def upload_file(request):
     return render(request, 'jobseeker/upload_file.html', {'upload_form': upload_form, 'profile': profile})
 
 
-def pdf_view(request, file_id):
-    file = get_object_or_404(FileUpload, pk=file_id)
+def pdf_view(request):
+    file = get_object_or_404(FileUpload, id=id)
     image_data = open(
         f"/home/access/Desktop/Eloquent_JavaScript.pdf/{file.pdf}", "rb").read()
     return HttpResponse(image_data, content_type="application/pdf")
+
+def download_file(request):
+    # Define Django project base directory
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # Define text file name
+    filename = upload
+    # Define the full file path
+    filepath = upload
+    # Open the file for reading content
+    path = open(filepath, 'r')
+    # Set the mime type
+    mime_type, _ = mimetypes.guess_type(filepath)
+    # Set the return value of the HttpResponse
+    response = HttpResponse(path, content_type=mime_type)
+    # Set the HTTP header for sending to browser
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    # Return the response value
+    return response
+
+
+
 
 
 @login_required
@@ -447,29 +472,6 @@ def contact(request):
         contact_form = ContactForm()
     return render(request, 'contact.html', {'contact_form': contact_form})
 
-
-@login_required
-def upload_file(request):
-    if request.method == 'POST':
-        upload_form = UploadFileForm(request.POST, request.FILES)
-        if upload_form.is_valid():
-            upload = upload_form.save(commit=False)
-            upload.user = request.user
-            upload.save()
-            messages.success(request, "File uploaded successfully")
-            return redirect('jobseekerDash')
-    else:
-        upload_form = UploadFileForm()
-    return render(request, 'jobseeker/upload_file.html', {'upload_form': upload_form})
-
-
-def pdf_view(request, file_id):
-    file = get_object_or_404(FileUpload, pk=file_id)
-    image_data = open(
-        f"/home/access/Desktop/Eloquent_JavaScript.pdf/{file.pdf}", "rb").read()
-    return HttpResponse(image_data, content_type="application/pdf")
-
-
 @login_required
 def jobseekerPage(request):
     current_user = request.user
@@ -498,3 +500,6 @@ def search_by_category(request):
     else:
         message = 'You have not searched for any term'
         return render(request, 'job-cat/search.html', {"message": message})
+      
+
+
