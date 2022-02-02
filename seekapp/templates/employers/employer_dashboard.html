@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container-fluid employ mt-5">
   <div class="row">
-    <div class="col-md-3 mb-3">
+    <div class="col-md-3">
       <div class="card">
         <div class="text-center">
           {% if profile.profile_photo.url %}
@@ -38,61 +38,94 @@
 
       <h3 class="text-center">POPULAR SEARCHES</h3>
 
-        <div class="row">
-            <div class="search1 col-lg-4 col-md-6">
-                <h6>Ui/Ux Designer</h6>
-                <h6>Data Scientist</h6>
-            </div>
-            <div class="search1 col-lg-4 col-md-6">
-                <h6>System Analyst</h6>
-                <h6>Software Developer</h6>
-            </div>
-            <div class="search1 col-lg-4 col-md-6">
-                <h6>Solution Architect</h6>
-                <h6>IT Support Technician</h6>
-            </div>
+      <div class="row">
+        <div class="search1 col-lg-4 col-md-6">
+          <h6>Ui/Ux Designer</h6>
+          <h6>Data Scientist</h6>
         </div>
+        <div class="search1 col-lg-4 col-md-6">
+          <h6>System Analyst</h6>
+          <h6>Software Developer</h6>
+        </div>
+        <div class="search1 col-lg-4 col-md-6">
+          <h6>Solution Architect</h6>
+          <h6>IT Support Technician</h6>
+        </div>
+      </div>
     </div>
 
-    <table class="tble" >
-        <tr>
-            <th scope="col"><h3 class="thead">Name</h3></th>
-            <th scope="col"><h3 class="thead">Email</h3></th>
-            <th scope="col"><h3 class="thead">Phone</h3></th>
-            <th scope="col"><h3 class="thead">Location</h3></th>
-            <th scope="col"><h3 class="thead">View</h3></th>
-            <th scope="col"><h3 class="thead">Contact</h3></th>
-        </tr>
-        {% for job_seeker in job_seekers %}
-        {% if job_seeker.is_verified %}
-        <tr class="tr1">
-          <!-- a href="" data-product="{{job_seeker.id}}" data-action="add" class="btn btn-outline-info btn-sm hire">Hire</a> -->
-          <td>{{job_seeker.first_name}} &n {{job_seeker.last_name}}</td>
-          <td>{{job_seeker.email}}</td>
-          <td>{{job_seeker.contact}}</td>
-          <td>{{job_seeker.location}}</td>
-          <td><a href="{%url 'jobseeker_profile' job_seeker.id %}"><button class="button dash-button">View info</button></a></td>
-          <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
-        </tr>
-        {%endif%}
-        {%endfor%}
+    <table class="tble">
+      <tr>
+        <th scope="col">
+          <h3 class="thead">Name</h3>
+        </th>
+        <th scope="col">
+          <h3 class="thead">Email</h3>
+        </th>
+        <th scope="col">
+          <h3 class="thead">Phone</h3>
+        </th>
+        <th scope="col">
+          <h3 class="thead">Category</h3>
+        </th>
+        <th scope="col">
+          <h3 class="thead">View</h3>
+        </th>
+        <th scope="col">
+          <h3 class="thead">Contact</h3>
+        </th>
+      </tr>
+      {% for job_seekers_prof in job_seekers_profs%}
+     
+      {% if job_seekers_prof.user.is_verified %}
 
-      </table>
+      <tr class="tr1">
+        <!-- a href="" data-product="{{job_seeker.id}}" data-action="add" class="btn btn-outline-info btn-sm hire">Hire</a> -->
+        <td>{{job_seekers_prof.user.first_name}} &nbsp; {{job_seeker.last_name}}</td>
+        <td>{{job_seekers_prof.user.email}}</td>
+        <td>{{job_seekers_prof.contact}}</td>
+        <td>{{job_seekers_prof.job_category}}</td>
+        <td><a href="{%url 'jobseeker_profile' job_seekers_prof.user.id %}"><button class="button dash-button">View
+              info</button></a></td>
+        <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
+      </tr>
+      {%endif%}
+      {%endfor%}  
+      
 
+    </table>
+
+
+    <!-- <div class="container add"style="padding: 1rem; background-color: #5facfa; width: max-content; border-radius: 30px; float:center;">
+    <div class="row-mt-2" style="color: navy; text-align: center;">
+        <h2>POTENTIAL CANDIDATES:</h2>
+    </div>
+    {% for job_seeker in job_seekers %}
+      {% if job_seeker.is_verified %}
+    <div class="col-md-6" style="color: black; ">
+      <h5>Name:{{job_seeker.first_name}}{{job_seeker.last_name}}</h5>
+      <h5>Email:{{job_seeker.email}}</h5>
+      <h5>Contact:{{job_seeker.phone}}</h5>
+      <h5>Location:{{job_seeker.location}}</h5>
+      <h5><a href="{%url 'jobseeker_profile' job_seeker.id %}"><button class="button dash-button">View info</button></a></h5> <br>
+      <h5><a href="mailto:{{job_seeker.email}}"><button class="button dash-button">Hire</button></a></h5>
+    </div>
+    {%endif%}
+      {%endfor%}
+  </div>  -->
     {% else %}
     <div class="row">
       <div class="col-md-8">
-        <form class="forms card" action="{% url 'employerPayment' %}" method="POST" enctype="multipart/form-data">
-          <div class="card-header">
-            <h4>Get verified and enjoy our service,pay Ksh 3000 only using the form below to get started</h4>
-            <p>Note: Phone number format is 0725470732</p>
+        <form class="forms card" action="{%url 'employerPayment' %}" method="POST" enctype="multipart/form-data" style=" -webkit-box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);">
+          <div class="card-header" style="background-color: #F3F9FF;">
+            <h4 class="text-dark">Get verified and enjoy our service,pay Ksh 3000 only using the form below to get
+              started</h4>
+            <p class="text-center">Note: Phone number format is 254725470732</p>
           </div>
-         
-          <fieldset class="form-group">
-            {% csrf_token %}
-             {% load crispy_forms_tags %}
-              {{ mpesa_form | crispy }}
-               {% csrf_token %}
+
+          <fieldset class="form-group p-3">
+            {% csrf_token %} {% load crispy_forms_tags %} {{ mpesa_form | crispy }} {% csrf_token %}
 
           </fieldset>
           <div class="form-group text-center">
@@ -101,28 +134,29 @@
         </form>
       </div>
       <div class="col-md-4">
-        <div class="card">
-          <div class="card-header">
-            <h4>Payment Procedure</h4>
-            <p><strong>MPESA STK payment</strong></p>
+        <div class="card" style=" -webkit-box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.2);">
+          <div class="card-header" style="background-color: #F3F9FF;">
+            <h4 class="text-dark">Payment Procedure</h4>
+            <p class="text-center"><strong>MPESA STK payment</strong></p>
           </div>
-          <ol class="p-2">
-            <li>Fill in the form.</li>
-            <li>Ensure you enter mpesa no.</li>
-            <li>Submit the form and wait for mpesa notification.</li>
-            <li>Enter your pin.</li>
-            <li>Press ok to send.</li>
-            <li>Upon successful payment you will receive email notification.</li>
-          </ol>
+          <ul class="p-3">
+            <li><i class="fas fa-check-square"></i> Fill in the form.</li>
+            <li><i class="fas fa-check-square"></i> Ensure you enter mpesa no.</li>
+            <li><i class="fas fa-check-square"></i> Submit the form and wait for mpesa notification.
+            </li>
+            <li><i class="fas fa-check-square"></i> Enter your pin.</li>
+            <li><i class="fas fa-check-square"></i> Press ok to send.</li>
+            <li><i class="fas fa-check-square"></i> Upon successful payment you will receive email notification.
+            </li>
+          </ul>
         </div>
       </div>
+
+      {% endif %}
     </div>
-
-
-    {% endif %}
+    <div class="col-md-1"></div>
   </div>
-  <div class="col-md-1"></div>
-</div>
 </div>
 <script>
   let hireJobSeeker = document.getElementsByClassName("hireJobSeeker");

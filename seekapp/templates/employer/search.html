@@ -4,8 +4,8 @@
 {% block content %}
 <div class="container-fluid employ mt-5">
   <div class="row">
-    {% if messages %}
-    {% for message in messages %}
+    {% if messageees %}
+    {% for message in messageees %}
     <div class="row ">
       <div class="col-md-4"></div>
       <div class="col-md-4">
@@ -45,9 +45,9 @@
   <div class="col-md-8">
     <div class="row pl-3">
       {% if jobseekers%}
-      <h2>Found {{ jobseekers|length }} jobseekers in searched category {{message}}</h2>
+      <h2>Found {{ jobseekers|length }} jobseekers Category {{message|title}}</h2>
       {% else %}
-      <h2> Found 0 jobseekers in searched category {{message}}</h2>
+      <h2> Found 0 jobseekers in Category {{message|title}}</h2>
       {% endif %}
 
     </div>
