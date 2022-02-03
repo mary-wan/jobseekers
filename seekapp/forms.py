@@ -105,6 +105,10 @@ class UpdateEmployerProfile(forms.ModelForm):
 
 
 class PaymentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['contact'].required = True
+        
     class Meta:
         model = Subscribe
         fields = ['first_name', 'last_name', 'contact']

@@ -368,6 +368,7 @@ def employerPayment(request):
             user = User.objects.get(id=current_user.id)
             user.is_verified = True
             user.save()
+            time.sleep(10)
             return redirect('employerDash')
     else:
         mpesa_form = PaymentForm(instance=request.user)
@@ -403,7 +404,7 @@ def contact(request):
             contact_form.save()
             send_contact_email(name, email)
             data = {
-                'success': 'Your message has been reaceived. Thank you for contacting us, we will get back to you shortly'}
+                'success': 'Your message has been received. Thank you for contacting us, we will get back to you shortly'}
             messages.success(request, f"Message submitted successfully")
     else:
         contact_form = ContactForm()

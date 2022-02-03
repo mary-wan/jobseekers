@@ -12,7 +12,7 @@
           <div class="form  conc-height">
             <h3>Send us a message</h3>
             <form class="mb-5" method="post" id="contactForm" name="contactForm">
-              
+              {% csrf_token %} 
                 <div class="col-md-6 form-group mb-5">
                   <label for="" class="col-form-label">Name *</label>
                   <input type="text" class="form-control" name="name" id="name" placeholder="Your name">

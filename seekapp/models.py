@@ -185,8 +185,7 @@ class Contact(models.Model):
 class Subscribe(models.Model):
     first_name = models.CharField(max_length=144, null=True, blank=True)
     last_name = models.CharField(max_length=144, null=True, blank=True)
-    contact = models.CharField(
-        unique=True, max_length=30, null=True, blank=True)
+    contact = models.CharField(max_length=30)
 
 
 # class AccessToken(models.Model):
