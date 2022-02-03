@@ -85,9 +85,9 @@
         <td>{{job_seekers_prof.user.email}}</td>
         <td>{{job_seekers_prof.contact}}</td>
         <td>{{job_seekers_prof.job_category}}</td>
-        <td><a href="{%url 'jobseeker_profile' job_seekers_prof.user.id %}"><button class="button dash-button">View
+        <td><a href="{%url 'jobseeker_profile' job_seekers_prof.user.id %}"><button class="button dash-button btn btn-warning btn-sm">View
               info</button></a></td>
-        <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
+        <td><a href="mailto:{{job_seeker.email}}"><button class="button btn btn-info btn-sm">Contact</button></a></td>
       </tr>
       {%endif%}
       {%endfor%}  

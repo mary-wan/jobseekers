@@ -45,7 +45,7 @@
   <div class="col-md-8">
     <div class="row pl-3">
       {% if jobseekers%}
-      <h2>Found {{ jobseekers|length }} jobseekers Category {{message|title}}</h2>
+      <h2>Found {{ jobseekers|length }} jobseekers in Category {{message|title}}</h2>
       {% else %}
       <h2> Found 0 jobseekers in Category {{message|title}}</h2>
       {% endif %}
@@ -57,12 +57,24 @@
     <div class="card card-body table-responsive">
       <table class="table table-striped" border="1">
         <tr>
-          <th scope="col">Names</th>
-          <th scope="col">Email</th>
-          <th scope="col">Phone</th>
-          <th scope="col">Location</th>
-          <th scope="col">View</th>
-          <th scope="col">Contact</th>
+          <th scope="col">
+            <h3 class="thead">Name</h3>
+          </th>
+          <th scope="col">
+            <h3 class="thead">Email</h3>
+          </th>
+          <th scope="col">
+            <h3 class="thead">Phone</h3>
+          </th>
+          <th scope="col">
+            <h3 class="thead">Category</h3>
+          </th>
+          <th scope="col">
+            <h3 class="thead">View</h3>
+          </th>
+          <th scope="col">
+            <h3 class="thead">Contact</h3>
+          </th>
         </tr>
         {% for job_seeker in jobseekers %}
         {% if job_seeker.user.is_verified%}
@@ -72,8 +84,8 @@
           <td>{{job_seeker.email}}</td>
           <td>{{job_seeker.contact}}</td>
           <td>{{job_seeker.location}}</td>
-          <td><a href=""><button class="button">View</button></a></td>
-          <td><a href="mailto:{{job_seeker.email}}"><button class="button">Contact</button></a></td>
+          <td><a href="{%url 'jobseeker_profile' job_seeker.user.id %}"><button class="button btn btn-warning btn-sm">View</button></a></td>
+          <td><a href="mailto:{{job_seeker.email}}"><button class="button btn btn-info btn-sm">Contact</button></a></td>
         </tr>
         {%endif%}
         {%endfor%}
