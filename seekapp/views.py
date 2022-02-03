@@ -45,8 +45,9 @@ def jobseeker_profile(request, id):
     jobseeker = User.objects.get(id=id)
     profile = JobSeeker.objects.get(user_id=id)  # get profile
     portfolio = Portfolio.objects.filter(user_id=id)
+    documents = FileUpload.objects.filter(user_id=id)
     # user = get_object_or_404(User, pk=user.id)
-    return render(request, "employer/jobseekerview.html", {"jobseeker": jobseeker, "portfolio": portfolio, "profile": profile})
+    return render(request, "employer/jobseekerview.html", {"jobseeker": jobseeker, "portfolio": portfolio, "profile": profile,'documents':documents})
 # jobseekers update profile
 
 
