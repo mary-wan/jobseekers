@@ -4,5 +4,4 @@ from .models import *
 # Create your tests here.
 
 
-class UserTestClass(TestCase):
-    def
+# class UserTestClass(TestCase):
