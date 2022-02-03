@@ -11,4 +11,5 @@ admin.site.register(Employer)
 admin.site.register(Contact)
 admin.site.register(FileUpload)
 admin.site.register(Portfolio)
+admin.site.register(MpesaPayment)
 

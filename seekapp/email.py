@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 def send_contact_email(name,receiver):
     # Creating message subject and sender
     subject = 'Message recieved'
-    sender = 'ngetij.nick@gmail.com'
+    sender = 'jobunyambu@gmail.com'
 
     #passing in the context vairables
     text_content = render_to_string('email/contact.txt',{"name": name})

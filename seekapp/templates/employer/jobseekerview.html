@@ -82,26 +82,24 @@
     </div>
     </div>
 
-    </div> 
-
+    </div>
 
 </section> -->
 
 <section class="jobseeker">
     <div class="container-full container-fluid">
         <div class="row">
-            <div class="col-lg-6  job_cont">
+            <div class="col-lg-6">
                 <div class="seek_content mt-3 mb-5">
                     <div class="mation">
-                        <div class="mation-image">
+                        <div class="mation-image  justify-content-start">
                             {% if profile.profile_photo %}
                             <img src="{{profile.profile_photo.url}}" alt="" class="mation-pic"> {%else%}
                             <img src="{%static 'photos/avatar.png' %}" class="mation-pic" alt="My profile picture"> {% endif %}
     
                         </div>
-                       
+                        <h3 class="justify-content-end">INFORMATION</h3>
                     </div>
-                    <h2 class="heading4" style="color: #13b5ea; text-align: center; font-weight: 500;">INFORMATION</h2>
                     <hr>
                     <div>
                         <h4>First Name : <span>{{ jobseeker.first_name }}</span> </h4>
@@ -125,7 +123,7 @@
                     {% if documents %}
                     <h4 class="text-center">Documents and Resumes</h4>
                     {% for document in documents %}
-                    <div class="card p-2 mb-3">
+                    <div class="card  mb-1 p-2">
                         <h2><i class="fas fa-file-pdf"></i> {{document.name}}</h2>
                         <a href="" target="_blank" class="btn btn-outline-info doc mb-1"><i class="fas fa-eye"></i> View</a>
                         <a href="{{ document.pdf.url }}" download="" class="btn btn-info docc-view mb-1"><i class="fa fa-download"

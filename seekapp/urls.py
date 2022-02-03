@@ -1,5 +1,7 @@
+from http import server
 from unicodedata import name
-from django.urls import path
+from django import urls
+from django.urls import URLPattern, URLResolver, path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -33,10 +35,4 @@ urlpatterns = [
     path('employerPayment/', app_views.employerPayment, name='employerPayment'),
     path('search_jobseekers/', views.search_jobseekers, name='search_jobseekers'),
     path('search_category/', views.search_by_category, name='search_categories'),
-    path('daraja/stk-push', views.stk_push_success,
-         name='stk_push_success'),
-    #     path('access/token', views.getAccessToken,
-    #          name='get_mpesa_access_token'),
-    path('online/lipa', views.employerDash, name='mpesa_payment'),
-    path('successful', views.customer_payment_success, name='success'),
 ]

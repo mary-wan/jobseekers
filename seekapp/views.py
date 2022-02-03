@@ -17,8 +17,15 @@ from .email import *
 from django.http.response import Http404
 from django.http import HttpResponse, HttpResponseRedirect, Http404, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
-from seekapp.mpesa import utils
-from seekapp.mpesa.core import MpesaClient
+from .models import *
+from os import access
+from decouple import config, Csv
+from django.views.decorators.csrf import csrf_exempt
+import json
+import requests
+
+from .mpesa_credentials import MpesaAccessToken, LipaNaMpesaPassword
+from .models import MpesaPayment
 
 
 def services(request):
@@ -34,18 +41,17 @@ def home(request):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
 def jobseeker_profile(request, id):
     jobseeker = User.objects.get(id=id)
     profile = JobSeeker.objects.get(user_id=id)  # get profile
     portfolio = Portfolio.objects.filter(user_id=id)
+    documents = FileUpload.objects.filter(user_id=id)
     # user = get_object_or_404(User, pk=user.id)
-    return render(request, "employer/jobseekerview.html", {"jobseeker": jobseeker, "portfolio": portfolio, "profile": profile})
+    return render(request, "employer/jobseekerview.html", {"jobseeker": jobseeker, "portfolio": portfolio, "profile": profile,'documents':documents})
 # jobseekers update profile
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
 def profile_jobseeker(request):
     current_user = request.user
     user = get_object_or_404(User, pk=current_user.id)
@@ -55,7 +61,6 @@ def profile_jobseeker(request):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
 def update_jobseeker_profile(request):
     current_user = request.user
     profile = JobSeeker.objects.get(user_id=current_user.id)
@@ -81,31 +86,7 @@ def update_jobseeker_profile(request):
     }
     return render(request, 'jobseeker/update.html', params)
 
-
-# single jobseeker details
-# @login_required
-# # @allowed_users(allowed_roles=['admin'])
-# def jobseeker_details(request,user_id):
-#   try:
-#     jobseeker =get_object_or_404(JobSeeker, pk = user_id)
-#     documents = FileUpload.objects.filter(user_id = user_id).all()
-#     portfolios=Portfolio.objects.filter(user_id = user_id).all()
-
-
-# single jobseeker details
-# @login_required
-# # @allowed_users(allowed_roles=['admin'])
-# def jobseeker_details(request, user_id):
-#     try:
-#         jobseeker = get_object_or_404(JobSeeker, pk=user_id)
-#         documents = FileUpload.objects.filter(user_id=user_id).all()
-#         portfolios = Portfolio.objects.filter(user_id=user_id).all()
-
-#         return render(request, '#', {'jobseeker': jobseeker, 'documents': documents, 'portfolios': portfolios})
-
-# delete jobseeker
 @login_required
-# @allowed_users(allowed_roles=['admin'])
 def delete_jobseeker(request, user_id):
     jobseeker = JobSeeker.objects.get(pk=user_id)
     if jobseeker:
@@ -117,7 +98,6 @@ def delete_jobseeker(request, user_id):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','employer'])
 def employerProfile(request):
     employer = request.user
     profile = Employer.objects.get(user_id=employer.id)  # get profile
@@ -133,7 +113,6 @@ def employerProfile(request):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','employer'])
 def update_employer_profile(request):
     current_user = request.user
     profile = Employer.objects.get(
@@ -163,27 +142,12 @@ def update_employer_profile(request):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin'])
 def delete_employer(request, user_id):
     employer = Employer.objects.get(pk=user_id)
     if employer:
         employer.delete_user()
         messages.success(request, f'Employer deleted successfully!')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-# sigle details for jobseekers
-# @login_required
-# # @allowed_users(allowed_roles=['admin','employer'])
-# def single_jobseeker(request,user_id):
-#   try:
-#     jobseeker =get_object_or_404(User, pk = user_id)
-#     documents = FileUpload.objects.filter(user_id = user_id)
-#     portfolios=Portfolio.objects.filter(user_id = user_id)
-
-# #         except ObjectDoesNotExist:
-# #             raise Http404()
-
-# #         return render(request, '#', {'documents': documents, 'jobseeker': jobseeker, "portfolios": portfolios})
 
 
 def contact(request):
@@ -253,7 +217,6 @@ def pdf_view(request, file_id):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
 def jobseekerPage(request):
     current_user = request.user
     documents = FileUpload.objects.filter(user_id=current_user.id).all()
@@ -342,6 +305,7 @@ def employerDash(request):
     current_user = request.user
     profile = Employer.objects.get(user_id=current_user.id)
     job_seekers = User.objects.filter(is_jobseeker=True).all()
+    job_seekers_profs = JobSeeker.objects.all()
     # potential = JobSeeker.objects.all()
     employer = User.objects.all()
     if request.method == 'POST':
@@ -360,24 +324,13 @@ def employerDash(request):
         "job_seekers": job_seekers,
         "employer": employer,
         'profile': profile,
-        'mpesa_form': mpesa_form
+        'mpesa_form': mpesa_form,
+        'job_seekers_profs':job_seekers_profs
+    
     }
     return render(request, 'employers/employer_dashboard.html', context)
 
-
-# @login_required
-# def employerDash(request):
-#     user = request.user
-#     job_seekers = User.objects.filter(
-#         is_verified=True, is_jobseeker=True).all()
-#     employer = User.objects.all()
-
-#     context = {
-#         "job_seekers": job_seekers,
-#         "employer": employer,
-#     }
-#     return render(request, 'employers/employer_dashboard.html', context)
-
+# Mpesa
 
 @login_required
 def employerPayment(request):
@@ -386,9 +339,36 @@ def employerPayment(request):
         mpesa_form = PaymentForm(
             request.POST, request.FILES, instance=request.user)
         if mpesa_form.is_valid():
+            access_token = MpesaAccessToken().validated_mpesa_access_token
+            stk_push_api_url = config("STK_PUSH_API_URL")
+            headers = {
+                "Authorization": "Bearer %s" % access_token,
+                "Content-Type": "application/json",
+            }
+            request = {
+                "BusinessShortCode": LipaNaMpesaPassword().BusinessShortCode,
+                "Password": LipaNaMpesaPassword().decode_password,
+                "Timestamp": LipaNaMpesaPassword().payment_time,
+                "TransactionType": "CustomerPayBillOnline",
+                "Amount": "1",
+                "PartyA": request.POST.get('contact'),
+                "PartyB": LipaNaMpesaPassword().BusinessShortCode,
+                "PhoneNumber": request.POST.get('contact'),
+                # "CallBackURL": "https://mpesa-api-python.herokuapp.com/api/v1/mpesa/callback/",
+                "CallBackURL": "https://sandbox.safaricom.co.ke/mpesa/",
+                "AccountReference": "Jobslux",
+                "TransactionDesc": "Testing stk push",
+            }
+            response = requests.post(
+                stk_push_api_url, json=request, headers=headers)
+
             mpesa_form.save()
-            messages.success(
-                request, 'Your Payment has been made successfully')
+            # messages.success(
+            # request, 'Your Payment has been made successfully')
+            user = User.objects.get(id=current_user.id)
+            user.is_verified = True
+            user.save()
+            time.sleep(10)
             return redirect('employerDash')
     else:
         mpesa_form = PaymentForm(instance=request.user)
@@ -396,51 +376,6 @@ def employerPayment(request):
         'mpesa_form': mpesa_form,
     }
     return render(request, 'employers/paymentform.html', context)
-
-# Mpesa
-
-
-cl = MpesaClient()
-stk_push_callback_url = ''
-c2b_callback_url = ''
-
-
-def oauth_success(request):
-    r = cl.access_token()
-    return JsonResponse(r, safe=False)
-
-
-def stk_push_success(request):
-    phone_number = config('LNM_PHONE_NUMBER')
-    amount = 1
-    account_reference = 'ABC001'
-    transaction_desc = 'STK Push Description'
-    callback_url = stk_push_callback_url
-    r = cl.stk_push(phone_number, amount, account_reference,
-                    transaction_desc, callback_url)
-    return JsonResponse(r.response_description, safe=False)
-
-
-def customer_payment_success(request):
-    phone_number = config('C2B_PHONE_NUMBER')
-    amount = 1
-    transaction_desc = 'Customer Payment Description'
-    occassion = 'Test customer payment occassion'
-    callback_url = c2b_callback_url
-    r = cl.business_payment(phone_number, amount,
-                            transaction_desc, callback_url, occassion)
-    return JsonResponse(r.response_description, safe=False)
-
-
-def promotion_payment_success(request):
-    phone_number = config('C2B_PHONE_NUMBER')
-    amount = 1
-    transaction_desc = 'Promotion Payment Description'
-    occassion = 'Test promotion payment occassion'
-    callback_url = b2c_callback_url
-    r = cl.promotion_payment(phone_number, amount,
-                             transaction_desc, callback_url, occassion)
-    return JsonResponse(r.response_description, safe=False)
 
 
 def search_jobseekers(request):
@@ -469,7 +404,7 @@ def contact(request):
             contact_form.save()
             send_contact_email(name, email)
             data = {
-                'success': 'Your message has been reaceived. Thank you for contacting us, we will get back to you shortly'}
+                'success': 'Your message has been received. Thank you for contacting us, we will get back to you shortly'}
             messages.success(request, f"Message submitted successfully")
     else:
         contact_form = ContactForm()
@@ -484,7 +419,6 @@ def pdf_view(request, file_id):
 
 
 @login_required
-# @allowed_users(allowed_roles=['admin','jobseeker'])
 def jobseekerPage(request):
     current_user = request.user
     documents = FileUpload.objects.filter(user_id=current_user.id).all()
